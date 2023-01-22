@@ -56,18 +56,7 @@ import CardV2 from "./roomstew/components/CardV2";
 import ListingScreen from "./roomstew/screens/ListingScreen";
 
 export default function App() {
-  return (
-    <ListingScreen style={styles.screen}>
-      <Card
-        image={require("./roomstew/assets/apartment.jpg")}
-        rent={300}
-        title="Apartment with 3 bedrroms in lovely suburbs available"
-        roomsAvailable={3}
-        dateAvailable="01/01/2021"
-        dateAdded="01/01/2021"
-      ></Card>
-    </ListingScreen>
-  );
+  return <ListingScreen style={styles.screen}></ListingScreen>;
 }
 
 const styles = StyleSheet.create({

@@ -8,12 +8,23 @@ import colors from "../config/colors";
 import axios from "axios";
 
 const ListingScreen = () => {
-  const BASE_URI = "http://localhost:3002/api/listings";
+  const [offset, setOffset] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
 
+  const handleEndReached = () => {
+    console.log("end reached");
+    setOffset(offset + 1);
+    getListings();
+  };
+
   const getListings = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
     try {
-      const response = await axios.get(`${BASE_URI}`);
+      const response = await axios.get(
+        `http://localhost:3002/api/listings?offset=${offset}`
+      );
       const newListings = response.data.map((item) => {
         return {
           id: item.id,
@@ -27,21 +38,25 @@ const ListingScreen = () => {
           dateAdded: new Date(item.dateAdded).toLocaleDateString(),
         };
       });
-      setListings(newListings);
+      setListings([...listings, ...newListings]);
     } catch (error) {
-      console.error(error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getListings();
-  }, []);
+  }, [offset]);
+
   return (
     <Screen style={styles.screen}>
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => {
+          console.log(item.id);
           return (
             <Card
               title={item.title}
@@ -53,6 +68,8 @@ const ListingScreen = () => {
             />
           );
         }}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
       ></FlatList>
     </Screen>
   );
@@ -66,25 +83,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
   },
 });
-
-//from LISTING TABLE: title, image, dateAdded
-
-/* 
-
-Backend sends 10 listings to front-end
-Backend should send for each listing -
-  - the listing properties: title, image, dateAdded
-  - information needed from other tables related to a listing: 
-    - lowestRent (lowest room price for a listing),
-    - roomsAvailable (number of rooms available for a listing),
-    - dateAvailableFrom (date the room is available from)
-
-*/
-
-/* from ROOM TABLE: 
-lowestRent (lowest room price for a listing), 
-roomsAvailable (number of rooms available for a listing),
-dateAvailableFrom (date the room is available from)
-*/
-
-//To calculate roomsAvailable, count the number of rooms associated with the listing
