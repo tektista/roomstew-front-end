@@ -51,12 +51,12 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Screen from "./roomstew/components/Screen";
 // import AppText from "./roomstew/components/AppText";
 import Card from "./roomstew/components/Card";
-import CardV2 from "./roomstew/components/CardV2";
-
 import ListingScreen from "./roomstew/screens/ListingScreen";
+import LoginScreen from "./roomstew/screens/LoginScreen";
+import AccountScreen from "./roomstew/screens/AccountScreen";
 
 export default function App() {
-  return <ListingScreen style={styles.screen}></ListingScreen>;
+  return <AccountScreen />;
 }
 
 const styles = StyleSheet.create({
