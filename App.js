@@ -56,7 +56,7 @@ import LoginScreen from "./roomstew/screens/LoginScreen";
 import AccountScreen from "./roomstew/screens/AccountScreen";
 
 export default function App() {
-  return <AccountScreen />;
+  return <LoginScreen />;
 }
 
 const styles = StyleSheet.create({
