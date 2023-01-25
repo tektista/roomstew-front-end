@@ -22,7 +22,7 @@ const LoginScreen = () => {
       <Image style={styles.logo} source={require("../assets/apartment.jpg")} />
 
       <AppForm
-        initialValues={{ email: "", pasword: "" }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
