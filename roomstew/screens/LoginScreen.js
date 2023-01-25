@@ -9,6 +9,7 @@ import AppButton from "../components/AppButton";
 import ErrorMessage from "../components/ErrorMessage";
 import AppFormField from "../components/AppFormField";
 import SubmitButton from "../components/SubmitButton";
+import AppForm from "../components/AppForm";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -20,37 +21,33 @@ const LoginScreen = () => {
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/apartment.jpg")} />
 
-      <Formik
+      <AppForm
         initialValues={{ email: "", pasword: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {() => (
-          <>
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              name="email"
-              placeholder="email"
-              textContentType="emailAddress"
-            />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="email"
+          keyboardType="email-address"
+          name="email"
+          placeholder="email"
+          textContentType="emailAddress"
+        />
 
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              name="password"
-              placeholder="password"
-              secureTextEntry={true}
-              textContentType="password"
-            />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="lock"
+          name="password"
+          placeholder="password"
+          secureTextEntry={true}
+          textContentType="password"
+        />
 
-            <SubmitButton title="Login" />
-          </>
-        )}
-      </Formik>
+        <SubmitButton title="Login" />
+      </AppForm>
     </Screen>
   );
 };
