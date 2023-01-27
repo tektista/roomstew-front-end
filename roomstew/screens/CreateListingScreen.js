@@ -1,11 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import * as Yup from "yup";
+
+// import CheckBox from "@react-native-community/checkbox";
+import { CheckBox } from "@rneui/base";
 
 import Screen from "../components/Screen";
 import AppForm from "../components/forms/AppForm";
 import AppFormField from "../components/forms/AppFormField";
 import SubmitButton from "../components/forms/SubmitButton";
+import AppFormCheckbox from "../components/forms/AppFormCheckbox";
 
 const validationSchema = Yup.object().shape({
   postcode: Yup.string().required().min(4).label("Postcode"),
@@ -17,7 +21,12 @@ const CreateListingScreen = () => {
   return (
     <Screen>
       <AppForm
-        initialValues={{ postcode: "", streetAddress: "", city: "" }}
+        initialValues={{
+          postcode: "",
+          streetAddress: "",
+          cityTown: "",
+          hasGarden: true,
+        }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
@@ -50,6 +59,12 @@ const CreateListingScreen = () => {
           placeholder="City"
           textContentType="addressCity"
         />
+
+        <AppFormCheckbox
+          checkboxDescription="Does it have a garden"
+          name="hasGarden"
+        />
+
         <SubmitButton title="Next" />
       </AppForm>
     </Screen>

@@ -24,3 +24,7 @@ const AppFormField = ({ name, ...otherProps }) => {
 export default AppFormField;
 
 const styles = StyleSheet.create({});
+
+/* This form is so we don't need to set onBlur, onChangeText and a corresponding
+ error message for every AppTextInput
+ we use.  */
