@@ -1,4 +1,9 @@
-import { Image, StyleSheet, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import React from "react";
 
 import AppText from "./AppText";
@@ -11,34 +16,37 @@ export default function Card({
   numRoomsAvailable,
   earliestRoomDateAvailable,
   dateAdded,
+  onPress,
 }) {
   return (
-    <View style={styles.card}>
-      <Image style={styles.image} source={image}></Image>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.card}>
+        <Image style={styles.image} source={image}></Image>
 
-      <View style={styles.detailsContainer}>
-        <AppText style={styles.rentText}>
-          <AppText style={styles.smallRentText}>from </AppText>£{minRoomRent}
-          <AppText style={styles.smallRentText}> /month</AppText>
-        </AppText>
-
-        <AppText style={styles.titleText}>{title}</AppText>
-        <AppText style={styles.roomsAvailableText}>
-          rooms available: {numRoomsAvailable}
-        </AppText>
-
-        <View style={styles.datesContainer}>
-          <AppText style={styles.dateAvailableText}>
-            date available: {earliestRoomDateAvailable}
+        <View style={styles.detailsContainer}>
+          <AppText style={styles.rentText}>
+            <AppText style={styles.smallRentText}>from </AppText>£{minRoomRent}
+            <AppText style={styles.smallRentText}> /month</AppText>
           </AppText>
-          <AppText style={styles.dateAddedText}>
-            date added: {dateAdded}
+
+          <AppText style={styles.titleText}>{title}</AppText>
+          <AppText style={styles.roomsAvailableText}>
+            rooms available: {numRoomsAvailable}
           </AppText>
+
+          <View style={styles.datesContainer}>
+            <AppText style={styles.dateAvailableText}>
+              date available: {earliestRoomDateAvailable}
+            </AppText>
+            <AppText style={styles.dateAddedText}>
+              date added: {dateAdded}
+            </AppText>
+          </View>
         </View>
-      </View>
 
-      <View></View>
-    </View>
+        <View></View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

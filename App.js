@@ -1,72 +1,46 @@
-// import React, { useState } from "react";
-
+// RoomStew
 // import { StatusBar } from "expo-status-bar";
-// import {
-//   StyleSheet,
-//   Text,
-//   View,
-//   Button,
-//   SafeAreaView,
-//   TextInput,
-// } from "react-native";
-// import AppButton from "./app/components/AppButton";
-// import ViewImageScreen from "./app/screens/ViewImageScreen";
-// import WelcomeScreen from "./app/screens/WelcomeScreen";
+// import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
-// import Card from "./app/components/Card";
-// import ListingDetailsScreen from "./app/components/ListingDetailsScreen";
-// import MessagesScreen from "./app/components/MessagesScreen";
-// import Screen from "./app/components/Screen";
-// import ListItem from "./app/components/ListItem";
-// import AccountScreen from "./app/components/AccountScreen";
-// import AppTextInput from "./app/components/AppTextInput";
-// import AppPicker from "./app/components/AppPicker";
-// import AppText from "./app/components/AppText";
+// import Screen from "./roomstew/components/Screen";
+// import Card from "./roomstew/components/Card";
+// import ListingScreen from "./roomstew/screens/ListingScreen";
+// import LoginScreen from "./roomstew/screens/LoginScreen";
+// import AccountScreen from "./roomstew/screens/AccountScreen";
+// import AppForm from "./roomstew/components/forms/AppForm";
+// import AppFormField from "./roomstew/components/forms/AppFormField";
+// import CreateListingScreen from "./roomstew/screens/CreateListingScreen";
 
-// import Icon from "./app/components/Icon";
-
-// import LoginScreen from "./app/screens/LoginScreen";
-
-// import ListingsScreen from "./app/components/ListingScreen";
-// import ListingScreen from "./app/components/ListingScreen";
+// import AppCheckboxInput from "./roomstew/components/AppCheckboxInput";
+// import AppFormCheckbox from "./roomstew/components/forms/AppFormCheckbox";
 
 // export default function App() {
-//   return <LoginScreen />;
+//   return <ListingScreen />;
 // }
 
 // const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
+//   screen: {
+//     backgroundColor: "yellow",
 //   },
 // });
 
-// RoomStew
+// Test stack navigator
 
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
+import React from "react";
 
-import Screen from "./roomstew/components/Screen";
-// import AppText from "./roomstew/components/AppText";
-import Card from "./roomstew/components/Card";
-import ListingScreen from "./roomstew/screens/ListingScreen";
-import LoginScreen from "./roomstew/screens/LoginScreen";
-import AccountScreen from "./roomstew/screens/AccountScreen";
-import AppForm from "./roomstew/components/forms/AppForm";
-import AppFormField from "./roomstew/components/forms/AppFormField";
-import CreateListingScreen from "./roomstew/screens/CreateListingScreen";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import AppCheckboxInput from "./roomstew/components/AppCheckboxInput";
-import AppFormCheckbox from "./roomstew/components/forms/AppFormCheckbox";
+import AppNavigator from "./roomstew/navigation/AppNavigator";
 
-export default function App() {
-  return <CreateListingScreen />;
-}
+const App = () => {
+  return (
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  );
+};
 
-const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: "yellow",
-  },
-});
+export default App;

@@ -7,7 +7,7 @@ import colors from "../config/colors";
 
 import axios from "axios";
 
-const ListingScreen = () => {
+const ListingScreen = ({ navigation }) => {
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
@@ -64,6 +64,7 @@ const ListingScreen = () => {
               numRoomsAvailable={item.numRoomsAvailable}
               earliestRoomDateAvailable={item.earliestRoomDateAvailable}
               dateAdded={item.dateAdded}
+              onPress={navigation.navigate("ListingDetails", item)}
             />
           );
         }}
