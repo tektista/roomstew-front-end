@@ -34,12 +34,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import AppNavigator from "./roomstew/navigation/AppNavigator";
+import Screen from "./roomstew/components/Screen";
+import ListingDetailsScreen from "./roomstew/screens/ListingDetailsScreen";
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <AppNavigator />
-    </NavigationContainer>
+    <Screen>
+      <ListingDetailsScreen />
+    </Screen>
   );
 };
 
