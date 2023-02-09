@@ -16,7 +16,6 @@ const ListingScreen = ({ navigation }) => {
   const handleEndReached = () => {
     console.log("end reached");
     setOffset(offset + 1);
-    getListings();
   };
 
   const getListings = async () => {
@@ -67,7 +66,7 @@ const ListingScreen = ({ navigation }) => {
               dateAdded={item.dateAdded}
               //We use the navigation prop to navigate to the ListingDetails screen
               onPress={() => {
-                navigation.navigate("ListingDetails");
+                navigation.navigate("ListingDetails", { item });
               }}
             />
           );

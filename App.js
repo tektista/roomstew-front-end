@@ -35,11 +35,12 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import navigationTheme from "./roomstew/navigation/navigationTheme";
 import AppNavigator from "./roomstew/navigation/AppNavigator";
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       <AppNavigator />
     </NavigationContainer>
   );
