@@ -49,3 +49,7 @@ const styles = StyleSheet.create({
     marginVertical: 40,
   },
 });
+
+/* Description: This is the listing details screen for each listing which
+should display the details of each listing on press from the listings screen
+*/
