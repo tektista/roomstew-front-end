@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: colors.white,
-    backgroundColor: colors.green,
+    backgroundColor: colors.primary,
 
     padding: 10,
     paddingVertical: 20,

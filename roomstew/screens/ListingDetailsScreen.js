@@ -1,5 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
 
 import AppText from "../components/AppText";
 import ListItem from "../components/ListItem";
@@ -7,7 +9,28 @@ import colors from "../config/colors";
 
 export default function ListingDetailsScreen({ route }) {
   const listing = route.params.item;
-  console.log(listing);
+  console.log(listing.id);
+
+  //state of object pulled from axios
+
+  const [listingFromDB, setListingFromDB] = useState({});
+
+  //we need this to get the listing details from the server once the listing is clicked
+  const getListingDetails = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3002/api/listings/${listing.id}`
+      );
+      setListingFromDB(response.data[0]);
+      console.log(listingFromDB);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getListingDetails();
+  }, []);
 
   return (
     <View>
@@ -15,9 +38,14 @@ export default function ListingDetailsScreen({ route }) {
 
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>
-          {listing.title} {listing.id}
+          {listingFromDB.title} {listingFromDB.listing_id}
         </AppText>
-        <AppText style={styles.price}>£{listing.minRoomRent} </AppText>
+
+        {/* <AppText style={styles.price}>£{listing.minRoomRent} </AppText> */}
+
+        <AppText styles={styles.description}>
+          {listingFromDB.description}
+        </AppText>
 
         <View style={styles.userContainer}>
           <ListItem

@@ -65,6 +65,11 @@ const ListingScreen = ({ navigation }) => {
               earliestRoomDateAvailable={item.earliestRoomDateAvailable}
               dateAdded={item.dateAdded}
               //We use the navigation prop to navigate to the ListingDetails screen
+
+              /* pass the listing to the listing details screen, where we can use the id
+              to get the listing details from the database, which we can then display
+
+              */
               onPress={() => {
                 navigation.navigate("ListingDetails", { item });
               }}
