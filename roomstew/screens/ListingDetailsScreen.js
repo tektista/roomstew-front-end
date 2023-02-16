@@ -135,8 +135,15 @@ export default function ListingDetailsScreen({ route }) {
           </View>
         ))}
 
-        <View style={styles.showMoreCoontainer}>
-          <AppText style={styles.showMore}>Show More</AppText>
+        <View style={styles.showMoreContainer}>
+          <AppText
+            onPress={() => {
+              console.log("Hello");
+            }}
+            style={styles.showMore}
+          >
+            Show More
+          </AppText>
         </View>
       </View>
     </ScrollView>
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
 
   detailsContainer: {},
 
-  showMoreCoontainer: {
+  showMoreContainer: {
     display: "flex",
     alignItems: "center",
   },

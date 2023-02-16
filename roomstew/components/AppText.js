@@ -6,6 +6,10 @@ import React from "react";
 
 import defaultStyles from "../config/styles";
 
-export default function AppText({ children, style }) {
-  return <Text style={[defaultStyles.text, style]}>{children}</Text>;
+export default function AppText({ onPress, children, style }) {
+  return (
+    <Text onPress={onPress} style={[defaultStyles.text, style]}>
+      {children}
+    </Text>
+  );
 }
