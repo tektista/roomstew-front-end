@@ -1,7 +1,8 @@
-import { Image, StyleSheet, View, ScrollView } from "react-native";
+import { Image, StyleSheet, View, ScrollView, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
+import convertListingPropsVals from "../helpers/convertListingPropsVals";
 
 import colors from "../config/colors";
 import AppText from "../components/AppText";
@@ -11,15 +12,16 @@ import Icon from "../components/Icon";
 
 export default function ListingDetailsScreen({ route }) {
   const listing = route.params.item;
-  console.log(listing.id);
 
   //state of object pulled from axios
 
   const [listingFromDB, setListingFromDB] = useState({});
+  // const [convertedListingFromDB, setConvertedListingFromDB] = useState({});
 
   const listingItems = [
     {
       title: "Rooms",
+      listingFromDBName: "rooms_available",
       icon: {
         name: "bed",
         backgroundColor: colors.primary,
@@ -27,6 +29,7 @@ export default function ListingDetailsScreen({ route }) {
     },
     {
       title: "Furnished",
+      listingFromDBName: "is_furnished",
       icon: {
         name: "table-chair",
         backgroundColor: colors.primary,
@@ -34,6 +37,7 @@ export default function ListingDetailsScreen({ route }) {
     },
     {
       title: "Bills",
+      listingFromDBName: "bills_included",
       icon: {
         name: "home-lightning-bolt",
         backgroundColor: colors.primary,
@@ -41,6 +45,7 @@ export default function ListingDetailsScreen({ route }) {
     },
     {
       title: "Internet",
+      listingFromDBName: "internet_included",
       icon: {
         name: "wifi",
         backgroundColor: colors.primary,
@@ -48,6 +53,7 @@ export default function ListingDetailsScreen({ route }) {
     },
     {
       title: "Living room",
+      listingFromDBName: "has_living_room",
       icon: {
         name: "sofa",
         backgroundColor: colors.primary,
@@ -55,6 +61,7 @@ export default function ListingDetailsScreen({ route }) {
     },
     {
       title: "Bathrooms",
+      listingFromDBName: "bathroom_count",
       icon: {
         name: "toilet",
         backgroundColor: colors.primary,
@@ -68,8 +75,7 @@ export default function ListingDetailsScreen({ route }) {
       const response = await axios.get(
         `http://localhost:3002/api/listings/${listing.id}`
       );
-      setListingFromDB(response.data[0]);
-      console.log(listingFromDB);
+      setListingFromDB(convertListingPropsVals(response.data[0]));
     } catch (error) {
       console.log(error);
     }
@@ -78,6 +84,11 @@ export default function ListingDetailsScreen({ route }) {
   useEffect(() => {
     getListingDetails();
   }, []);
+
+  useEffect(() => {
+    console.log("Here");
+    console.log(listingFromDB);
+  }, [listingFromDB]);
 
   return (
     <ScrollView>
@@ -106,6 +117,13 @@ export default function ListingDetailsScreen({ route }) {
           <View key={item.title}>
             <ListItem
               title={item.title}
+              subTitle={
+                item.title === "Rooms" && listing.numRoomsAvailable ? (
+                  listing.numRoomsAvailable + " available"
+                ) : (
+                  <Text>{listingFromDB[item.listingFromDBName]}</Text>
+                )
+              }
               IconComponent={
                 <Icon
                   name={item.icon.name}
@@ -116,6 +134,10 @@ export default function ListingDetailsScreen({ route }) {
             <ListItemSeparator />
           </View>
         ))}
+
+        <View style={styles.showMoreCoontainer}>
+          <AppText style={styles.showMore}>Show More</AppText>
+        </View>
       </View>
     </ScrollView>
   );
@@ -143,9 +165,16 @@ const styles = StyleSheet.create({
 
   description: {},
 
-  price: {
-    color: colors.secondary,
+  detailsContainer: {},
+
+  showMoreCoontainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+
+  showMore: {
+    color: colors.primary,
     fontWeight: "bold",
-    marginVertical: 10,
+    textDecorationLine: "underline",
   },
 });
