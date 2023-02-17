@@ -65,7 +65,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
       </View>
 
       <View style={styles.detailsContainer}>
-        {ListingDetailsScreenItems.map((item) => (
+        {ListingDetailsScreenItems.slice(0, 5).map((item) => (
           <View key={item.title}>
             <ListItem
               title={item.title}
