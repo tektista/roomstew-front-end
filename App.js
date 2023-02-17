@@ -124,16 +124,16 @@ export default App;
 // const Tweets = ({ navigation }) => (
 //   <Screen>
 //     <Text>Tweets</Text>
-//     {/* <Link /> */}
+//     <Link />
 
-//     <Button
+//     {/* <Button
 //       title="View Tweet"
 //       // use nav prop to navigate to the name of the screen you want to navigate to
 //       // we can use the second argument to pass data to the screen we are navigating to
 //       onPress={() => {
 //         navigation.navigate("TweetDetails", { id: 1 });
 //       }}
-//     />
+//     /> */}
 //   </Screen>
 // );
 
@@ -142,7 +142,8 @@ export default App;
 // // to access the route prop in child components, we can use the route hook
 // const TweetDetails = ({ route }) => (
 //   <Screen>
-//     <Text>Tweet Details {route.params.id} </Text>
+//     {/* <Text>Tweet Details {route.params.id} </Text> */}
+//     <Text>Tweet Details </Text>
 //   </Screen>
 // );
 

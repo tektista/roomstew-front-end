@@ -26,14 +26,16 @@ const convertListingPropsVals = (listingObj) => {
     : (listing.has_parking = "No");
 
   listing.couples_allowed == 1
-    ? (listing.couples_allowed = "Yes")
-    : (listing.couples_allowed = "No");
+    ? (listing.couples_allowed = "Allowed")
+    : (listing.couples_allowed = "Not Allowed");
 
   listing.smokers_allowed == 1
-    ? (listing.smokers_allowed = "Yes")
-    : (listing.smokers_allowed = "No");
+    ? (listing.smokers_allowed = "Allowed")
+    : (listing.smokers_allowed = "Not Allowed");
 
-  listing.pets_allowed == 1 ? (listing.pets = "Yes") : (listing.pets = "No");
+  listing.pets_allowed == 1
+    ? (listing.pets_allowed = "Allowed")
+    : (listing.pets_allowed = "Not Allowed");
 
   if (listing.building_type == 0) {
     listing.building_type = "Apartment";
@@ -46,10 +48,10 @@ const convertListingPropsVals = (listingObj) => {
   }
 
   if (listing.gender_preference == 0) {
-    listing.gender_preference = "Females only";
+    listing.gender_preference = "Female only";
   }
   if (listing.gender_preference == 1) {
-    listing.gender_preference = "Males only";
+    listing.gender_preference = "Male only";
   }
   if (listing.gender_preference == 2) {
     listing.gender_preference = "Any";

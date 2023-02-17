@@ -6,68 +6,20 @@ import convertListingPropsVals from "../helpers/convertListingPropsVals";
 
 import colors from "../config/colors";
 import AppText from "../components/AppText";
+import ShowMoreText from "../components/ShowMoreText";
 import ListItem from "../components/ListItem";
 import ListItemSeparator from "../components/ListItemSeparator";
 import Icon from "../components/Icon";
 
-export default function ListingDetailsScreen({ route }) {
+import ListingDetailsScreenItems from "../config/ListingDetailsScreenItems";
+
+export default function ListingDetailsScreen({ route, navigation }) {
   const listing = route.params.item;
 
   //state of object pulled from axios
 
   const [listingFromDB, setListingFromDB] = useState({});
   // const [convertedListingFromDB, setConvertedListingFromDB] = useState({});
-
-  const listingItems = [
-    {
-      title: "Rooms",
-      listingFromDBName: "rooms_available",
-      icon: {
-        name: "bed",
-        backgroundColor: colors.primary,
-      },
-    },
-    {
-      title: "Furnished",
-      listingFromDBName: "is_furnished",
-      icon: {
-        name: "table-chair",
-        backgroundColor: colors.primary,
-      },
-    },
-    {
-      title: "Bills",
-      listingFromDBName: "bills_included",
-      icon: {
-        name: "home-lightning-bolt",
-        backgroundColor: colors.primary,
-      },
-    },
-    {
-      title: "Internet",
-      listingFromDBName: "internet_included",
-      icon: {
-        name: "wifi",
-        backgroundColor: colors.primary,
-      },
-    },
-    {
-      title: "Living room",
-      listingFromDBName: "has_living_room",
-      icon: {
-        name: "sofa",
-        backgroundColor: colors.primary,
-      },
-    },
-    {
-      title: "Bathrooms",
-      listingFromDBName: "bathroom_count",
-      icon: {
-        name: "toilet",
-        backgroundColor: colors.primary,
-      },
-    },
-  ];
 
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
@@ -113,7 +65,7 @@ export default function ListingDetailsScreen({ route }) {
       </View>
 
       <View style={styles.detailsContainer}>
-        {listingItems.map((item) => (
+        {ListingDetailsScreenItems.map((item) => (
           <View key={item.title}>
             <ListItem
               title={item.title}
@@ -136,14 +88,7 @@ export default function ListingDetailsScreen({ route }) {
         ))}
 
         <View style={styles.showMoreContainer}>
-          <AppText
-            onPress={() => {
-              console.log("Hello");
-            }}
-            style={styles.showMore}
-          >
-            Show More
-          </AppText>
+          <ShowMoreText style={styles.showMore}>Show More</ShowMoreText>
         </View>
       </View>
     </ScrollView>
