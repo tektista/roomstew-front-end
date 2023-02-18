@@ -8,12 +8,23 @@ import React from "react";
 
 import defaultStyles from "../config/styles";
 
-export default function ShowMoreText({ pageToNavigateTo, children, style }) {
+export default function ShowMoreText({
+  pageToNavigateTo,
+  listingFromDB,
+  roomCount,
+  children,
+  style,
+}) {
   const navigation = useNavigation();
 
   return (
     <Text
-      onPress={() => navigation.navigate(pageToNavigateTo)}
+      onPress={() =>
+        navigation.navigate(pageToNavigateTo, {
+          listingFromDB: listingFromDB,
+          roomCount: roomCount,
+        })
+      }
       style={[defaultStyles.text, style]}
     >
       {children}

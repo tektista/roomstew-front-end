@@ -19,7 +19,6 @@ export default function ListingDetailsScreen({ route }) {
   //state of object pulled from axios
 
   const [listingFromDB, setListingFromDB] = useState({});
-  // const [convertedListingFromDB, setConvertedListingFromDB] = useState({});
 
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
@@ -91,6 +90,8 @@ export default function ListingDetailsScreen({ route }) {
           <ShowMoreText
             style={styles.showMore}
             pageToNavigateTo={"ListingDetailsShowMoreDetailsScreen"}
+            listingFromDB={listingFromDB}
+            roomCount={listing.numRoomsAvailable}
           >
             Show More
           </ShowMoreText>
