@@ -7,6 +7,8 @@ import convertListingPropsVals from "../helpers/convertListingPropsVals";
 import colors from "../config/colors";
 import AppText from "../components/AppText";
 import ShowMoreText from "../components/ShowMoreText";
+import ShowMoreDesc from "../components/ShowMoreDesc";
+
 import ListItem from "../components/ListItem";
 import ListItemSeparator from "../components/ListItemSeparator";
 import Icon from "../components/Icon";
@@ -61,6 +63,10 @@ export default function ListingDetailsScreen({ route }) {
         <AppText styles={styles.description}>
           {listingFromDB.description}
         </AppText>
+
+        <View style={styles.showMoreContainer}>
+          <ShowMoreDesc style={styles.showMore}>Show More</ShowMoreDesc>
+        </View>
       </View>
 
       <View style={styles.detailsContainer}>
