@@ -4,11 +4,7 @@ import React from "react";
 import Screen from "../components/Screen";
 
 const ListingDetailsShowMoreDetailsScreen = () => {
-  return (
-    <Screen>
-      <Text>Hello World</Text>
-    </Screen>
-  );
+  return <Screen></Screen>;
 };
 
 export default ListingDetailsShowMoreDetailsScreen;

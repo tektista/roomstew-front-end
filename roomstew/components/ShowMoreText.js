@@ -8,12 +8,12 @@ import React from "react";
 
 import defaultStyles from "../config/styles";
 
-export default function ShowMoreText({ onPress, children, style }) {
+export default function ShowMoreText({ pageToNavigateTo, children, style }) {
   const navigation = useNavigation();
 
   return (
     <Text
-      onPress={() => navigation.navigate("ListingDetailsShowMoreDetailsScreen")}
+      onPress={() => navigation.navigate(pageToNavigateTo)}
       style={[defaultStyles.text, style]}
     >
       {children}

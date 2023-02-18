@@ -13,7 +13,7 @@ import Icon from "../components/Icon";
 
 import ListingDetailsScreenItems from "../config/ListingDetailsScreenItems";
 
-export default function ListingDetailsScreen({ route, navigation }) {
+export default function ListingDetailsScreen({ route }) {
   const listing = route.params.item;
 
   //state of object pulled from axios
@@ -88,7 +88,12 @@ export default function ListingDetailsScreen({ route, navigation }) {
         ))}
 
         <View style={styles.showMoreContainer}>
-          <ShowMoreText style={styles.showMore}>Show More</ShowMoreText>
+          <ShowMoreText
+            style={styles.showMore}
+            pageToNavigateTo={"ListingDetailsShowMoreDetailsScreen"}
+          >
+            Show More
+          </ShowMoreText>
         </View>
       </View>
     </ScrollView>
