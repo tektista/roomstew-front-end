@@ -74,6 +74,14 @@ const ListingDetailsScreenItems = [
     },
   },
   {
+    title: "Age preference",
+    listingFromDBName: "age_preference",
+    icon: {
+      name: "format-list-numbered",
+      backgroundColor: colors.primary,
+    },
+  },
+  {
     title: "Gender preference",
     listingFromDBName: "gender_preference",
     icon: {

@@ -25,6 +25,8 @@ const convertListingPropsVals = (listingObj) => {
     ? (listing.has_parking = "Yes")
     : (listing.has_parking = "No");
 
+  listing.age_preference = `${listing.min_age} - ${listing.min_age}`;
+
   listing.couples_allowed == 1
     ? (listing.couples_allowed = "Allowed")
     : (listing.couples_allowed = "Not Allowed");
