@@ -10,7 +10,7 @@ import defaultStyles from "../config/styles";
 
 export default function ShowMoreText({
   pageToNavigateTo,
-  listingDescription,
+  dataToPassToPage,
   children,
   style,
 }) {
@@ -20,7 +20,7 @@ export default function ShowMoreText({
     <Text
       onPress={() =>
         navigation.navigate(pageToNavigateTo, {
-          listingDescription: listingDescription,
+          listingDescription: dataToPassToPage,
         })
       }
       style={[defaultStyles.text, style]}

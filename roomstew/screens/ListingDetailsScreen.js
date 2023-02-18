@@ -60,12 +60,20 @@ export default function ListingDetailsScreen({ route }) {
           {listingFromDB.title} {listingFromDB.listing_id}
         </AppText>
 
-        <AppText styles={styles.description}>
-          {listingFromDB.description}
+        <AppText style={styles.description}>
+          {listingFromDB.description && listingFromDB.description.length > 256
+            ? listingFromDB.description.slice(0, 256) + " ..."
+            : listingFromDB.description}
         </AppText>
 
         <View style={styles.showMoreContainer}>
-          <ShowMoreDesc style={styles.showMore}>Show More</ShowMoreDesc>
+          <ShowMoreDesc
+            style={styles.showMore}
+            pageToNavigateTo={"ListingDetailsShowMoreDescScreen"}
+            dataToPassToPage={listingFromDB.description}
+          >
+            Show More
+          </ShowMoreDesc>
         </View>
       </View>
 

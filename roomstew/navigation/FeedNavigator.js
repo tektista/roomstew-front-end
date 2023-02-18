@@ -3,6 +3,7 @@ import React from "react";
 import ListingScreen from "../screens/ListingScreen";
 import ListingDetailsScreen from "../screens/ListingDetailsScreen";
 import ListingDetailsShowMoreDetailsScreen from "../screens/ListingDetailsShowMoreDetailsScreen";
+import ListingDetailsShowMoreDescScreen from "../screens/ListingDetailsShowMoreDescScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -14,6 +15,10 @@ const FeedNavigator = () => (
     <Stack.Screen
       name="ListingDetailsShowMoreDetailsScreen"
       component={ListingDetailsShowMoreDetailsScreen}
+    />
+    <Stack.Screen
+      name="ListingDetailsShowMoreDescScreen"
+      component={ListingDetailsShowMoreDescScreen}
     />
   </Stack.Navigator>
 );
