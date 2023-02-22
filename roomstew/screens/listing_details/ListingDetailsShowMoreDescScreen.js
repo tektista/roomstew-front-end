@@ -1,8 +1,7 @@
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import React from "react";
 
-import Screen from "../components/Screen";
-import AppText from "../components/AppText";
+import AppText from "../../components/AppText";
 
 const ListingDetailsShowMoreDescScreen = ({ route }) => {
   const listingDescription = route.params.listingDescription;

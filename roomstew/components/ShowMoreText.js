@@ -3,7 +3,7 @@
 
 import { useNavigation } from "@react-navigation/native";
 
-import { Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import React from "react";
 
 import defaultStyles from "../config/styles";

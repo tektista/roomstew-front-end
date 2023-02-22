@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 
-import Screen from "../components/Screen";
-import ListingDetailsScreenItems from "../config/ListingDetailsScreenItems";
+import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
 
-import Icon from "../components/Icon";
-import ListItem from "../components/ListItem";
-import ListItemSeparator from "../components/ListItemSeparator";
+import Icon from "../../components/Icon";
+import ListItem from "../../components/ListItem";
+import ListItemSeparator from "../../components/ListItemSeparator";
 
 const ListingDetailsShowMoreDetailsScreen = ({ route }) => {
   const listingFromDB = route.params.listingFromDB;

@@ -2,10 +2,10 @@ import React from "react";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import ListingsScreen from "../screens/ListingScreen";
 import AccountScreen from "../screens/AccountScreen";
-import CreateListingScreen from "../screens/CreateListingScreen";
+
 import FeedNavigator from "./FeedNavigator";
+import CreateListingFormNavigator from "./CreateListingFormNavigator";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
@@ -36,7 +36,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="ListingEdit"
-      component={CreateListingScreen}
+      component={CreateListingFormNavigator}
       options={{
         tabBarIcon: ({ size, color }) => (
           <MaterialCommunityIcons

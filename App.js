@@ -26,7 +26,7 @@
 
 // Test stack navigator
 
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 import React from "react";
 
 import Screen from "./roomstew/components/Screen";

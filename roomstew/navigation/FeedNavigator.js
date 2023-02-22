@@ -1,9 +1,9 @@
 import React from "react";
 
 import ListingScreen from "../screens/ListingScreen";
-import ListingDetailsScreen from "../screens/ListingDetailsScreen";
-import ListingDetailsShowMoreDetailsScreen from "../screens/ListingDetailsShowMoreDetailsScreen";
-import ListingDetailsShowMoreDescScreen from "../screens/ListingDetailsShowMoreDescScreen";
+import ListingDetailsScreen from "../screens/listing_details/ListingDetailsScreen";
+import ListingDetailsShowMoreDetailsScreen from "../screens/listing_details/ListingDetailsShowMoreDetailsScreen";
+import ListingDetailsShowMoreDescScreen from "../screens/listing_details/ListingDetailsShowMoreDescScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();

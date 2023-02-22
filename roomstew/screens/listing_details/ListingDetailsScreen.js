@@ -1,26 +1,40 @@
-import { Image, StyleSheet, View, ScrollView, Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  Button,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
-import convertListingPropsVals from "../helpers/convertListingPropsVals";
 
-import colors from "../config/colors";
-import AppText from "../components/AppText";
-import ShowMoreText from "../components/ShowMoreText";
-import ShowMoreDesc from "../components/ShowMoreDesc";
+import convertListingPropsVals from "../../helpers/convertListingPropsVals";
+import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
 
-import ListItem from "../components/ListItem";
-import ListItemSeparator from "../components/ListItemSeparator";
-import Icon from "../components/Icon";
+import colors from "../../config/colors";
+import AppText from "../../components/AppText";
+import ShowMoreText from "../../components/ShowMoreText";
+import ShowMoreDesc from "../../components/ShowMoreDesc";
 
-import ListingDetailsScreenItems from "../config/ListingDetailsScreenItems";
+import ListItem from "../../components/ListItem";
+import ListItemSeparator from "../../components/ListItemSeparator";
+import Icon from "../../components/Icon";
 
-export default function ListingDetailsScreen({ route }) {
+export default function ListingDetailsScreen({ route, navigation }) {
   const listing = route.params.item;
 
   //state of object pulled from axios
 
   const [listingFromDB, setListingFromDB] = useState({});
+  const [photosFromListing, setPhotosFromListing] = useState([]);
+
+  const images = [
+    "https://images.pexels.com/photos/7438545/pexels-photo-7438545.jpeg",
+    "https://images.pexels.com/photos/12996613/pexels-photo-12996613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://images.pexels.com/photos/6690827/pexels-photo-6690827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  ];
 
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
@@ -28,7 +42,25 @@ export default function ListingDetailsScreen({ route }) {
       const response = await axios.get(
         `http://localhost:3002/api/listings/${listing.id}`
       );
-      setListingFromDB(convertListingPropsVals(response.data[0]));
+
+      setListingFromDB(convertListingPropsVals(response.data[0][0]));
+
+      const photoList = response.data[1];
+
+      console.log(photoList);
+      const photoDataList = [];
+
+      photoList.forEach((photoObject) => {
+        const base64Image = btoa(
+          new Uint8Array(photoObject.listing_photo.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        );
+        photoDataList.push(`data:image/jpeg;base64,${base64Image}`);
+      });
+
+      setPhotosFromListing(photoDataList);
     } catch (error) {
       console.log(error);
     }
@@ -39,17 +71,35 @@ export default function ListingDetailsScreen({ route }) {
   }, []);
 
   useEffect(() => {
-    console.log("Here");
-    console.log(listingFromDB);
-  }, [listingFromDB]);
+    console.log(photosFromListing);
+  }, [photosFromListing]);
 
   return (
     <ScrollView>
-      <Image style={styles.image} source={require("../assets/apartment.jpg")} />
+      <Image style={styles.image} source={{ uri: photosFromListing[0] }} />
+
+      {/* <Image
+        style={styles.image}
+        source={{
+          uri: images[2],
+        }}
+      /> */}
+
+      {/* <FlatList
+        // horizontal={true}
+        pagingEnabled={true}
+        data={photosFromListing}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.image}>
+            <Image style={styles.image} source={{ uri: images[1] }} />
+          </View>
+        )}
+      ></FlatList> */}
 
       <View style={styles.userContainer}>
         <ListItem
-          image={require("../assets/apartment.jpg")}
+          image={require("../../assets/apartment.jpg")}
           title="Mosh Hamedani"
           subTitle="5 Listings"
         ></ListItem>
@@ -74,6 +124,15 @@ export default function ListingDetailsScreen({ route }) {
           >
             Show More
           </ShowMoreDesc>
+
+          {/* <Button
+            title="Show More"
+            onPress={() => {
+              navigation.navigate("ListingDetailsShowMoreDescScreen", {
+                listingDescription: listingFromDB.description,
+              });
+            }}
+          /> */}
         </View>
       </View>
 
