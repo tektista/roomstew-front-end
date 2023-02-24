@@ -12,14 +12,12 @@ import * as Yup from "yup";
 import AppForm from "../../components/forms/AppForm";
 import SubmitButton from "../../components/forms/SubmitButton";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
+import AppListItemPickerForm from "../../components/forms/AppListItemPickerForm";
 import ListItemPicker from "../../components/ListItemPicker";
 import AppText from "../../components/AppText";
 import Icon from "../../components/Icon";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import colors from "../../config/colors";
-import AppFormNumberField from "../../components/forms/AppFormNumberField";
-
-import { useFormikContext } from "formik";
 
 const PropertyDetailsFormScreen = ({ route, navigation }) => {
   //HANDLE THESE VALUES
@@ -31,51 +29,51 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
 
   const numbers = [
     {
-      label: "number",
+      label: "Bathrooms",
       value: 1,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 2,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 3,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 4,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 5,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 6,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 7,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 8,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 9,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 10,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 11,
     },
     {
-      label: "number",
+      label: "Bathrooms",
       value: 12,
     },
   ]; //HANDLE THESE VALUES
@@ -152,15 +150,28 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
           />
 
           <ListItemSeparator />
-
+          {/* 
           <ListItemPicker
+            name={"bathroomCount"}
             title="Bathrooms"
             subTitle={number.toString()}
             IconComponent={
               <Icon name="toilet" backgroundColor={colors.primary} />
             }
             items={numbers}
-            selectedItem={number}
+            itemName={" bathrooms"}
+            onSelectItem={(item) => setNumber(item)}
+          /> */}
+
+          <AppListItemPickerForm
+            name="bathroomCount"
+            title="Bathrooms"
+            subTitle={number.toString()}
+            IconComponent={
+              <Icon name="toilet" backgroundColor={colors.primary} />
+            }
+            items={numbers}
+            itemName={" bathrooms"}
             onSelectItem={(item) => setNumber(item)}
           />
 
@@ -183,7 +194,7 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
               <Icon name="parking" backgroundColor={colors.primary} />
             }
           />
-          <SubmitButton title="Next 2/5" />
+          <SubmitButton title="Next 2/5" onPress={console.log(values)} />
         </AppForm>
       </View>
     </ScrollView>

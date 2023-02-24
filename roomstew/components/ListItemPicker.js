@@ -25,7 +25,9 @@ export default function ListItemPicker({
   image,
   IconComponent,
   items,
+  itemName,
   onSelectItem,
+  onSelectItemSetFieldValue,
   selectedItem,
 }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -69,9 +71,11 @@ export default function ListItemPicker({
             renderItem={({ item }) => (
               <PickerItem
                 value={item.value}
+                itemName={itemName}
                 onPress={() => {
                   setModalVisible(false);
                   onSelectItem(item.value);
+                  onSelectItemSetFieldValue(item.value);
                 }}
               />
             )}
