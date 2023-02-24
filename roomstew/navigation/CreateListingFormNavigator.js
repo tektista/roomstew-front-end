@@ -15,10 +15,6 @@ const CreateListingFormNavigator = () => {
         name="PropertyDetailsFormScreen"
         component={PropertyDetailsFormScreen}
       />
-      <Stack.Screen
-        name="NumberInputScreen"
-        component={PropertyDetailsNumberInputScreen}
-      />
     </Stack.Navigator>
   );
 };
