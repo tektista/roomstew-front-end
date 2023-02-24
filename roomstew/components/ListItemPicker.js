@@ -1,0 +1,120 @@
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Modal,
+  Button,
+  FlatList,
+} from "react-native";
+import React, { useState } from "react";
+
+import Screen from "./Screen";
+
+import Icon from "./Icon";
+
+import AppText from "./AppText";
+import colors from "../config/colors";
+import PickerItem from "./PickerItem";
+
+import ListItemSeparator from "./ListItemSeparator";
+
+export default function ListItemPicker({
+  title,
+  subTitle,
+  image,
+  IconComponent,
+  items,
+  onSelectItem,
+  selectedItem,
+}) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  return (
+    <>
+      <TouchableOpacity
+        underlayColor={colors.light}
+        onPress={() => setModalVisible(true)}
+      >
+        <View style={styles.container}>
+          <View style={styles.detailsWrapper}>
+            {IconComponent}
+            {image && <Image style={styles.image} source={image} />}
+
+            <View style={styles.detailsContainer}>
+              <AppText style={styles.title}> {title}</AppText>
+              {subTitle && (
+                <AppText style={styles.subTitle}>{subTitle} </AppText>
+              )}
+            </View>
+          </View>
+
+          <View style={styles.iconRightConainter}>
+            <Icon
+              name="chevron-down"
+              size={40}
+              iconColor={colors.dark}
+              backgroundColor={colors.white}
+              style={styles}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
+
+      <Modal visible={modalVisible} animationType="slide">
+        <Screen>
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item.value.toString()}
+            renderItem={({ item }) => (
+              <PickerItem
+                value={item.value}
+                onPress={() => {
+                  setModalVisible(false);
+                  onSelectItem(item.value);
+                }}
+              />
+            )}
+            ItemSeparatorComponent={ListItemSeparator}
+          />
+        </Screen>
+      </Modal>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    padding: 15,
+    backgroundColor: colors.white,
+
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  detailsContainer: {
+    marginLeft: 10,
+    justifyContent: "center",
+  },
+  image: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+  title: {
+    fontWeight: "500",
+  },
+  subTitle: {
+    color: colors.medium,
+  },
+
+  detailsWrapper: {
+    flexDirection: "row",
+  },
+
+  iconRightConainter: {
+    position: "absolute",
+    right: 6,
+  },
+});

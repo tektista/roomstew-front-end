@@ -1,22 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
 import { useFormikContext } from "formik";
 
 import AppCheckboxInput from "../AppCheckboxInput";
 
 const AppFormCheckbox = ({
   name,
-  checkboxDescription,
   value,
+  title,
+  subTitle,
+  image,
+  IconComponent,
   ...otherProps
 }) => {
-  const { values, handleChange, setFieldValue } = useFormikContext();
+  const { values, setFieldValue } = useFormikContext();
   return (
     <>
       <AppCheckboxInput
-        checkboxDescription={checkboxDescription}
         onValueChange={() => setFieldValue(name, !values[name])}
+        title={title}
         value={values[name]}
+        IconComponent={IconComponent}
       />
     </>
   );

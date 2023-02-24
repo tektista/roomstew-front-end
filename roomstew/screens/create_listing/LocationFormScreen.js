@@ -11,6 +11,8 @@ import AppFormField from "../../components/forms/AppFormField";
 import SubmitButton from "../../components/forms/SubmitButton";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 import ListItemSeparator from "../../components/ListItemSeparator";
+import Icon from "../../components/Icon";
+import colors from "../../config/colors";
 
 import AppText from "../../components/AppText";
 
@@ -33,9 +35,7 @@ const LocationFormScreen = ({ navigation }) => {
             postcode: "",
             streetAddress: "",
             cityTown: "",
-            hasGarden: true,
           }}
-          // TO DO - navigate to next page, with values as a parameter
           onSubmit={(values) =>
             navigation.navigate("PropertyDetailsFormScreen", { values })
           }
@@ -70,7 +70,6 @@ const LocationFormScreen = ({ navigation }) => {
             placeholder="City"
             textContentType="addressCity"
           />
-
           <SubmitButton title="Next 1/5" />
         </AppForm>
       </View>

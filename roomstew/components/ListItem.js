@@ -1,11 +1,4 @@
-import {
-  View,
-  Tex,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import React from "react";
 
 import AppText from "./AppText";
