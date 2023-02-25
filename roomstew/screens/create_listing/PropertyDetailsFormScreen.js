@@ -1,32 +1,16 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  FlatList,
-  Button,
-} from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import React, { useState } from "react";
-import * as Yup from "yup";
 
 import AppForm from "../../components/forms/AppForm";
 import SubmitButton from "../../components/forms/SubmitButton";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 import AppListItemPickerForm from "../../components/forms/AppListItemPickerForm";
-import ListItemPicker from "../../components/ListItemPicker";
 import AppText from "../../components/AppText";
 import Icon from "../../components/Icon";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import colors from "../../config/colors";
 
 const PropertyDetailsFormScreen = ({ route, navigation }) => {
-  //HANDLE THESE VALUES
-  // const validationSchema = Yup.object().shape({
-  //   postcode: Yup.string().required().min(4).label("Postcode"),
-  //   streetAddress: Yup.string().required().min(4).label("Street Address"),
-  //   cityTown: Yup.string().required().min(4).label("City"),
-  // });
-
   const numbers = [
     {
       label: "Bathrooms",
@@ -76,10 +60,9 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
       label: "Bathrooms",
       value: 12,
     },
-  ]; //HANDLE THESE VALUES
+  ];
 
-  const [number, setNumber] = useState(0);
-
+  const [bathroomCount, setBathroomCount] = useState(1);
   const values = route.params.values;
 
   return (
@@ -101,7 +84,7 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
           }}
           onSubmit={(values) =>
             //HANDLE THESE
-            navigation.navigate("PropertyDetailsFormScreen", { values })
+            navigation.navigate("PropertyPreferencesFormScreen", { values })
           }
           // validationSchema={validationSchema}
         >
@@ -150,29 +133,16 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
           />
 
           <ListItemSeparator />
-          {/* 
-          <ListItemPicker
-            name={"bathroomCount"}
-            title="Bathrooms"
-            subTitle={number.toString()}
-            IconComponent={
-              <Icon name="toilet" backgroundColor={colors.primary} />
-            }
-            items={numbers}
-            itemName={" bathrooms"}
-            onSelectItem={(item) => setNumber(item)}
-          /> */}
 
           <AppListItemPickerForm
             name="bathroomCount"
             title="Bathrooms"
-            subTitle={number.toString()}
+            subTitle={bathroomCount.toString()}
             IconComponent={
               <Icon name="toilet" backgroundColor={colors.primary} />
             }
             items={numbers}
-            itemName={" bathrooms"}
-            onSelectItem={(item) => setNumber(item)}
+            onSelectItem={(item) => setBathroomCount(item)}
           />
 
           <ListItemSeparator />
@@ -210,6 +180,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    paddingTop: 10,
     paddingHorizontal: 10,
   },
 });

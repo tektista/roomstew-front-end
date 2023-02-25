@@ -9,10 +9,6 @@ import Screen from "../../components/Screen";
 import AppForm from "../../components/forms/AppForm";
 import AppFormField from "../../components/forms/AppFormField";
 import SubmitButton from "../../components/forms/SubmitButton";
-import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
-import ListItemSeparator from "../../components/ListItemSeparator";
-import Icon from "../../components/Icon";
-import colors from "../../config/colors";
 
 import AppText from "../../components/AppText";
 
@@ -86,6 +82,7 @@ const styles = StyleSheet.create({
   locationTitle: {
     fontSize: 20,
     fontWeight: "bold",
+    paddingTop: 10,
     paddingHorizontal: 10,
   },
 });

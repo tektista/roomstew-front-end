@@ -14,10 +14,9 @@ const AppCheckboxInput = ({
   subTitle,
   image,
   IconComponent,
-  onPress,
 }) => {
   return (
-    <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+    <TouchableHighlight underlayColor={colors.light}>
       <View style={styles.container}>
         <View style={styles.detailsWrapper}>
           {IconComponent}

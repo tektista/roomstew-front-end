@@ -71,7 +71,7 @@ export default function ListItemPicker({
             renderItem={({ item }) => (
               <PickerItem
                 value={item.value}
-                itemName={itemName}
+                itemName={item.label}
                 onPress={() => {
                   setModalVisible(false);
                   onSelectItem(item.value);
