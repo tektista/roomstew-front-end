@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as Yup from "yup";
 
 import Screen from "../../components/Screen";
 import AppText from "../../components/AppText";
@@ -13,22 +14,40 @@ import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 
-const PropertyPreferencesFormScreen = ({ route, navigation }) => {
-  const values = route.params.values;
-  console.log(values);
+const populatePickerItems = (minAge, maxAge) => {
+  const pickerItems = [];
 
-  //used for setting the ListItemPicker's selection rage by populating numbers array
-  const minMaxAgePickerItems = [];
-
-  for (let age = 18; age <= 99; age++) {
+  for (let age = minAge; age <= maxAge; age++) {
     let numberObj = {
       label: "Years old",
       value: age,
     };
 
-    minMaxAgePickerItems.push(numberObj);
-    console.log(minMaxAgePickerItems);
+    pickerItems.push(numberObj);
   }
+  return pickerItems;
+};
+
+const PropertyPreferencesFormScreen = ({ route, navigation }) => {
+  const values = route.params.values;
+
+  //Initial subtitle values
+  const [genderPreference, setGenderPreference] = useState("Any");
+
+  //Max age,
+  const [minAge, setMinAge] = useState(17);
+  const [maxAge, setMaxAge] = useState(99);
+
+  const [minAgeSubtitle, setMinAgeSubtitle] = useState(minAge);
+  const [maxAgeSubtitle, setMaxAgeSubtitle] = useState(maxAge);
+
+  //Populate initial picker items, we need to change these variables so there is a separate one for each
+  const [minAgePickerItems, setMinAgePickerItems] = useState(
+    populatePickerItems(minAge, maxAge)
+  );
+  const [maxAgePickerItems, setMaxAgePickerItems] = useState(
+    populatePickerItems(minAge, maxAge)
+  );
 
   const genderPreferencePickerItems = [
     {
@@ -47,10 +66,13 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
     },
   ];
 
-  //used for setting the ListItemPicker's selection rage
-  const [minAge, setMinAge] = useState(18);
-  const [maxAge, setMaxAge] = useState(99);
-  const [genderPreference, setGenderPreference] = useState("Any");
+  useEffect(() => {
+    setMinAgePickerItems(populatePickerItems(17, maxAge));
+  }, [minAge, maxAge]);
+
+  useEffect(() => {
+    setMaxAgePickerItems(populatePickerItems(minAge, 99));
+  }, [minAge, maxAge]);
 
   return (
     <Screen>
@@ -72,34 +94,53 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
             //HANDLE THESE
             navigation.navigate("PropertyPreferencesFormScreen", { values })
           }
-          // validationSchema={validationSchema}
         >
           <AppListItemPickerForm
             name="min_age"
             title="Minimum Age"
-            subTitle={minAge.toString()}
+            subTitle={minAgeSubtitle.toString()}
             IconComponent={
               <Icon
                 name="format-list-numbered"
                 backgroundColor={colors.primary}
               />
             }
-            items={minMaxAgePickerItems}
-            onSelectItem={(item) => setMinAge(item)}
+            items={minAgePickerItems}
+            onSelectItem={(item) => {
+              if (item > maxAge) {
+                setMaxAge(item);
+                setMaxAgeSubtitle(item);
+                setMaxAgePickerItems(populatePickerItems(item, 99));
+              }
+
+              setMinAge(item);
+              setMinAgeSubtitle(item);
+              setMinAgePickerItems(populatePickerItems(17, maxAge));
+            }}
           />
 
           <AppListItemPickerForm
             name="max_age"
             title="Max Age"
-            subTitle={maxAge.toString()}
+            subTitle={maxAgeSubtitle.toString()}
             IconComponent={
               <Icon
                 name="format-list-numbered"
                 backgroundColor={colors.primary}
               />
             }
-            items={minMaxAgePickerItems}
-            onSelectItem={(item) => setMaxAge(item)}
+            items={maxAgePickerItems}
+            onSelectItem={(item) => {
+              if (item < minAge) {
+                setMinAge(item);
+                setMinAgeSubtitle(item);
+                setMinAgePickerItems(populatePickerItems(17, item));
+              }
+
+              setMaxAge(item);
+              setMaxAgeSubtitle(item);
+              setMaxAgePickerItems(populatePickerItems(minAge, 99));
+            }}
           />
 
           <AppListItemPickerForm
@@ -108,7 +149,7 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
             subTitle={genderPreference}
             IconComponent={
               <Icon
-                name="format-list-numbered"
+                name="gender-male-female"
                 backgroundColor={colors.primary}
               />
             }

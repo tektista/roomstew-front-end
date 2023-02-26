@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useFormikContext } from "formik";
 
 import ListItemPicker from "../ListItemPicker";
+import ErrorMessage from "./ErrorMessage";
 
 const AppListItemPickerForm = ({
   name,
@@ -14,19 +15,21 @@ const AppListItemPickerForm = ({
   onSelectItem,
   selectedItem,
 }) => {
-  const { values, setFieldValue } = useFormikContext();
+  const { values, setFieldValue, errors } = useFormikContext();
   return (
-    <ListItemPicker
-      title={title}
-      subTitle={subTitle}
-      image={image}
-      IconComponent={IconComponent}
-      items={items}
-      itemName={itemName}
-      onSelectItem={onSelectItem}
-      selectedItem={selectedItem}
-      onSelectItemSetFieldValue={(value) => setFieldValue(name, value)}
-    />
+    <>
+      <ListItemPicker
+        title={title}
+        subTitle={subTitle}
+        image={image}
+        IconComponent={IconComponent}
+        items={items}
+        itemName={itemName}
+        onSelectItem={onSelectItem}
+        selectedItem={selectedItem}
+        onSelectItemSetFieldValue={(value) => setFieldValue(name, value)}
+      />
+    </>
   );
 };
 
