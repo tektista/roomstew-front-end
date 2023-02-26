@@ -1,52 +1,31 @@
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import * as ImagePicker from "expo-image-picker";
-import ImageInput from "../../components/ImageInput";
+import ImageInputList from "../../components/ImageInputList";
 
 const PropertyDescriptionFormScreen = ({ route, navigation }) => {
   const values = route.params.values;
   console.log(values);
 
-  const [imageURI, setImageURI] = useState(null);
+  const [imageURIs, setImageURIs] = useState([]);
 
-  const requestPermission = async () => {
-    const result = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!result.granted)
-      alert("You need to enable permission to access the library.");
+  const handleAdd = (uri) => {
+    setImageURIs([...imageURIs, uri]);
   };
 
-  useEffect(() => {
-    requestPermission();
-  }, []);
-
-  //   const selectImage = async () => {
-  //     let result = await ImagePicker.launchImageLibraryAsync();
-  //     console.log(result);
-  //     try {
-  //       if (result.canceled === false) {
-  //         setImageURI(result.assets[0].uri);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  const selectImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    });
-
-    if (!result.canceled) {
-      setImageURI(result.assets[0].uri);
-    }
+  const handleRemove = (uri) => {
+    setImageURIs(imageURIs.filter((imageURI) => imageURI !== uri));
   };
 
   return (
     <View>
-      <Button title="Select Image" onPress={selectImage} />
-      <Image source={{ uri: imageURI }} style={{ width: 200, height: 200 }} />
-      <ImageInput imageURI={imageURI} />
+      {/* <Button title="Select Image" onPress={selectImage} />
+      <Image source={{ uri: imageURI }} style={{ width: 200, height: 200 }} /> */}
+      <ImageInputList
+        imageURIs={imageURIs}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
+      />
     </View>
   );
 };
