@@ -4,6 +4,7 @@ import LocationFormScreen from "../screens/create_listing/LocationFormScreen";
 import PropertyDetailsFormScreen from "../screens/create_listing/PropertyDetailsFormScreen";
 import PropertyPreferencesFormScreen from "../screens/create_listing/PropertyPreferencesFormScreen";
 import PropertyDescriptionFormScreen from "../screens/create_listing/PropertyDescriptionFormScreen";
+import PropertyRoomsFormScreen from "../screens/create_listing/PropertyRoomsFormScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,11 @@ const CreateListingFormNavigator = () => {
       <Stack.Screen
         name="PropertyDescriptionFormScreen"
         component={PropertyDescriptionFormScreen}
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name="PropertyRoomsFormScreen"
+        component={PropertyRoomsFormScreen}
       ></Stack.Screen>
     </Stack.Navigator>
   );
