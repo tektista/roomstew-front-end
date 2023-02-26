@@ -1,14 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
-import * as Yup from "yup";
-
 import Screen from "../../components/Screen";
 import AppText from "../../components/AppText";
 
 import AppForm from "../../components/forms/AppForm";
 import SubmitButton from "../../components/forms/SubmitButton";
 import AppListItemPickerForm from "../../components/forms/AppListItemPickerForm";
-import ListItemSeparator from "../../components/ListItemSeparator";
 
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
@@ -16,13 +13,11 @@ import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 
 const populatePickerItems = (minAge, maxAge) => {
   const pickerItems = [];
-
   for (let age = minAge; age <= maxAge; age++) {
     let numberObj = {
       label: "Years old",
       value: age,
     };
-
     pickerItems.push(numberObj);
   }
   return pickerItems;
@@ -30,18 +25,17 @@ const populatePickerItems = (minAge, maxAge) => {
 
 const PropertyPreferencesFormScreen = ({ route, navigation }) => {
   const values = route.params.values;
+  console.log(values);
 
   //Initial subtitle values
   const [genderPreference, setGenderPreference] = useState("Any");
 
-  //Max age,
   const [minAge, setMinAge] = useState(17);
   const [maxAge, setMaxAge] = useState(99);
 
   const [minAgeSubtitle, setMinAgeSubtitle] = useState(minAge);
   const [maxAgeSubtitle, setMaxAgeSubtitle] = useState(maxAge);
 
-  //Populate initial picker items, we need to change these variables so there is a separate one for each
   const [minAgePickerItems, setMinAgePickerItems] = useState(
     populatePickerItems(minAge, maxAge)
   );
@@ -92,7 +86,7 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
           }}
           onSubmit={(values) =>
             //HANDLE THESE
-            navigation.navigate("PropertyPreferencesFormScreen", { values })
+            navigation.navigate("PropertyDescriptionFormScreen", { values })
           }
         >
           <AppListItemPickerForm
@@ -173,7 +167,7 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
             }
           />
 
-          <SubmitButton title="Next 3/5" onPress={console.log(values)} />
+          <SubmitButton title="Next 3/5" />
         </AppForm>
       </View>
     </Screen>

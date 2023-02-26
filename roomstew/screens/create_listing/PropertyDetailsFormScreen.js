@@ -64,6 +64,7 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
 
   const [bathroomCount, setBathroomCount] = useState(1);
   const values = route.params.values;
+  console.log(values);
 
   return (
     <ScrollView>
