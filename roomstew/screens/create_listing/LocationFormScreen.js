@@ -2,9 +2,6 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import * as Yup from "yup";
 
-// import CheckBox from "@react-native-community/checkbox";
-import { CheckBox } from "@rneui/base";
-
 import Screen from "../../components/Screen";
 import AppForm from "../../components/forms/AppForm";
 import AppFormField from "../../components/forms/AppFormField";

@@ -13,3 +13,5 @@ const submitButton = ({ title }) => {
 export default submitButton;
 
 const styles = StyleSheet.create({});
+
+//setField value to be the buttons name

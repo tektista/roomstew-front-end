@@ -18,7 +18,9 @@ const PropertyDescriptionFormScreen = ({ route, navigation }) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
     description: Yup.string().required().min(1).label("Description"),
-    images: Yup.array().min(1, "Please select at least one image."),
+    images: Yup.array()
+      .min(1, "Please select at least one image.")
+      .max(8, "Maximum of 8 images allowed."),
   });
 
   return (

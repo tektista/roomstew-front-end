@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     height: 100,
     width: 100,
+
+    marginHorizontal: 5,
   },
 
   image: {
