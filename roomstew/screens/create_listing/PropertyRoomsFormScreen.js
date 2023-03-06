@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
 import React, { useState } from "react";
 
 import Screen from "../../components/Screen";
@@ -6,6 +6,7 @@ import AppForm from "../../components/forms/AppForm";
 import SubmitButton from "../../components/forms/SubmitButton";
 
 import AppButton from "../../components/AppButton";
+import CardRoomPreview from "../../components/CardRoomPreview";
 
 const PropertyRoomsFormScreen = ({ navigation, route }) => {
   const values = route.params.values;
@@ -34,11 +35,29 @@ const PropertyRoomsFormScreen = ({ navigation, route }) => {
 
   //Modal
 
-  const [roomList, setRoomList] = useState([]);
+  const [roomList, setRoomList] = useState([
+    {
+      room_description: "asdfadsf",
+      rent: 123,
+      deposit: 123,
+      start_date: "2023-03-05",
+      end_date: "No end date",
+
+      room_size: 1,
+      is_desk: false,
+      is_en_suite: false,
+      is_boiler: false,
+      floor: 0,
+      is_furnished: true,
+      room_images: [
+        "file:///Users/john/Library/Developer/CoreSimulator/Devices/533FB601-209F-465B-9E18-A580D9698C15/data/Containers/Data/Application/46675AC2-6925-440B-B7FF-CEB749FC7DA1/Library/Caches/ExponentExperienceData/%2540anonymous%252Ffront-end-86036fef-7806-475a-a679-f9e588e599d4/ImagePicker/6B7AE5D9-6ED8-4762-8E34-957B8B4D8E9B.jpg",
+      ],
+    },
+  ]);
 
   return (
     <Screen>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
         <AppForm
           initialValues={{
             previousValues: values,
@@ -52,6 +71,24 @@ const PropertyRoomsFormScreen = ({ navigation, route }) => {
           //HANDLE
           // validationSchema={validationSchema}
         >
+          <FlatList
+            data={roomList}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => {
+              return (
+                <CardRoomPreview
+                  roomNumber={index + 1}
+                  roomSize={item.room_size}
+                  isFurnished={item.is_furnished}
+                  startDate={item.start_date}
+                  endDate={item.end_date}
+                  rent={item.rent}
+                  deposit={item.deposit}
+                />
+              );
+            }}
+          />
+
           <SubmitButton title="post listing 5/5" />
         </AppForm>
       </ScrollView>
@@ -61,4 +98,8 @@ const PropertyRoomsFormScreen = ({ navigation, route }) => {
 
 export default PropertyRoomsFormScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+});

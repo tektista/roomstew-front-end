@@ -93,175 +93,171 @@ max of start date is the min of end date
   });
 
   return (
-    <Screen>
-      <ScrollView>
-        <AppForm
-          initialValues={{
-            room_description: "",
-            rent: 0,
-            room_deposit: 0,
-            start_date: getFormatedDate(startDate, "YYYY-MM-DD"),
-            end_date: endDate,
+    <ScrollView contentContainerStyle={styles.container}>
+      <AppForm
+        initialValues={{
+          room_description: "",
+          rent: 0,
+          room_deposit: 0,
+          start_date: getFormatedDate(startDate, "YYYY-MM-DD"),
+          end_date: endDate,
 
-            room_size: 0,
-            is_desk: false,
-            is_en_suite: false,
-            is_boiler: false,
-            floor: 0,
-            room_is_furnished: true,
-            room_images: [],
+          room_size: 0,
+          is_desk: false,
+          is_en_suite: false,
+          is_boiler: false,
+          floor: 0,
+          room_is_furnished: true,
+          room_images: [],
+        }}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+        validationSchema={validationSchema}
+      >
+        <AppFormImagePicker name="room_images" />
+
+        <AppFormField
+          maxLength={512}
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="description"
+          keyboardType="default"
+          name="room_description"
+          placeholder="Description"
+          multiline={true}
+        />
+
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="attach-money"
+          keyboardType="numeric"
+          name="rent"
+          placeholder="Rent per month"
+        />
+
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="attach-money"
+          keyboardType="numeric"
+          name="room_deposit"
+          placeholder="Deposit"
+        />
+
+        <ListItemSeparator />
+
+        <AppDatePickerFormField
+          name="start_date"
+          title="Start Date"
+          subTitle={getFormatedDate(startDate, "DD-MM-YYYY")}
+          IconComponent={
+            <Icon name="calendar" backgroundColor={colors.primary} />
+          }
+          minDate={getFormatedDate(date, "YYYY-MM-DD")}
+          maxDate={
+            endDate === "No end date"
+              ? getFormatedDate(
+                  new Date(
+                    startDate.getFullYear(),
+                    startDate.getMonth() + 6,
+                    startDate.getDate()
+                  ),
+                  "YYYY-MM-DD"
+                )
+              : getFormatedDate(endDate, "YYYY-MM-DD")
+          }
+          onSelectItem={(value) => {
+            const newStartDate = new Date(value);
+            newStartDate.setMonth(newStartDate.getMonth());
+            setStartDate(newStartDate);
           }}
-          onSubmit={(values) => {
-            console.log(values);
+        />
+
+        <ListItemSeparator />
+
+        <AppDatePickerFormField
+          name="end_date"
+          title="End Date"
+          subTitle={
+            endDate === "No end date"
+              ? endDate
+              : getFormatedDate(endDate, "DD-MM-YYYY")
+          }
+          IconComponent={
+            <Icon name="calendar" backgroundColor={colors.primary} />
+          }
+          //min end date should be the max
+          minDate={getFormatedDate(startDate, "YYYY-MM-DD")}
+          // there should be no max end date
+
+          onSelectItem={(value) => {
+            setEndDate(new Date(value));
           }}
-          validationSchema={validationSchema}
-        >
-          <AppFormImagePicker name="room_images" />
+        />
+        <ListItemSeparator />
 
-          <AppFormField
-            maxLength={512}
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="description"
-            keyboardType="default"
-            name="room_description"
-            placeholder="Description"
-            multiline={true}
-          />
+        <AppListItemPickerForm
+          name="room_size"
+          title="Room Size"
+          subTitle={roomSize}
+          IconComponent={
+            <Icon
+              name="image-size-select-small"
+              backgroundColor={colors.primary}
+            />
+          }
+          items={roomSizePickerItems}
+          onSelectItem={(item) => setRoomSize(item)}
+        />
+        <AppListItemPickerForm
+          name="floor"
+          title="Room Floor"
+          subTitle={roomFloor.toString()}
+          IconComponent={
+            <Icon
+              name="image-size-select-small"
+              backgroundColor={colors.primary}
+            />
+          }
+          items={roomFloorPickerItems}
+          onSelectItem={(item) => setRoomFloor(item)}
+        />
+        <ListItemSeparator />
+        <AppFormCheckbox
+          name="is_furnished"
+          title={"Furnished"}
+          IconComponent={
+            <Icon name="table-chair" backgroundColor={colors.primary} />
+          }
+        />
+        <ListItemSeparator />
+        <AppFormCheckbox
+          name="is_en_suite"
+          title={"En-suite"}
+          IconComponent={
+            <Icon name="toilet" backgroundColor={colors.primary} />
+          }
+        />
+        <ListItemSeparator />
+        <AppFormCheckbox
+          name="is_desk"
+          title={"Desk"}
+          IconComponent={<Icon name="desk" backgroundColor={colors.primary} />}
+        />
+        <ListItemSeparator />
+        <AppFormCheckbox
+          name="is_boiler"
+          title={"Boiler In Room"}
+          IconComponent={
+            <Icon name="water-boiler" backgroundColor={colors.primary} />
+          }
+        />
 
-          <AppFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="attach-money"
-            keyboardType="numeric"
-            name="rent"
-            placeholder="Rent per month"
-          />
-
-          <AppFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="attach-money"
-            keyboardType="numeric"
-            name="room_deposit"
-            placeholder="Deposit"
-          />
-
-          <ListItemSeparator />
-
-          <AppDatePickerFormField
-            name="start_date"
-            title="Start Date"
-            subTitle={getFormatedDate(startDate, "DD-MM-YYYY")}
-            IconComponent={
-              <Icon name="calendar" backgroundColor={colors.primary} />
-            }
-            minDate={getFormatedDate(date, "YYYY-MM-DD")}
-            maxDate={
-              endDate === "No end date"
-                ? getFormatedDate(
-                    new Date(
-                      startDate.getFullYear(),
-                      startDate.getMonth() + 6,
-                      startDate.getDate()
-                    ),
-                    "YYYY-MM-DD"
-                  )
-                : getFormatedDate(endDate, "YYYY-MM-DD")
-            }
-            onSelectItem={(value) => {
-              const newStartDate = new Date(value);
-              newStartDate.setMonth(newStartDate.getMonth());
-              setStartDate(newStartDate);
-            }}
-          />
-
-          <ListItemSeparator />
-
-          <AppDatePickerFormField
-            name="end_date"
-            title="End Date"
-            subTitle={
-              endDate === "No end date"
-                ? endDate
-                : getFormatedDate(endDate, "DD-MM-YYYY")
-            }
-            IconComponent={
-              <Icon name="calendar" backgroundColor={colors.primary} />
-            }
-            //min end date should be the max
-            minDate={getFormatedDate(startDate, "YYYY-MM-DD")}
-            // there should be no max end date
-
-            onSelectItem={(value) => {
-              setEndDate(new Date(value));
-            }}
-          />
-          <ListItemSeparator />
-
-          <AppListItemPickerForm
-            name="room_size"
-            title="Room Size"
-            subTitle={roomSize}
-            IconComponent={
-              <Icon
-                name="image-size-select-small"
-                backgroundColor={colors.primary}
-              />
-            }
-            items={roomSizePickerItems}
-            onSelectItem={(item) => setRoomSize(item)}
-          />
-          <AppListItemPickerForm
-            name="floor"
-            title="Room Floor"
-            subTitle={roomFloor.toString()}
-            IconComponent={
-              <Icon
-                name="image-size-select-small"
-                backgroundColor={colors.primary}
-              />
-            }
-            items={roomFloorPickerItems}
-            onSelectItem={(item) => setRoomFloor(item)}
-          />
-          <ListItemSeparator />
-          <AppFormCheckbox
-            name="is_furnished"
-            title={"Furnished"}
-            IconComponent={
-              <Icon name="table-chair" backgroundColor={colors.primary} />
-            }
-          />
-          <ListItemSeparator />
-          <AppFormCheckbox
-            name="is_en_suite"
-            title={"En-suite"}
-            IconComponent={
-              <Icon name="toilet" backgroundColor={colors.primary} />
-            }
-          />
-          <ListItemSeparator />
-          <AppFormCheckbox
-            name="is_desk"
-            title={"Desk"}
-            IconComponent={
-              <Icon name="desk" backgroundColor={colors.primary} />
-            }
-          />
-          <ListItemSeparator />
-          <AppFormCheckbox
-            name="is_boiler"
-            title={"Boiler In Room"}
-            IconComponent={
-              <Icon name="water-boiler" backgroundColor={colors.primary} />
-            }
-          />
-
-          <SubmitButton title="Add Room" />
-        </AppForm>
-      </ScrollView>
-    </Screen>
+        <SubmitButton title="Add Room" />
+      </AppForm>
+    </ScrollView>
   );
 };
 

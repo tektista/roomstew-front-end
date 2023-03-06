@@ -23,7 +23,6 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
   };
 
   const handlePress = () => {
-    console.log("Hello");
     if (!imageURI) selectImage();
     else
       Alert.alert("Delete", "Are you sure you want to delete this image?", [

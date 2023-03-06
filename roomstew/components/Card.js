@@ -43,8 +43,6 @@ export default function Card({
             </AppText>
           </View>
         </View>
-
-        <View></View>
       </View>
     </TouchableWithoutFeedback>
   );
