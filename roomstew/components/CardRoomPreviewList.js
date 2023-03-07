@@ -3,19 +3,7 @@ import React from "react";
 
 import CardRoomPreview from "./CardRoomPreview";
 
-const CardRoomPreviewList = ({
-  roomList = [
-    {
-      roomNumber: 1,
-      roomSize: 0,
-      isFurnished: false,
-      startDate: "01/01/2021",
-      endDate: "01/01/2022",
-      rent: 100,
-      deposit: 100,
-    },
-  ],
-}) => {
+const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
   return (
     <View>
       {roomList.map((room, index) => {
@@ -30,6 +18,7 @@ const CardRoomPreviewList = ({
             endDate={room.end_date}
             rent={room.rent}
             deposit={room.room_deposit}
+            onPress={() => handleDelete(index)}
           />
         );
       })}

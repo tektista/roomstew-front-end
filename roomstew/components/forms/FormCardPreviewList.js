@@ -5,9 +5,17 @@ import { useFormikContext } from "formik";
 import CardRoomPreviewList from "../CardRoomPreviewList";
 
 const FormCardPreviewList = ({ name }) => {
-  const { values } = useFormikContext();
+  const { values, setFieldValue } = useFormikContext();
 
-  return <CardRoomPreviewList roomList={values[name]} />;
+  const handleDelete = (roomIndex) => {
+    setFieldValue(name, [
+      ...values[name].filter((item, index) => index !== roomIndex),
+    ]);
+  };
+
+  return (
+    <CardRoomPreviewList roomList={values[name]} handleDelete={handleDelete} />
+  );
 };
 
 export default FormCardPreviewList;

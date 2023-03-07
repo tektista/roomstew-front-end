@@ -14,33 +14,31 @@ const CardRoomPreview = ({
   onPress,
 }) => {
   return (
-    <TouchableWithoutFeedback>
-      <View style={styles.roomCard}>
-        <View style={styles.titleContainer}>
-          <AppText>Room {roomNumber}</AppText>
-        </View>
-
-        <View style={styles.roomDetailsContainer}>
-          <AppText>{roomSize === 0 ? "Single Room" : "Double Room"}</AppText>
-          <AppText>{roomSize === 0 ? "Unfurnished" : "Furnished"}</AppText>
-        </View>
-        <View style={styles.startEndDateContainer}>
-          <AppText>
-            {startDate} - {endDate}
-          </AppText>
-        </View>
-        <View style={styles.rentDepositContainer}>
-          <AppText>Rent: £{rent} /month</AppText>
-          <AppText>Deposit: £{deposit}</AppText>
-        </View>
-
-        <TouchableWithoutFeedback onPress={onPress}>
-          <View style={styles.deleteContainer}>
-            <AppText style={styles.deleteText}> Delete</AppText>
-          </View>
-        </TouchableWithoutFeedback>
+    <View style={styles.roomCard}>
+      <View style={styles.titleContainer}>
+        <AppText>Room {roomNumber}</AppText>
       </View>
-    </TouchableWithoutFeedback>
+
+      <View style={styles.roomDetailsContainer}>
+        <AppText>{roomSize === 0 ? "Single Room" : "Double Room"}</AppText>
+        <AppText>{roomSize === 0 ? "Unfurnished" : "Furnished"}</AppText>
+      </View>
+      <View style={styles.startEndDateContainer}>
+        <AppText>
+          {startDate} - {endDate}
+        </AppText>
+      </View>
+      <View style={styles.rentDepositContainer}>
+        <AppText>Rent: £{rent} /month</AppText>
+        <AppText>Deposit: £{deposit}</AppText>
+      </View>
+
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={styles.deleteContainer}>
+          <AppText style={styles.deleteText}> Delete</AppText>
+        </View>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };
 
