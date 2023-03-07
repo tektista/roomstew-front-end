@@ -5,15 +5,13 @@ import * as Yup from "yup";
 
 import AppForm from "../../components/forms/AppForm";
 import TextInputFormField from "../../components/forms/TextInputFormField";
-import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import FormSubmitButton from "../../components/forms/FormSubmitButton";
 import ImagePickerFormField from "../../components/forms/ImagePickerFormField";
 import AppText from "../../components/AppText";
 import Screen from "../../components/Screen";
 
 const DescriptionFormScreen = ({ route, navigation }) => {
   const values = route.params.values;
-
-  const [imageURIs, setImageURIs] = useState([]);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
@@ -65,7 +63,7 @@ const DescriptionFormScreen = ({ route, navigation }) => {
             numberOfLines={3}
           />
 
-          <FormFormSubmitButton title="Next 4/5" />
+          <FormSubmitButton title="Next 4/5" />
         </AppForm>
       </View>
     </Screen>

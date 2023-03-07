@@ -15,7 +15,7 @@ import Screen from "../../components/Screen";
 
 //FORM
 import AppForm from "../../components/forms/AppForm";
-import FormFormSubmitButton from "../../components/forms/FormFormFormSubmitButton";
+import FormSubmitButton from "../../components/forms/FormFormSubmitButton";
 
 import AppButton from "../../components/AppButton";
 
@@ -48,7 +48,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
           <RoomCardPreviewListFormField name="roomList" />
 
-          <FormFormSubmitButton title="Post Listing 5/5" />
+          <FormSubmitButton title="Post Listing 5/5" />
         </AppForm>
       </ScrollView>
     </Screen>

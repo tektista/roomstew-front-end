@@ -4,7 +4,7 @@ import Screen from "../../components/Screen";
 import AppText from "../../components/AppText";
 
 import AppForm from "../../components/forms/AppForm";
-import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import FormSubmitButton from "../../components/forms/FormSubmitButton";
 import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 
 import Icon from "../../components/Icon";
@@ -167,7 +167,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             }
           />
 
-          <FormFormSubmitButton title="Next 3/5" />
+          <FormSubmitButton title="Next 3/5" />
         </AppForm>
       </View>
     </Screen>

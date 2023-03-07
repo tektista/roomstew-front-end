@@ -2,7 +2,7 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import React, { useState } from "react";
 
 import AppForm from "../../components/forms/AppForm";
-import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import FormSubmitButton from "../../components/forms/FormSubmitButton";
 import CheckboxFormField from "../../components/forms/CheckboxFormField";
 import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 import AppText from "../../components/AppText";
@@ -165,10 +165,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
               <Icon name="parking" backgroundColor={colors.primary} />
             }
           />
-          <FormFormSubmitButton
-            title="Next 2/5"
-            onPress={console.log(values)}
-          />
+          <FormSubmitButton title="Next 2/5" onPress={console.log(values)} />
         </AppForm>
       </View>
     </ScrollView>

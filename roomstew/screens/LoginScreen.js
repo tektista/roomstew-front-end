@@ -8,7 +8,7 @@ import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import ErrorMessage from "../components/forms/ErrorMessage";
 import TextInputFormField from "../components/forms/TextInputFormField";
-import FormFormSubmitButton from "../components/forms/FormFormSubmitButton";
+import FormSubmitButton from "../components/forms/FormSubmitButton";
 import AppForm from "../components/forms/AppForm";
 
 const validationSchema = Yup.object().shape({
@@ -46,7 +46,7 @@ const LoginScreen = () => {
           textContentType="password"
         />
 
-        <FormFormSubmitButton title="Login" />
+        <FormSubmitButton title="Login" />
       </AppForm>
     </Screen>
   );

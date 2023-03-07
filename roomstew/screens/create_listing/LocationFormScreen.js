@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import Screen from "../../components/Screen";
 import AppForm from "../../components/forms/AppForm";
 import TextInputFormField from "../../components/forms/TextInputFormField";
-import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import FormSubmitButton from "../../components/forms/FormSubmitButton";
 
 import AppText from "../../components/AppText";
 
@@ -63,7 +63,7 @@ const LocationFormScreen = ({ navigation }) => {
             placeholder="City"
             textContentType="addressCity"
           />
-          <FormFormSubmitButton title="Next 1/5" />
+          <FormSubmitButton title="Next 1/5" />
         </AppForm>
       </View>
     </Screen>
