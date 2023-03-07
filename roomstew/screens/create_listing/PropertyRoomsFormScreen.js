@@ -1,95 +1,91 @@
-import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Modal,
+} from "react-native";
 import React, { useState } from "react";
+import * as Yup from "yup";
+import { getFormatedDate } from "react-native-modern-datepicker";
 
 import Screen from "../../components/Screen";
+
+//FORM
 import AppForm from "../../components/forms/AppForm";
 import SubmitButton from "../../components/forms/SubmitButton";
+import AppFormField from "../../components/forms/AppFormField";
+import ListItemSeparator from "../../components/ListItemSeparator";
+import AppListItemPickerForm from "../../components/forms/AppListItemPickerForm";
+import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
+import AppFormImagePicker from "../../components/forms/AppFormImagePicker";
+import AppDatePickerFormField from "../../components/forms/AppDatePickerFormField";
+
+import colors from "../../config/colors";
+import Icon from "../../components/Icon";
 
 import AppButton from "../../components/AppButton";
 import CardRoomPreview from "../../components/CardRoomPreview";
 
+import AppText from "../../components/AppText";
+import FormAddRoomModal from "../../components/forms/FormAddRoomModal";
+
+import AppFormRoomModal from "../../components/forms/AppFormRoomModal";
+import CardRoomPreviewList from "../../components/CardRoomPreviewList";
+import FormCardPreviewList from "../../components/forms/FormCardPreviewList";
+
+/* 
+
+ <FlatList
+          data={roomList}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => {
+            return (
+              <CardRoomPreview
+                roomNumber={index + 1}
+                roomSize={item.room_size}
+                isFurnished={item.room_is_furnished}
+                startDate={item.start_date}
+                endDate={item.end_date}
+                rent={item.rent}
+                deposit={item.room_deposit}
+              />
+            );
+          }}
+        />*/
+
 const PropertyRoomsFormScreen = ({ navigation, route }) => {
   const values = route.params.values;
 
-  /*
+  const [roomList, setRoomList] = useState([]);
 
-  1. Modal route
-  2. Navigator route
+  const [modalVisible, setModalVisible] = useState(false);
 
-  1. WHEN addRoomButton is clicked, Use react navigate to go to the addRoom screen
-  pass the values object from (previous screen) to the addRoom screen
-
-  2. IF they click the back button, go back to the previous screen and pass
-   the values object to it use react navigate again
-
-  3. On room page there should be an AppForm with the following fields
-
-  */
-
-  // I need a card component that renders rooms in a card format
-  // I need a component that renders a list of rooms in card format #
-  // feed the initial values of the form to the roomCardcomponent
-
-  //This formik form needs to have two buttons, one for adding a room, and one
-  //for posting the listing
-
-  //Modal
-
-  const [roomList, setRoomList] = useState([
-    {
-      room_description: "asdfadsf",
-      rent: 123,
-      deposit: 123,
-      start_date: "2023-03-05",
-      end_date: "No end date",
-
-      room_size: 1,
-      is_desk: false,
-      is_en_suite: false,
-      is_boiler: false,
-      floor: 0,
-      is_furnished: true,
-      room_images: [
-        "file:///Users/john/Library/Developer/CoreSimulator/Devices/533FB601-209F-465B-9E18-A580D9698C15/data/Containers/Data/Application/46675AC2-6925-440B-B7FF-CEB749FC7DA1/Library/Caches/ExponentExperienceData/%2540anonymous%252Ffront-end-86036fef-7806-475a-a679-f9e588e599d4/ImagePicker/6B7AE5D9-6ED8-4762-8E34-957B8B4D8E9B.jpg",
-      ],
-    },
-  ]);
+  // I need to set the values of the outer form by returning the values of the inner form
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView>
+        <AppButton title="Add a room" onPress={() => setModalVisible(true)} />
         <AppForm
-          initialValues={{
-            previousValues: values,
-            rooms: [],
-          }}
+          initialValues={{ roomList: [] }}
           onSubmit={(values) => {
             console.log(values);
-            navigation.navigate("PropertyAddRoomFormScreen");
           }}
-
-          //HANDLE
-          // validationSchema={validationSchema}
+          //handle validationScheme
         >
-          <FlatList
-            data={roomList}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              return (
-                <CardRoomPreview
-                  roomNumber={index + 1}
-                  roomSize={item.room_size}
-                  isFurnished={item.is_furnished}
-                  startDate={item.start_date}
-                  endDate={item.end_date}
-                  rent={item.rent}
-                  deposit={item.deposit}
-                />
-              );
+          <AppFormRoomModal
+            modalVisible={modalVisible}
+            handleModalClose={(value) => {
+              setModalVisible(value);
             }}
           />
 
-          <SubmitButton title="post listing 5/5" />
+          <FormCardPreviewList name="roomList" />
+
+          <SubmitButton title="Post Listing 5/5" />
         </AppForm>
       </ScrollView>
     </Screen>
@@ -99,7 +95,7 @@ const PropertyRoomsFormScreen = ({ navigation, route }) => {
 export default PropertyRoomsFormScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  modalContainer: {
     padding: 10,
   },
 });

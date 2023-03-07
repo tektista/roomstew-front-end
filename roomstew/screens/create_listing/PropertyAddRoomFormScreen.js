@@ -30,8 +30,11 @@ import SubmitButton from "../../components/forms/SubmitButton";
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 import AppDatePickerFormField from "../../components/forms/AppDatePickerFormField";
+import PropertyRoomsFormScreen from "./PropertyRoomsFormScreen";
 
 const PropertyAddRoomFormScreen = ({ route, navigation }) => {
+  const { handleAddRoom } = route.params;
+
   const [imageURIs, setImageURIs] = useState([]);
   // the current day object
   const date = new Date();
@@ -41,7 +44,6 @@ const PropertyAddRoomFormScreen = ({ route, navigation }) => {
 
   const [endDate, setEndDate] = useState("No end date");
   const [roomSize, setRoomSize] = useState("Single room");
-
   const [roomFloor, setRoomFloor] = useState("0");
 
   const roomSizePickerItems = [
@@ -107,11 +109,13 @@ max of start date is the min of end date
           is_en_suite: false,
           is_boiler: false,
           floor: 0,
-          room_is_furnished: true,
+          is_furnished: false,
           room_images: [],
         }}
         onSubmit={(values) => {
+          handleAddRoom(values);
           console.log(values);
+          navigation.goBack();
         }}
         validationSchema={validationSchema}
       >
