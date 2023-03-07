@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useFormikContext } from "formik";
 
-import AppCheckboxInput from "../AppCheckboxInput";
+import CheckboxInput from "../CheckboxInput";
 
 const CheckboxFormField = ({
   name,
@@ -15,7 +15,7 @@ const CheckboxFormField = ({
   const { values, setFieldValue } = useFormikContext();
   return (
     <>
-      <AppCheckboxInput
+      <CheckboxInput
         onValueChange={() => setFieldValue(name, !values[name])}
         title={title}
         value={values[name]}

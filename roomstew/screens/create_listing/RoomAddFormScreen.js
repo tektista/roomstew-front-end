@@ -32,7 +32,7 @@ import colors from "../../config/colors";
 import DatePickerFormFieldField from "../../components/forms/DatePickerFormField";
 import PropertyRoomsFormScreen from "./RoomsFormScreen";
 
-const PropertyAddRoomFormScreen = ({ route, navigation }) => {
+const RoomAddFormScreen = ({ route, navigation }) => {
   const { handleAddRoom } = route.params;
 
   const [imageURIs, setImageURIs] = useState([]);
@@ -265,6 +265,6 @@ max of start date is the min of end date
   );
 };
 
-export default PropertyAddRoomFormScreen;
+export default RoomAddFormScreen;
 
 const styles = StyleSheet.create({});

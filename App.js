@@ -11,7 +11,7 @@
 // import TextInputFormField from "./roomstew/components/forms/TextInputFormField";
 // import CreateListingScreen from "./roomstew/screens/CreateListingScreen";
 
-// import AppCheckboxInput from "./roomstew/components/AppCheckboxInput";
+// import CheckboxInput from "./roomstew/components/CheckboxInput";
 // import CheckboxFormField from "./roomstew/components/forms/CheckboxFormField";
 
 // export default function App() {

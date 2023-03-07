@@ -7,7 +7,7 @@ import AppText from "./AppText";
 // import { CheckBox } from "@rneui/themed";
 import Checkbox from "expo-checkbox";
 
-const AppCheckboxInput = ({
+const CheckboxInput = ({
   value,
   onValueChange,
   title,
@@ -43,7 +43,7 @@ const AppCheckboxInput = ({
   );
 };
 
-export default AppCheckboxInput;
+export default CheckboxInput;
 
 const styles = StyleSheet.create({
   container: {
