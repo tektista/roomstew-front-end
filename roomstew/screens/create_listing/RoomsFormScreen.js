@@ -22,7 +22,7 @@ import AppButton from "../../components/AppButton";
 import AppFormRoomModal from "../../components/forms/AppFormRoomModal";
 import FormCardPreviewList from "../../components/forms/FormCardPreviewList";
 
-const PropertyRoomsFormScreen = ({ navigation, route }) => {
+const RoomsFormScreen = ({ navigation, route }) => {
   const values = route.params.values;
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -55,7 +55,7 @@ const PropertyRoomsFormScreen = ({ navigation, route }) => {
   );
 };
 
-export default PropertyRoomsFormScreen;
+export default RoomsFormScreen;
 
 const styles = StyleSheet.create({
   modalContainer: {

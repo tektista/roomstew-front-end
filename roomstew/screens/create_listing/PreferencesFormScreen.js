@@ -23,7 +23,7 @@ const populatePickerItems = (minAge, maxAge) => {
   return pickerItems;
 };
 
-const PropertyPreferencesFormScreen = ({ route, navigation }) => {
+const PreferencesFormScreen = ({ route, navigation }) => {
   const values = route.params.values;
   console.log(values);
 
@@ -86,7 +86,7 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
           }}
           onSubmit={(values) =>
             //HANDLE THESE
-            navigation.navigate("PropertyDescriptionFormScreen", { values })
+            navigation.navigate("DescriptionFormScreen", { values })
           }
         >
           <AppListItemPickerForm
@@ -174,7 +174,7 @@ const PropertyPreferencesFormScreen = ({ route, navigation }) => {
   );
 };
 
-export default PropertyPreferencesFormScreen;
+export default PreferencesFormScreen;
 
 const styles = StyleSheet.create({
   title: {

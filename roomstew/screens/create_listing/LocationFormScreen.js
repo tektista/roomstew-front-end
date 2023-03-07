@@ -30,7 +30,7 @@ const LocationFormScreen = ({ navigation }) => {
             cityTown: "",
           }}
           onSubmit={(values) =>
-            navigation.navigate("PropertyDetailsFormScreen", { values })
+            navigation.navigate("DetailsFormScreen", { values })
           }
           validationSchema={validationSchema}
         >

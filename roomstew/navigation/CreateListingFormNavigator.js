@@ -1,11 +1,10 @@
 import React from "react";
 
 import LocationFormScreen from "../screens/create_listing/LocationFormScreen";
-import PropertyDetailsFormScreen from "../screens/create_listing/PropertyDetailsFormScreen";
-import PropertyPreferencesFormScreen from "../screens/create_listing/PropertyPreferencesFormScreen";
-import PropertyDescriptionFormScreen from "../screens/create_listing/PropertyDescriptionFormScreen";
-import PropertyRoomsFormScreen from "../screens/create_listing/PropertyRoomsFormScreen";
-import PropertyAddRoomFormScreen from "../screens/create_listing/PropertyAddRoomFormScreen";
+import DetailsFormScreen from "../screens/create_listing/DetailsFormScreen";
+import PreferencesFormScreen from "../screens/create_listing/PreferencesFormScreen";
+import DescriptionFormScreen from "../screens/create_listing/DescriptionFormScreen";
+import RoomsFormScreen from "../screens/create_listing/RoomsFormScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -14,26 +13,19 @@ const CreateListingFormNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="LocationFormScreen" component={LocationFormScreen} />
+      <Stack.Screen name="DetailsFormScreen" component={DetailsFormScreen} />
       <Stack.Screen
-        name="PropertyDetailsFormScreen"
-        component={PropertyDetailsFormScreen}
-      />
-      <Stack.Screen
-        name="PropertyPreferencesFormScreen"
-        component={PropertyPreferencesFormScreen}
+        name="PreferencesFormScreen"
+        component={PreferencesFormScreen}
       ></Stack.Screen>
       <Stack.Screen
-        name="PropertyDescriptionFormScreen"
-        component={PropertyDescriptionFormScreen}
+        name="DescriptionFormScreen"
+        component={DescriptionFormScreen}
       ></Stack.Screen>
 
       <Stack.Screen
-        name="PropertyRoomsFormScreen"
-        component={PropertyRoomsFormScreen}
-      ></Stack.Screen>
-      <Stack.Screen
-        name="PropertyAddRoomFormScreen"
-        component={PropertyAddRoomFormScreen}
+        name="RoomsFormScreen"
+        component={RoomsFormScreen}
       ></Stack.Screen>
     </Stack.Navigator>
   );

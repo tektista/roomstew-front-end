@@ -10,7 +10,7 @@ import AppFormImagePicker from "../../components/forms/AppFormImagePicker";
 import AppText from "../../components/AppText";
 import Screen from "../../components/Screen";
 
-const PropertyDescriptionFormScreen = ({ route, navigation }) => {
+const DescriptionFormScreen = ({ route, navigation }) => {
   const values = route.params.values;
 
   const [imageURIs, setImageURIs] = useState([]);
@@ -37,7 +37,7 @@ const PropertyDescriptionFormScreen = ({ route, navigation }) => {
             images: [],
           }}
           onSubmit={(values) => {
-            navigation.navigate("PropertyRoomsFormScreen", { values });
+            navigation.navigate("RoomsFormScreen", { values });
           }}
           validationSchema={validationSchema}
         >
@@ -72,7 +72,7 @@ const PropertyDescriptionFormScreen = ({ route, navigation }) => {
   );
 };
 
-export default PropertyDescriptionFormScreen;
+export default DescriptionFormScreen;
 
 const styles = StyleSheet.create({
   appFormContainer: {

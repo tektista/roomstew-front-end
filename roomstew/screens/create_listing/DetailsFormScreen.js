@@ -10,7 +10,7 @@ import Icon from "../../components/Icon";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import colors from "../../config/colors";
 
-const PropertyDetailsFormScreen = ({ route, navigation }) => {
+const DetailsFormScreen = ({ route, navigation }) => {
   const numbers = [
     {
       label: "Bathrooms",
@@ -85,7 +85,7 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
           }}
           onSubmit={(values) =>
             //HANDLE THESE
-            navigation.navigate("PropertyPreferencesFormScreen", { values })
+            navigation.navigate("PreferencesFormScreen", { values })
           }
           // validationSchema={validationSchema}
         >
@@ -172,7 +172,7 @@ const PropertyDetailsFormScreen = ({ route, navigation }) => {
   );
 };
 
-export default PropertyDetailsFormScreen;
+export default DetailsFormScreen;
 
 const styles = StyleSheet.create({
   appFormContainer: {
