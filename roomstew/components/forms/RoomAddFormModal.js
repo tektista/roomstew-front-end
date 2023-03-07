@@ -12,18 +12,18 @@ import * as Yup from "yup";
 
 import Screen from "../Screen";
 import AppForm from "./AppForm";
-import AppFormField from "./AppFormField";
-import AppFormCheckbox from "./AppFormCheckbox";
-import AppListItemPickerForm from "./AppListItemPickerForm";
-import AppFormImagePicker from "./AppFormImagePicker";
-import AppDatePickerFormField from "./AppDatePickerFormField";
+import TextInputFormField from "./TextInputFormField";
+import CheckboxFormField from "./CheckboxFormField";
+import ListItemPickerFormField from "./ListItemPickerFormField";
+import ImagePickerFormField from "./ImagePickerFormField";
+import DatePickerFormFieldField from "./DatePickerFormField";
 import ListItemSeparator from "../ListItemSeparator";
-import SubmitButton from "./SubmitButton";
+import FormFormSubmitButton from "./FormFormFormSubmitButton";
 
 import Icon from "../Icon";
 import colors from "../../config/colors";
 
-const FormAddRoomModal = ({
+const RoomAddFormModal = ({
   modalVisible,
   handleModalClose,
   handleRoomSubmit,
@@ -90,9 +90,9 @@ const FormAddRoomModal = ({
             }}
             validationSchema={validationSchema}
           >
-            <AppFormImagePicker name="room_images" />
+            <ImagePickerFormField name="room_images" />
 
-            <AppFormField
+            <TextInputFormField
               maxLength={512}
               autoCapitalize="none"
               autoCorrect={false}
@@ -103,7 +103,7 @@ const FormAddRoomModal = ({
               multiline={true}
             />
 
-            <AppFormField
+            <TextInputFormField
               autoCapitalize="none"
               autoCorrect={false}
               icon="attach-money"
@@ -112,7 +112,7 @@ const FormAddRoomModal = ({
               placeholder="Rent per month"
             />
 
-            <AppFormField
+            <TextInputFormField
               autoCapitalize="none"
               autoCorrect={false}
               icon="attach-money"
@@ -123,7 +123,7 @@ const FormAddRoomModal = ({
 
             <ListItemSeparator />
 
-            <AppDatePickerFormField
+            <DatePickerFormFieldField
               name="start_date"
               title="Start Date"
               subTitle={getFormatedDate(startDate, "DD-MM-YYYY")}
@@ -152,7 +152,7 @@ const FormAddRoomModal = ({
 
             <ListItemSeparator />
 
-            <AppDatePickerFormField
+            <DatePickerFormFieldField
               name="end_date"
               title="End Date"
               subTitle={
@@ -173,7 +173,7 @@ const FormAddRoomModal = ({
             />
             <ListItemSeparator />
 
-            <AppListItemPickerForm
+            <ListItemPickerFormField
               name="room_size"
               title="Room Size"
               subTitle={roomSize}
@@ -186,7 +186,7 @@ const FormAddRoomModal = ({
               items={roomSizePickerItems}
               onSelectItem={(item) => setRoomSize(item)}
             />
-            <AppListItemPickerForm
+            <ListItemPickerFormField
               name="floor"
               title="Room Floor"
               subTitle={roomFloor.toString()}
@@ -200,7 +200,7 @@ const FormAddRoomModal = ({
               onSelectItem={(item) => setRoomFloor(item)}
             />
             <ListItemSeparator />
-            <AppFormCheckbox
+            <CheckboxFormField
               name="is_furnished"
               title={"Furnished"}
               IconComponent={
@@ -208,7 +208,7 @@ const FormAddRoomModal = ({
               }
             />
             <ListItemSeparator />
-            <AppFormCheckbox
+            <CheckboxFormField
               name="is_en_suite"
               title={"En-suite"}
               IconComponent={
@@ -216,7 +216,7 @@ const FormAddRoomModal = ({
               }
             />
             <ListItemSeparator />
-            <AppFormCheckbox
+            <CheckboxFormField
               name="is_desk"
               title={"Desk"}
               IconComponent={
@@ -224,14 +224,14 @@ const FormAddRoomModal = ({
               }
             />
             <ListItemSeparator />
-            <AppFormCheckbox
+            <CheckboxFormField
               name="is_boiler"
               title={"Boiler In Room"}
               IconComponent={
                 <Icon name="water-boiler" backgroundColor={colors.primary} />
               }
             />
-            <SubmitButton title="Add Room" />
+            <FormFormSubmitButton title="Add Room" />
           </AppForm>
         </ScrollView>
       </Screen>
@@ -239,6 +239,6 @@ const FormAddRoomModal = ({
   );
 };
 
-export default FormAddRoomModal;
+export default RoomAddFormModal;
 
 const styles = StyleSheet.create({});

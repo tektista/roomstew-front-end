@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 import AppForm from "../../components/forms/AppForm";
-import AppFormField from "../../components/forms/AppFormField";
-import SubmitButton from "../../components/forms/SubmitButton";
-import AppFormImagePicker from "../../components/forms/AppFormImagePicker";
+import TextInputFormField from "../../components/forms/TextInputFormField";
+import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import ImagePickerFormField from "../../components/forms/ImagePickerFormField";
 import AppText from "../../components/AppText";
 import Screen from "../../components/Screen";
 
@@ -41,9 +41,9 @@ const DescriptionFormScreen = ({ route, navigation }) => {
           }}
           validationSchema={validationSchema}
         >
-          <AppFormImagePicker name="images" />
+          <ImagePickerFormField name="images" />
 
-          <AppFormField
+          <TextInputFormField
             maxLength={128}
             autoCapitalize="none"
             autoCorrect={false}
@@ -53,7 +53,7 @@ const DescriptionFormScreen = ({ route, navigation }) => {
             placeholder="Title"
           />
 
-          <AppFormField
+          <TextInputFormField
             maxLength={1024}
             autoCapitalize="none"
             autoCorrect={false}
@@ -65,7 +65,7 @@ const DescriptionFormScreen = ({ route, navigation }) => {
             numberOfLines={3}
           />
 
-          <SubmitButton title="Next 4/5" />
+          <FormFormSubmitButton title="Next 4/5" />
         </AppForm>
       </View>
     </Screen>

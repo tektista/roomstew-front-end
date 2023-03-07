@@ -3,7 +3,7 @@ import { useFormikContext } from "formik";
 
 import AppCheckboxInput from "../AppCheckboxInput";
 
-const AppFormCheckbox = ({
+const CheckboxFormField = ({
   name,
   value,
   title,
@@ -25,6 +25,6 @@ const AppFormCheckbox = ({
   );
 };
 
-export default AppFormCheckbox;
+export default CheckboxFormField;
 
 const styles = StyleSheet.create({});

@@ -2,9 +2,9 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import React, { useState } from "react";
 
 import AppForm from "../../components/forms/AppForm";
-import SubmitButton from "../../components/forms/SubmitButton";
-import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
-import AppListItemPickerForm from "../../components/forms/AppListItemPickerForm";
+import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import CheckboxFormField from "../../components/forms/CheckboxFormField";
+import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 import AppText from "../../components/AppText";
 import Icon from "../../components/Icon";
 import ListItemSeparator from "../../components/ListItemSeparator";
@@ -89,7 +89,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
           }
           // validationSchema={validationSchema}
         >
-          <AppFormCheckbox
+          <CheckboxFormField
             name="bills_included"
             title={"Bills included"}
             IconComponent={
@@ -102,7 +102,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <ListItemSeparator />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="internet_included"
             title={"Internet included"}
             IconComponent={
@@ -112,7 +112,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <ListItemSeparator />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="is_furnished"
             title={"Furnished"}
             IconComponent={
@@ -122,7 +122,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <ListItemSeparator />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="has_living_room"
             title={"Living room"}
             IconComponent={
@@ -135,7 +135,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <ListItemSeparator />
 
-          <AppListItemPickerForm
+          <ListItemPickerFormField
             name="bathroomCount"
             title="Bathrooms"
             subTitle={bathroomCount.toString()}
@@ -148,7 +148,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <ListItemSeparator />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="has_garden"
             title={"Garden"}
             IconComponent={
@@ -158,14 +158,17 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <ListItemSeparator />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="has_parking"
             title={"Parking"}
             IconComponent={
               <Icon name="parking" backgroundColor={colors.primary} />
             }
           />
-          <SubmitButton title="Next 2/5" onPress={console.log(values)} />
+          <FormFormSubmitButton
+            title="Next 2/5"
+            onPress={console.log(values)}
+          />
         </AppForm>
       </View>
     </ScrollView>

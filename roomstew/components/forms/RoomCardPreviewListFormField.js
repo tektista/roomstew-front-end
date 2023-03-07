@@ -4,7 +4,7 @@ import { useFormikContext } from "formik";
 
 import CardRoomPreviewList from "../CardRoomPreviewList";
 
-const FormCardPreviewList = ({ name }) => {
+const RoomCardPreviewListFormField = ({ name }) => {
   const { values, setFieldValue } = useFormikContext();
 
   const handleDelete = (roomIndex) => {
@@ -18,6 +18,6 @@ const FormCardPreviewList = ({ name }) => {
   );
 };
 
-export default FormCardPreviewList;
+export default RoomCardPreviewListFormField;
 
 const styles = StyleSheet.create({});

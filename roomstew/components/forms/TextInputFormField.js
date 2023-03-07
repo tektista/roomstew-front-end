@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 import AppTextInput from "../AppTextInput";
 import ErrorMessage from "./ErrorMessage";
 
-const AppFormField = ({ name, width, ...otherProps }) => {
+const TextInputFormField = ({ name, width, ...otherProps }) => {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
 
   return (
@@ -22,7 +22,7 @@ const AppFormField = ({ name, width, ...otherProps }) => {
   );
 };
 
-export default AppFormField;
+export default TextInputFormField;
 
 const styles = StyleSheet.create({});
 

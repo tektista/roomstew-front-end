@@ -15,12 +15,12 @@ import Screen from "../../components/Screen";
 
 //FORM
 import AppForm from "../../components/forms/AppForm";
-import SubmitButton from "../../components/forms/SubmitButton";
+import FormFormSubmitButton from "../../components/forms/FormFormFormSubmitButton";
 
 import AppButton from "../../components/AppButton";
 
-import AppFormRoomModal from "../../components/forms/AppFormRoomModal";
-import FormCardPreviewList from "../../components/forms/FormCardPreviewList";
+import RoomAddFormField from "../../components/forms/RoomAddFormField";
+import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreviewListFormField";
 
 const RoomsFormScreen = ({ navigation, route }) => {
   const values = route.params.values;
@@ -39,16 +39,16 @@ const RoomsFormScreen = ({ navigation, route }) => {
           }}
           //handle validationScheme
         >
-          <AppFormRoomModal
+          <RoomAddFormField
             modalVisible={modalVisible}
             handleModalClose={(value) => {
               setModalVisible(value);
             }}
           />
 
-          <FormCardPreviewList name="roomList" />
+          <RoomCardPreviewListFormField name="roomList" />
 
-          <SubmitButton title="Post Listing 5/5" />
+          <FormFormSubmitButton title="Post Listing 5/5" />
         </AppForm>
       </ScrollView>
     </Screen>

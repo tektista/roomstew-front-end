@@ -4,7 +4,7 @@ import { useFormikContext } from "formik";
 import ListItemPicker from "../ListItemPicker";
 import ErrorMessage from "./ErrorMessage";
 
-const AppListItemPickerForm = ({
+const ListItemPickerFormField = ({
   name,
   title,
   subTitle,
@@ -33,6 +33,6 @@ const AppListItemPickerForm = ({
   );
 };
 
-export default AppListItemPickerForm;
+export default ListItemPickerFormField;
 
 const styles = StyleSheet.create({});

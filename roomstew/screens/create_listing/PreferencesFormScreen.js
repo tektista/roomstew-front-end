@@ -4,12 +4,12 @@ import Screen from "../../components/Screen";
 import AppText from "../../components/AppText";
 
 import AppForm from "../../components/forms/AppForm";
-import SubmitButton from "../../components/forms/SubmitButton";
-import AppListItemPickerForm from "../../components/forms/AppListItemPickerForm";
+import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
-import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
+import CheckboxFormField from "../../components/forms/CheckboxFormField";
 
 const populatePickerItems = (minAge, maxAge) => {
   const pickerItems = [];
@@ -89,7 +89,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             navigation.navigate("DescriptionFormScreen", { values })
           }
         >
-          <AppListItemPickerForm
+          <ListItemPickerFormField
             name="min_age"
             title="Minimum Age"
             subTitle={minAgeSubtitle.toString()}
@@ -113,7 +113,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             }}
           />
 
-          <AppListItemPickerForm
+          <ListItemPickerFormField
             name="max_age"
             title="Max Age"
             subTitle={maxAgeSubtitle.toString()}
@@ -137,7 +137,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             }}
           />
 
-          <AppListItemPickerForm
+          <ListItemPickerFormField
             name="gender_preference"
             title=" Gender"
             subTitle={genderPreference}
@@ -151,7 +151,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             onSelectItem={(item) => setGenderPreference(item)}
           />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="couples_allowed"
             title={"Couples"}
             IconComponent={
@@ -159,7 +159,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             }
           />
 
-          <AppFormCheckbox
+          <CheckboxFormField
             name="smokers_allowed"
             title={"Smokers"}
             IconComponent={
@@ -167,7 +167,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             }
           />
 
-          <SubmitButton title="Next 3/5" />
+          <FormFormSubmitButton title="Next 3/5" />
         </AppForm>
       </View>
     </Screen>

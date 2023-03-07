@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 
 import ListItemDatePicker from "../ListItemDatePicker";
 
-const AppDatePickerFormField = ({
+const DatePickerFormFieldField = ({
   name,
   title,
   subTitle,
@@ -35,6 +35,6 @@ const AppDatePickerFormField = ({
   );
 };
 
-export default AppDatePickerFormField;
+export default DatePickerFormFieldField;
 
 const styles = StyleSheet.create({});

@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 import { useFormikContext } from "formik";
-import FormAddRoomModal from "./FormAddRoomModal";
+import RoomAddFormModal from "./RoomAddFormModal";
 
-const AppFormRoomModal = ({ modalVisible, handleModalClose }) => {
+const RoomAddFormField = ({ modalVisible, handleModalClose }) => {
   const { setFieldValue, values, errors } = useFormikContext();
 
   const handleRoomSubmit = (room) => {
@@ -12,7 +12,7 @@ const AppFormRoomModal = ({ modalVisible, handleModalClose }) => {
   };
 
   return (
-    <FormAddRoomModal
+    <RoomAddFormModal
       modalVisible={modalVisible}
       handleModalClose={handleModalClose}
       handleRoomSubmit={handleRoomSubmit}
@@ -20,6 +20,6 @@ const AppFormRoomModal = ({ modalVisible, handleModalClose }) => {
   );
 };
 
-export default AppFormRoomModal;
+export default RoomAddFormField;
 
 const styles = StyleSheet.create({});

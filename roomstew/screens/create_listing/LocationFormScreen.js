@@ -4,8 +4,8 @@ import * as Yup from "yup";
 
 import Screen from "../../components/Screen";
 import AppForm from "../../components/forms/AppForm";
-import AppFormField from "../../components/forms/AppFormField";
-import SubmitButton from "../../components/forms/SubmitButton";
+import TextInputFormField from "../../components/forms/TextInputFormField";
+import FormFormSubmitButton from "../../components/forms/FormFormSubmitButton";
 
 import AppText from "../../components/AppText";
 
@@ -34,7 +34,7 @@ const LocationFormScreen = ({ navigation }) => {
           }
           validationSchema={validationSchema}
         >
-          <AppFormField
+          <TextInputFormField
             autoCapitalize="none"
             autoCorrect={false}
             icon="map"
@@ -44,7 +44,7 @@ const LocationFormScreen = ({ navigation }) => {
             textContentType="postalCode"
           />
 
-          <AppFormField
+          <TextInputFormField
             autoCapitalize="none"
             autoCorrect={false}
             icon="house"
@@ -54,7 +54,7 @@ const LocationFormScreen = ({ navigation }) => {
             textContentType="streetAddressLine1"
           />
 
-          <AppFormField
+          <TextInputFormField
             autoCapitalize="none"
             autoCorrect={false}
             icon="location-city"
@@ -63,7 +63,7 @@ const LocationFormScreen = ({ navigation }) => {
             placeholder="City"
             textContentType="addressCity"
           />
-          <SubmitButton title="Next 1/5" />
+          <FormFormSubmitButton title="Next 1/5" />
         </AppForm>
       </View>
     </Screen>

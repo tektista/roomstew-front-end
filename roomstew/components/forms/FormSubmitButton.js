@@ -4,13 +4,13 @@ import { FormikContext } from "formik";
 
 import AppButton from "../AppButton";
 
-const submitButton = ({ title }) => {
+const FormFormSubmitButton = ({ title }) => {
   const { handleSubmit, values } = useContext(FormikContext);
 
   return <AppButton title={title} onPress={handleSubmit} />;
 };
 
-export default submitButton;
+export default FormFormSubmitButton;
 
 const styles = StyleSheet.create({});
 
