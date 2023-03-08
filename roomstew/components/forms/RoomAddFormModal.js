@@ -31,11 +31,19 @@ const RoomAddFormModal = ({
 }) => {
   const validationSchema = Yup.object().shape({
     room_description: Yup.string().required().min(1).label("Description"),
-    rent: Yup.number().required().label("Rent per month").min(1),
-    room_deposit: Yup.number().required().label("Deposit").min(1),
+    rent: Yup.number()
+      .required()
+      .label("Rent per month")
+      .min(1)
+      .typeError("Please enter a valid number."),
+    room_deposit: Yup.number()
+      .required()
+      .label("Deposit")
+      .min(1)
+      .typeError("Please enter a valid number"),
     room_images: Yup.array()
-      .min(1, "Please select at least one image.")
-      .max(8, "Maximum of 8 images allowed."),
+      .min(1, "Please select at least one image")
+      .max(8, "Maximum of 8 images allowed"),
   });
 
   const [startDate, setStartDate] = useState(new Date());
