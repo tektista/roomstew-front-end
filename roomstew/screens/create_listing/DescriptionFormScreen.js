@@ -84,7 +84,7 @@ export default DescriptionFormScreen;
 
 const styles = StyleSheet.create({
   appFormContainer: {
-    padding: 10,
+    padding: 15,
     flex: 1,
   },
   formTitle: {

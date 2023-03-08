@@ -253,7 +253,7 @@ const RoomAddFormModal = ({
 export default RoomAddFormModal;
 
 const styles = StyleSheet.create({
-  appFormContainer: { padding: 20 },
+  appFormContainer: { padding: 15 },
   button: {
     color: "red",
   },

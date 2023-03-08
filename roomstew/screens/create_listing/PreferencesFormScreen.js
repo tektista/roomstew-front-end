@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   appFormContainer: {
-    padding: 10,
+    padding: 15,
     flex: 1,
   },
 });
