@@ -3,7 +3,11 @@ import React, { useRef } from "react";
 import ImageInput from "./ImageInput";
 import AppText from "./AppText";
 
-const imageInputList = ({ imageURIs = [], onRemoveImage, onAddImage }) => {
+const imageInputList = ({
+  imageBase64DataList = [],
+  onRemoveImage,
+  onAddImage,
+}) => {
   const scrollView = useRef();
 
   return (
@@ -14,18 +18,20 @@ const imageInputList = ({ imageURIs = [], onRemoveImage, onAddImage }) => {
         onContentSizeChange={() => scrollView.current.scrollToEnd()}
       >
         <View style={styles.container}>
-          {imageURIs.map((uri, index) => (
+          {imageBase64DataList.map((imageBase64Data, index) => (
             <View key={index} style={styles.imageContainer}>
               <ImageInput
-                imageURI={uri}
-                onChangeImage={() => onRemoveImage(uri)}
+                imageBase64Data={imageBase64Data}
+                onChangeImage={() => onRemoveImage(imageBase64Data)}
               />
               <AppText style={styles.indexText}>Photo {index + 1}</AppText>
             </View>
           ))}
 
           {/* The ImageInput which shows Camera Icon Placeholder (no set imageURI) */}
-          <ImageInput onChangeImage={(uri) => onAddImage(uri)} />
+          <ImageInput
+            onChangeImage={(imageBase64Data) => onAddImage(imageBase64Data)}
+          />
         </View>
       </ScrollView>
     </View>

@@ -12,7 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import * as ImagePicker from "expo-image-picker";
 
-const ImageInput = ({ imageURI, onChangeImage }) => {
+const ImageInput = ({ imageBase64Data, onChangeImage }) => {
   useEffect(() => {
     requestPermission();
   }, []);
@@ -24,7 +24,7 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
 
   //If there isn't an image URI select an image
   const handlePress = () => {
-    if (!imageURI) selectImage();
+    if (!imageBase64Data) selectImage();
     else
       Alert.alert("Delete", "Are you sure you want to delete this image?", [
         //If they delete an image set the imageURI to null
@@ -51,7 +51,7 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
     <TouchableWithoutFeedback onPress={handlePress}>
       {/* IF no image URI display the placeholder camera icon */}
       <View style={styles.container}>
-        {!imageURI && (
+        {!imageBase64Data && (
           <MaterialCommunityIcons
             name="camera"
             size={40}
@@ -60,10 +60,10 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
         )}
 
         {/* If there is an image uri, display the image */}
-        {/* {imageURI && <Image source={{ uri: imageURI }} style={styles.image} />} */}
-        {imageURI && (
+        {/* {imageBase64Data && <Image source={{ uri: imageBase64Data }} style={styles.image} />} */}
+        {imageBase64Data && (
           <Image
-            source={{ uri: `data:image/jpg;base64,${imageURI}` }}
+            source={{ uri: `data:image/jpg;base64,${imageBase64Data}` }}
             style={styles.image}
           />
         )}

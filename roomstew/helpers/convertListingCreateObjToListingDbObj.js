@@ -1,14 +1,26 @@
-const convertToPhotoObjList = (imageUriList) => {
-  const imageObjListWithOrder = imageUriList.map((uri, index) => ({
-    uri: uri,
-    photoOrder: index,
-  }));
+const convertToListingPhotoObjList = (imageBase64DataList) => {
+  const imageObjListWithOrder = imageBase64DataList.map(
+    (imageBase64Data, index) => ({
+      listing_photo: imageBase64Data,
+      photoOrder: index,
+    })
+  );
+  return imageObjListWithOrder;
+};
+
+const convertToRoomPhotoObjList = (imageBase64DataList) => {
+  const imageObjListWithOrder = imageBase64DataList.map(
+    (imageBase64Data, index) => ({
+      room_photo: imageBase64Data,
+      photoOrder: index,
+    })
+  );
   return imageObjListWithOrder;
 };
 
 const convertListingObjToDbFormat = (listingObj) => {
   //convert imageURIList to imageObjListWithOrder
-  const listingPhotoObjList = convertToPhotoObjList(listingObj.images);
+  const listingPhotoObjList = convertToListingPhotoObjList(listingObj.images);
 
   // listing details object, with listing photo obj list
   const listingDetailsObj = {
@@ -39,7 +51,7 @@ const convertListingObjToDbFormat = (listingObj) => {
   //room details list, each room object has room photo obj list
   const roomListDetailsList = listingObj.roomList.map((room) => ({
     ...room,
-    room_images: convertToPhotoObjList(room.room_images),
+    room_images: convertToRoomPhotoObjList(room.room_images),
   }));
 
   const listingDbInFormat = [listingDetailsObj, roomListDetailsList];

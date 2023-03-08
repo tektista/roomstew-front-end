@@ -7,20 +7,22 @@ import ErrorMessage from "./ErrorMessage";
 const AppFormImagePicker = ({ name }) => {
   const { errors, setFieldValue, touched, values } = useFormikContext();
 
-  const handleAdd = (uri) => {
-    setFieldValue(name, [...values[name], uri]);
+  const handleAdd = (imageBase64Data) => {
+    setFieldValue(name, [...values[name], imageBase64Data]);
   };
 
-  const handleRemove = (uri) => {
+  const handleRemove = (imageBase64Data) => {
     setFieldValue(
       name,
-      values[name].filter((imageURI) => imageURI !== uri)
+      values[name].filter(
+        (imageBase64DataFromList) => imageBase64DataFromList !== imageBase64Data
+      )
     );
   };
   return (
     <>
       <ImageInputList
-        imageURIs={values[name]}
+        imageBase64DataList={values[name]}
         onAddImage={handleAdd}
         onRemoveImage={handleRemove}
       />
