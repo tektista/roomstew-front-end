@@ -22,26 +22,31 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
       alert("You need to enable permission to access the library.");
   };
 
+  //If there isn't an image URI select an image
   const handlePress = () => {
     if (!imageURI) selectImage();
     else
       Alert.alert("Delete", "Are you sure you want to delete this image?", [
+        //If they delete an image set the imageURI to null
         { text: "Yes", onPress: () => onChangeImage(null) },
         { text: "No" },
       ]);
   };
 
+  //Select an image from the library
   const selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 0.5,
     });
 
+    //PASSING the URI up to parent if not cancelled
     if (!result.canceled) onChangeImage(result.assets[0].uri);
   };
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
+      {/* IF no image URI display the placeholder camera icon */}
       <View style={styles.container}>
         {!imageURI && (
           <MaterialCommunityIcons
@@ -51,6 +56,7 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
           />
         )}
 
+        {/* If there is an image uri, display the image */}
         {imageURI && <Image source={{ uri: imageURI }} style={styles.image} />}
       </View>
     </TouchableWithoutFeedback>
