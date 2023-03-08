@@ -24,8 +24,7 @@ const populatePickerItems = (minAge, maxAge) => {
 };
 
 const PreferencesFormScreen = ({ route, navigation }) => {
-  const values = route.params.values;
-  console.log(values);
+  const previousMergedValues = route.params.mergedValues;
 
   //Initial subtitle values
   const [genderPreference, setGenderPreference] = useState("Any");
@@ -84,10 +83,15 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             pets_allowed: false,
             smokers_allowed: false,
           }}
-          onSubmit={(values) =>
+          onSubmit={(values) => {
             //HANDLE THESE
-            navigation.navigate("DescriptionFormScreen", { values })
-          }
+            const mergedValues = Object.assign(
+              {},
+              values,
+              previousMergedValues
+            );
+            navigation.navigate("DescriptionFormScreen", { mergedValues });
+          }}
         >
           <ListItemPickerFormField
             name="min_age"

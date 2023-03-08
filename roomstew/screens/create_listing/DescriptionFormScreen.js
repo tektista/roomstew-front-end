@@ -18,8 +18,7 @@ import AppText from "../../components/AppText";
 import Screen from "../../components/Screen";
 
 const DescriptionFormScreen = ({ route, navigation }) => {
-  const values = route.params.values;
-  console.log(values);
+  const previousMergedValues = route.params.mergedValues;
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
@@ -45,7 +44,12 @@ const DescriptionFormScreen = ({ route, navigation }) => {
             images: [],
           }}
           onSubmit={(values) => {
-            navigation.navigate("RoomsFormScreen", { values });
+            const mergedValues = Object.assign(
+              {},
+              values,
+              previousMergedValues
+            );
+            navigation.navigate("RoomsFormScreen", { mergedValues });
           }}
           validationSchema={validationSchema}
         >

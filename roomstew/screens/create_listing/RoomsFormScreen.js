@@ -25,8 +25,9 @@ import RoomAddFormField from "../../components/forms/RoomAddFormField";
 import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreviewListFormField";
 
 const RoomsFormScreen = ({ navigation, route }) => {
-  const values = route.params.values;
-  console.log(values);
+  const previousMergedValues = route.params.mergedValues;
+  console.log(previousMergedValues);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   // I need to set the values of the outer form by returning the values of the inner form
@@ -41,7 +42,13 @@ const RoomsFormScreen = ({ navigation, route }) => {
         <AppForm
           initialValues={{ roomList: [] }}
           onSubmit={(values) => {
-            console.log(values);
+            const mergedValues = Object.assign(
+              {},
+              values,
+              previousMergedValues
+            );
+
+            console.log(mergedValues);
           }}
           //handle validationScheme
         >

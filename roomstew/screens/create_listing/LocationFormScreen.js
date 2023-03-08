@@ -10,8 +10,8 @@ import AppText from "../../components/AppText";
 
 const validationSchema = Yup.object().shape({
   postcode: Yup.string().required().min(4).label("Postcode"),
-  streetAddress: Yup.string().required().min(4).label("Street Address"),
-  cityTown: Yup.string().required().min(4).label("City"),
+  street_address: Yup.string().required().min(4).label("Street Address"),
+  city: Yup.string().required().min(4).label("City"),
 });
 
 const LocationFormScreen = ({ navigation }) => {
@@ -25,8 +25,8 @@ const LocationFormScreen = ({ navigation }) => {
         <AppForm
           initialValues={{
             postcode: "",
-            streetAddress: "",
-            cityTown: "",
+            street_address: "",
+            city: "",
           }}
           onSubmit={(values) =>
             navigation.navigate("DetailsFormScreen", { values })
@@ -48,7 +48,7 @@ const LocationFormScreen = ({ navigation }) => {
             autoCorrect={false}
             icon="house"
             keyboardType="default"
-            name="streetAddress"
+            name="street_address"
             placeholder="Street Address"
             textContentType="streetAddressLine1"
           />
@@ -58,7 +58,7 @@ const LocationFormScreen = ({ navigation }) => {
             autoCorrect={false}
             icon="location-city"
             keyboardType="default"
-            name="cityTown"
+            name="city"
             placeholder="City"
             textContentType="addressCity"
           />

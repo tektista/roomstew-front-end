@@ -64,8 +64,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
   ];
 
   const [bathroomCount, setBathroomCount] = useState(1);
-  const values = route.params.values;
-  console.log(values);
+  const previousValues = route.params.values;
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -80,14 +79,14 @@ const DetailsFormScreen = ({ route, navigation }) => {
             internet_included: false,
             is_furnished: false,
             has_living_room: false,
-            bathroomCount: "",
+            bathroom_count: "",
             has_garden: false,
             has_parking: false,
           }}
-          onSubmit={(values) =>
-            //HANDLE THESE
-            navigation.navigate("PreferencesFormScreen", { values })
-          }
+          onSubmit={(values) => {
+            const mergedValues = Object.assign({}, values, previousValues);
+            navigation.navigate("PreferencesFormScreen", { mergedValues });
+          }}
           // validationSchema={validationSchema}
         >
           <CheckboxFormField
@@ -137,7 +136,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
           <ListItemSeparator />
 
           <ListItemPickerFormField
-            name="bathroomCount"
+            name="bathroom_count"
             title="Bathrooms"
             subTitle={bathroomCount.toString()}
             IconComponent={
@@ -169,7 +168,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
 
           <View style={{ flex: 1 }}></View>
 
-          <FormSubmitButton title="Next 2/5" onPress={console.log(values)} />
+          <FormSubmitButton title="Next 2/5" />
         </AppForm>
       </View>
     </ScrollView>
