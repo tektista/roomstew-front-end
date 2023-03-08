@@ -15,7 +15,9 @@ import Screen from "../../components/Screen";
 
 //FORM
 import AppForm from "../../components/forms/AppForm";
-import FormSubmitButton from "../../components/forms/FormFormSubmitButton";
+import FormSubmitButton from "../../components/forms/FormSubmitButton";
+
+import AppText from "../../components/AppText";
 
 import AppButton from "../../components/AppButton";
 
@@ -30,7 +32,10 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
   return (
     <Screen>
-      <ScrollView>
+      <View>
+        <AppText style={styles.formTitle}> Rooms </AppText>
+      </View>
+      <View style={styles.appFormContainer}>
         <AppButton title="Add a room" onPress={() => setModalVisible(true)} />
         <AppForm
           initialValues={{ roomList: [] }}
@@ -50,7 +55,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
           <FormSubmitButton title="Post Listing 5/5" />
         </AppForm>
-      </ScrollView>
+      </View>
     </Screen>
   );
 };
@@ -58,7 +63,13 @@ const RoomsFormScreen = ({ navigation, route }) => {
 export default RoomsFormScreen;
 
 const styles = StyleSheet.create({
-  modalContainer: {
+  appFormContainer: {
     padding: 10,
+  },
+  formTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingTop: 10,
+    paddingHorizontal: 10,
   },
 });

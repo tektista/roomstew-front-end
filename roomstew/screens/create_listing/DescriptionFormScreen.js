@@ -24,7 +24,10 @@ const DescriptionFormScreen = ({ route, navigation }) => {
   return (
     <Screen>
       <View>
-        <AppText style={styles.locationTitle}> Location</AppText>
+        <AppText style={styles.locationTitle}>
+          {" "}
+          Property Description & Photos
+        </AppText>
       </View>
 
       <View style={styles.appFormContainer}>

@@ -71,7 +71,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
   return (
     <Screen>
       <View>
-        <AppText style={styles.title}> Preferences </AppText>
+        <AppText style={styles.title}> Roommate Preferences </AppText>
       </View>
 
       <View style={styles.appFormContainer}>

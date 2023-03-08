@@ -18,8 +18,9 @@ import ListItemPickerFormField from "./ListItemPickerFormField";
 import ImagePickerFormField from "./ImagePickerFormField";
 import DatePickerFormFieldField from "./DatePickerFormField";
 import ListItemSeparator from "../ListItemSeparator";
-import FormSubmitButton from "./FormFormSubmitButton";
+import FormSubmitButton from "./FormSubmitButton";
 
+import AppText from "../AppText";
 import Icon from "../Icon";
 import colors from "../../config/colors";
 
@@ -66,8 +67,16 @@ const RoomAddFormModal = ({
     <Modal visible={modalVisible} animationType="slide">
       <Screen>
         <ScrollView>
+          <Button
+            title="Close"
+            style={styles.button}
+            onPress={() => handleModalClose(false)}
+          />
+          <View>
+            <AppText style={styles.formTitle}> Add Room Details </AppText>
+          </View>
+
           <View style={styles.appFormContainer}>
-            <Button title="Close" onPress={() => handleModalClose(false)} />
             <AppForm
               initialValues={{
                 room_description: "",
@@ -244,7 +253,14 @@ const RoomAddFormModal = ({
 export default RoomAddFormModal;
 
 const styles = StyleSheet.create({
-  appFormContainer: {
-    padding: 10,
+  appFormContainer: { padding: 20 },
+  button: {
+    color: "red",
+  },
+
+  formTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingHorizontal: 10,
   },
 });
