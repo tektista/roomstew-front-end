@@ -79,7 +79,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
             internet_included: false,
             is_furnished: false,
             has_living_room: false,
-            bathroom_count: "",
+            bathroom_count: 0,
             has_garden: false,
             has_parking: false,
           }}

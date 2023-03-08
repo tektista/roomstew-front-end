@@ -38,10 +38,13 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 0.5,
+      base64: true,
     });
 
     //PASSING the URI up to parent if not cancelled
-    if (!result.canceled) onChangeImage(result.assets[0].uri);
+    if (!result.canceled) {
+      onChangeImage(result.assets[0].base64);
+    }
   };
 
   return (
@@ -57,7 +60,13 @@ const ImageInput = ({ imageURI, onChangeImage }) => {
         )}
 
         {/* If there is an image uri, display the image */}
-        {imageURI && <Image source={{ uri: imageURI }} style={styles.image} />}
+        {/* {imageURI && <Image source={{ uri: imageURI }} style={styles.image} />} */}
+        {imageURI && (
+          <Image
+            source={{ uri: `data:image/jpg;base64,${imageURI}` }}
+            style={styles.image}
+          />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

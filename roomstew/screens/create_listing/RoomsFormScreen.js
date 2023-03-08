@@ -13,6 +13,7 @@ import { getFormatedDate } from "react-native-modern-datepicker";
 
 import Screen from "../../components/Screen";
 
+import convertListingObjToDbFormat from "../../helpers/convertListingCreateObjToListingDbObj";
 //FORM
 import AppForm from "../../components/forms/AppForm";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
@@ -47,8 +48,10 @@ const RoomsFormScreen = ({ navigation, route }) => {
               values,
               previousMergedValues
             );
-
             console.log(mergedValues);
+
+            const listingDbObj = convertListingObjToDbFormat(mergedValues);
+            console.log(listingDbObj);
           }}
           //handle validationScheme
         >
