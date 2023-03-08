@@ -1,9 +1,15 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Alert } from "react-native";
 import React from "react";
 
 import CardRoomPreview from "./CardRoomPreview";
 
 const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
+  const handlePress = (index) => {
+    Alert.alert("Delete", "Are you sure you want to delete this image?", [
+      { text: "Yes", onPress: () => handleDelete(index) },
+      { text: "No" },
+    ]);
+  };
   return (
     <View>
       {roomList.map((room, index) => {
@@ -18,7 +24,7 @@ const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
             endDate={room.end_date}
             rent={room.rent}
             deposit={room.room_deposit}
-            onPress={() => handleDelete(index)}
+            onPress={() => handlePress(index)}
           />
         );
       })}
