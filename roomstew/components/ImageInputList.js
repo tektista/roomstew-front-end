@@ -13,17 +13,15 @@ const imageInputList = ({ imageURIs = [], onRemoveImage, onAddImage }) => {
         horizontal={true}
         onContentSizeChange={() => scrollView.current.scrollToEnd()}
       >
-        {/*  */}
         <View style={styles.container}>
           {imageURIs.map((uri, index) => (
-            <>
-              <AppText>{index + 1}</AppText>
+            <View key={uri} style={styles.imageContainer}>
               <ImageInput
                 imageURI={uri}
-                key={uri}
                 onChangeImage={() => onRemoveImage(uri)}
               />
-            </>
+              <AppText style={styles.indexText}>Photo {index + 1}</AppText>
+            </View>
           ))}
 
           {/* The ImageInput which shows Camera Icon Placeholder (no set imageURI) */}
@@ -36,8 +34,16 @@ const imageInputList = ({ imageURIs = [], onRemoveImage, onAddImage }) => {
 
 export default imageInputList;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+  },
+  imageContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  indexText: {
+    marginTop: 5,
   },
 });
