@@ -9,6 +9,7 @@ import AppText from "../../components/AppText";
 import Icon from "../../components/Icon";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import colors from "../../config/colors";
+import Screen from "../../components/Screen";
 
 const DetailsFormScreen = ({ route, navigation }) => {
   const numbers = [
@@ -67,7 +68,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
   console.log(values);
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
         <AppText style={styles.title}> Property Details</AppText>
       </View>
@@ -165,6 +166,9 @@ const DetailsFormScreen = ({ route, navigation }) => {
               <Icon name="parking" backgroundColor={colors.primary} />
             }
           />
+
+          <View style={{ flex: 1 }}></View>
+
           <FormSubmitButton title="Next 2/5" onPress={console.log(values)} />
         </AppForm>
       </View>
@@ -175,13 +179,14 @@ const DetailsFormScreen = ({ route, navigation }) => {
 export default DetailsFormScreen;
 
 const styles = StyleSheet.create({
-  appFormContainer: {
-    padding: 10,
-  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     paddingTop: 10,
     paddingHorizontal: 10,
+  },
+  appFormContainer: {
+    padding: 10,
+    flex: 1,
   },
 });

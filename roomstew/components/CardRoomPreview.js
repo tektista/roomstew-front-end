@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
 
     padding: 10,
+    marginBottom: 20,
   },
   titleContainer: {
     flex: 1,

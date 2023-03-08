@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import Screen from "../../components/Screen";
 import AppText from "../../components/AppText";
@@ -69,7 +69,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
   }, [minAge, maxAge]);
 
   return (
-    <Screen>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
         <AppText style={styles.title}> Roommate Preferences </AppText>
       </View>
@@ -166,11 +166,12 @@ const PreferencesFormScreen = ({ route, navigation }) => {
               <Icon name="cigar" backgroundColor={colors.primary} />
             }
           />
+          <View style={{ flex: 1 }}></View>
 
           <FormSubmitButton title="Next 3/5" />
         </AppForm>
       </View>
-    </Screen>
+    </ScrollView>
   );
 };
 
@@ -185,5 +186,6 @@ const styles = StyleSheet.create({
   },
   appFormContainer: {
     padding: 10,
+    flex: 1,
   },
 });

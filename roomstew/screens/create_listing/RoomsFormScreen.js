@@ -31,7 +31,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
   // I need to set the values of the outer form by returning the values of the inner form
 
   return (
-    <Screen>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
         <AppText style={styles.formTitle}> Rooms </AppText>
       </View>
@@ -53,10 +53,12 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
           <RoomCardPreviewListFormField name="roomList" />
 
+          <View style={{ flex: 1 }}></View>
+
           <FormSubmitButton title="Post Listing 5/5" />
         </AppForm>
       </View>
-    </Screen>
+    </ScrollView>
   );
 };
 
@@ -65,6 +67,7 @@ export default RoomsFormScreen;
 const styles = StyleSheet.create({
   appFormContainer: {
     padding: 10,
+    flex: 1,
   },
   formTitle: {
     fontSize: 20,

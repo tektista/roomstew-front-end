@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Image,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 
 import * as Yup from "yup";
@@ -22,10 +29,9 @@ const DescriptionFormScreen = ({ route, navigation }) => {
   });
 
   return (
-    <Screen>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
-        <AppText style={styles.locationTitle}>
-          {" "}
+        <AppText style={styles.formTitle}>
           Property Description & Photos
         </AppText>
       </View>
@@ -65,11 +71,12 @@ const DescriptionFormScreen = ({ route, navigation }) => {
             multiline={true}
             numberOfLines={3}
           />
+          <View style={{ flex: 1 }}></View>
 
           <FormSubmitButton title="Next 4/5" />
         </AppForm>
       </View>
-    </Screen>
+    </ScrollView>
   );
 };
 
@@ -78,8 +85,9 @@ export default DescriptionFormScreen;
 const styles = StyleSheet.create({
   appFormContainer: {
     padding: 10,
+    flex: 1,
   },
-  locationTitle: {
+  formTitle: {
     fontSize: 20,
     fontWeight: "bold",
     paddingTop: 10,

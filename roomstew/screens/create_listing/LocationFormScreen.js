@@ -1,8 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import React from "react";
 import * as Yup from "yup";
 
-import Screen from "../../components/Screen";
 import AppForm from "../../components/forms/AppForm";
 import TextInputFormField from "../../components/forms/TextInputFormField";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
@@ -17,9 +16,9 @@ const validationSchema = Yup.object().shape({
 
 const LocationFormScreen = ({ navigation }) => {
   return (
-    <Screen>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
-        <AppText style={styles.locationTitle}> Location</AppText>
+        <AppText style={styles.formTitle}> Location</AppText>
       </View>
 
       <View style={styles.appFormContainer}>
@@ -63,23 +62,25 @@ const LocationFormScreen = ({ navigation }) => {
             placeholder="City"
             textContentType="addressCity"
           />
+          <View style={{ flex: 1 }}></View>
           <FormSubmitButton title="Next 1/5" />
         </AppForm>
       </View>
-    </Screen>
+    </ScrollView>
   );
 };
 
 export default LocationFormScreen;
 
 const styles = StyleSheet.create({
-  appFormContainer: {
-    padding: 10,
-  },
-  locationTitle: {
+  formTitle: {
     fontSize: 20,
     fontWeight: "bold",
     paddingTop: 10,
     paddingHorizontal: 10,
+  },
+  appFormContainer: {
+    padding: 10,
+    flex: 1,
   },
 });
