@@ -166,6 +166,14 @@ const PreferencesFormScreen = ({ route, navigation }) => {
               <Icon name="cigar" backgroundColor={colors.primary} />
             }
           />
+
+          <CheckboxFormField
+            name="pets_allowed"
+            title={"Pets"}
+            IconComponent={
+              <Icon name="dog-side" backgroundColor={colors.primary} />
+            }
+          />
           <View style={{ flex: 1 }}></View>
 
           <FormSubmitButton title="Next 3/5" />

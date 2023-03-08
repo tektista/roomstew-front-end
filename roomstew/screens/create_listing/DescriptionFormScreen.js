@@ -19,6 +19,7 @@ import Screen from "../../components/Screen";
 
 const DescriptionFormScreen = ({ route, navigation }) => {
   const values = route.params.values;
+  console.log(values);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),

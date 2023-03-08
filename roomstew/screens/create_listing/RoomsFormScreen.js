@@ -26,6 +26,7 @@ import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreview
 
 const RoomsFormScreen = ({ navigation, route }) => {
   const values = route.params.values;
+  console.log(values);
   const [modalVisible, setModalVisible] = useState(false);
 
   // I need to set the values of the outer form by returning the values of the inner form
