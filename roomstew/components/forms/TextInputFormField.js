@@ -3,17 +3,18 @@ import React from "react";
 import { useFormikContext } from "formik";
 
 import AppTextInput from "../AppTextInput";
+import AppText from "../AppText";
 import ErrorMessage from "./ErrorMessage";
 
-const TextInputFormField = ({ name, width, ...otherProps }) => {
+const TextInputFormField = ({ name, title, ...otherProps }) => {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
 
   return (
     <>
+      <AppText> {title} </AppText>
       <AppTextInput
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
-        width={width}
         {...otherProps}
       />
 
@@ -23,8 +24,6 @@ const TextInputFormField = ({ name, width, ...otherProps }) => {
 };
 
 export default TextInputFormField;
-
-const styles = StyleSheet.create({});
 
 /* This form is so we don't need to set onBlur, onChangeText and a corresponding
  error message for every AppTextInput

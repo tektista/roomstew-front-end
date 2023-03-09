@@ -114,29 +114,29 @@ const RoomAddFormModal = ({
                 maxLength={512}
                 autoCapitalize="none"
                 autoCorrect={false}
-                icon="description"
                 keyboardType="default"
                 name="room_description"
-                placeholder="Description"
+                title="Room Description"
+                placeholder="e.g. Double room with en-suite bathroom..."
                 multiline={true}
               />
 
               <TextInputFormField
                 autoCapitalize="none"
                 autoCorrect={false}
-                icon="attach-money"
                 keyboardType="numeric"
                 name="rent"
-                placeholder="Rent per month"
+                title="Rent /month in £"
+                placeholder="650"
               />
 
               <TextInputFormField
                 autoCapitalize="none"
                 autoCorrect={false}
-                icon="attach-money"
                 keyboardType="numeric"
                 name="room_deposit"
-                placeholder="Deposit"
+                title="Deposit in £"
+                placeholder="650"
               />
 
               <ListItemSeparator />
@@ -249,6 +249,7 @@ const RoomAddFormModal = ({
                   <Icon name="water-boiler" backgroundColor={colors.primary} />
                 }
               />
+
               <FormSubmitButton title="Add Room" />
             </AppForm>
           </View>

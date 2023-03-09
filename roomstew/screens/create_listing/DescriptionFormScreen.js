@@ -59,20 +59,20 @@ const DescriptionFormScreen = ({ route, navigation }) => {
             maxLength={128}
             autoCapitalize="none"
             autoCorrect={false}
-            icon="title"
             keyboardType="default"
             name="title"
-            placeholder="Title"
+            title="Title"
+            placeholder="e.g. 2 bed flat in London Available From..."
           />
 
           <TextInputFormField
             maxLength={1024}
             autoCapitalize="none"
             autoCorrect={false}
-            icon="description"
             keyboardType="default"
             name="description"
-            placeholder="Description"
+            title="Description"
+            placeholder="e.g. Looking for a flatmate to share my 2 bed flat in London... Looking for someone who is... You can contact me at..."
             multiline={true}
             numberOfLines={3}
           />

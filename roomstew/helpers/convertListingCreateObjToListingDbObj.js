@@ -47,6 +47,7 @@ const convertListingObjToDbFormat = (listingObj) => {
     postcode: listingObj.postcode,
     street_address: listingObj.street_address,
     city: listingObj.city,
+    country: listingObj.country,
     listing_images: listingPhotoObjList,
   };
 

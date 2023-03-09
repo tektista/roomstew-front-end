@@ -1,20 +1,32 @@
 import { StyleSheet, View, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 
 import AppForm from "../../components/forms/AppForm";
 import TextInputFormField from "../../components/forms/TextInputFormField";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
 
-import AppText from "../../components/AppText";
+import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 
-const validationSchema = Yup.object().shape({
-  postcode: Yup.string().required().min(4).label("Postcode"),
-  street_address: Yup.string().required().min(4).label("Street Address"),
-  city: Yup.string().required().min(4).label("City"),
-});
+import AppText from "../../components/AppText";
+import Icon from "../../components/Icon";
+import colors from "../../config/colors";
 
 const LocationFormScreen = ({ navigation }) => {
+  const [country, setCountry] = useState("England");
+
+  const validationSchema = Yup.object().shape({
+    postcode: Yup.string().required().min(4).label("Postcode"),
+    street_address: Yup.string().required().min(4).label("Street Address"),
+    city: Yup.string().required().min(4).label("City"),
+  });
+
+  const countryListItems = [
+    { label: "", value: "England" },
+    { label: "", value: "Northern Ireland" },
+    { label: "", value: "Scotland" },
+    { label: "", value: "Wales" },
+  ];
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
@@ -27,6 +39,7 @@ const LocationFormScreen = ({ navigation }) => {
             postcode: "",
             street_address: "",
             city: "",
+            country: "",
           }}
           onSubmit={(values) =>
             navigation.navigate("DetailsFormScreen", { values })
@@ -36,31 +49,41 @@ const LocationFormScreen = ({ navigation }) => {
           <TextInputFormField
             autoCapitalize="none"
             autoCorrect={false}
-            icon="map"
             keyboardType="default"
             name="postcode"
-            placeholder="Postcode"
+            title="Postcode"
+            placeholder="e.g. G128XX"
             textContentType="postalCode"
           />
-
           <TextInputFormField
             autoCapitalize="none"
             autoCorrect={false}
-            icon="house"
             keyboardType="default"
             name="street_address"
-            placeholder="Street Address"
+            title="Street Address"
+            placeholder="e.g. 3/2 Main Street"
             textContentType="streetAddressLine1"
           />
-
           <TextInputFormField
             autoCapitalize="none"
             autoCorrect={false}
-            icon="location-city"
             keyboardType="default"
             name="city"
-            placeholder="City"
+            title="City/Town"
+            placeholder="e.g. Glasgow"
             textContentType="addressCity"
+          />
+          <ListItemPickerFormField
+            name="country"
+            title="Country"
+            subTitle={country}
+            IconComponent={
+              <Icon name="flag" backgroundColor={colors.primary} />
+            }
+            items={countryListItems}
+            onSelectItem={(item) => {
+              setCountry(item);
+            }}
           />
           <View style={{ flex: 1 }}></View>
           <FormSubmitButton title="Next 1/5" />
