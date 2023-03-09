@@ -13,19 +13,22 @@ import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 
 const LocationFormScreen = ({ navigation }) => {
-  const [country, setCountry] = useState("England");
-
   const validationSchema = Yup.object().shape({
     postcode: Yup.string().required().min(4).label("Postcode"),
     street_address: Yup.string().required().min(4).label("Street Address"),
-    city: Yup.string().required().min(4).label("City"),
+    city: Yup.string().required().min(2).label("City"),
+    country: Yup.string().required().min(2).label("Country"),
   });
 
   const countryListItems = [
-    { label: "", value: "England" },
-    { label: "", value: "Northern Ireland" },
-    { label: "", value: "Scotland" },
-    { label: "", value: "Wales" },
+    { label: "England", subTitle: "England", value: "England" },
+    {
+      label: "Northern Ireland",
+      subTitle: "Northern Ireland",
+      value: "Northern Ireland",
+    },
+    { label: "Scotland", subTitle: "Scotland", value: "Scotland" },
+    { label: "Wales", subTitle: "Wales", value: "Wales" },
   ];
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -76,14 +79,10 @@ const LocationFormScreen = ({ navigation }) => {
           <ListItemPickerFormField
             name="country"
             title="Country"
-            subTitle={country}
             IconComponent={
               <Icon name="flag" backgroundColor={colors.primary} />
             }
             items={countryListItems}
-            onSelectItem={(item) => {
-              setCountry(item);
-            }}
           />
           <View style={{ flex: 1 }}></View>
           <FormSubmitButton title="Next 1/5" />

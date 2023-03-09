@@ -1,5 +1,6 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import React, { useState } from "react";
+import * as Yup from "yup";
 
 import AppForm from "../../components/forms/AppForm";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
@@ -12,75 +13,58 @@ import colors from "../../config/colors";
 import Screen from "../../components/Screen";
 
 const DetailsFormScreen = ({ route, navigation }) => {
-  const bathroomItems = [
+  const previousValues = route.params.values;
+
+  const createBathroomListItems = (maxBathroomCount) => {
+    const bathroomListItems = [];
+
+    for (let i = 1; i <= maxBathroomCount; i++) {
+      bathroomListItems.push({
+        label: `${i} bathroom${i > 1 ? "s" : ""}`,
+        subTitle: i,
+        value: i,
+      });
+    }
+
+    return bathroomListItems;
+  };
+
+  const bathroomListItems = createBathroomListItems(12);
+
+  const buildingTypeListItems = [
     {
-      label: "Bathrooms",
+      label: "Flat",
+      subTitle: "Flat",
+      value: 0,
+    },
+    {
+      label: "House",
+      subTitle: "House",
       value: 1,
     },
     {
-      label: "Bathrooms",
+      label: "Other",
+      subTitle: "Other",
       value: 2,
     },
-    {
-      label: "Bathrooms",
-      value: 3,
-    },
-    {
-      label: "Bathrooms",
-      value: 4,
-    },
-    {
-      label: "Bathrooms",
-      value: 5,
-    },
-    {
-      label: "Bathrooms",
-      value: 6,
-    },
-    {
-      label: "Bathrooms",
-      value: 7,
-    },
-    {
-      label: "Bathrooms",
-      value: 8,
-    },
-    {
-      label: "Bathrooms",
-      value: 9,
-    },
-    {
-      label: "Bathrooms",
-      value: 10,
-    },
-    {
-      label: "Bathrooms",
-      value: 11,
-    },
-    {
-      label: "Bathrooms",
-      value: 12,
-    },
   ];
 
-  const buildingTypeItems = [
-    {
-      label: "",
-      value: "Flat",
-    },
-    {
-      label: "",
-      value: "House",
-    },
-    {
-      label: "",
-      value: "Other",
-    },
-  ];
-
-  const [bathroomCount, setBathroomCount] = useState(1);
-  const [buildingType, setBuildingType] = useState("Flat");
-  const previousValues = route.params.values;
+  const validationSchema = Yup.object().shape({
+    building_type: Yup.number()
+      .required("Building type is required")
+      .test(
+        "is-not-negative-one",
+        "Building type is required",
+        (value) => value !== -1
+      ),
+    bathroom_count: Yup.number()
+      .required("Number of bathrooms is required")
+      .test(
+        "is-not-negative-one",
+        "Number of bathrooms is required",
+        (value) => value !== -1
+      ),
+  });
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -91,12 +75,12 @@ const DetailsFormScreen = ({ route, navigation }) => {
       <View style={styles.appFormContainer}>
         <AppForm
           initialValues={{
-            builidng_type: "Flat",
+            building_type: -1,
             bills_included: false,
             internet_included: false,
             is_furnished: false,
             has_living_room: false,
-            bathroom_count: 0,
+            bathroom_count: -1,
             has_garden: false,
             has_parking: false,
             has_hmo: false,
@@ -105,18 +89,15 @@ const DetailsFormScreen = ({ route, navigation }) => {
             const mergedValues = Object.assign({}, values, previousValues);
             navigation.navigate("PreferencesFormScreen", { mergedValues });
           }}
+          validationSchema={validationSchema}
         >
           <ListItemPickerFormField
             name="building_type"
             title="Building Type"
-            subTitle={buildingType}
             IconComponent={
               <Icon name="office-building" backgroundColor={colors.primary} />
             }
-            items={buildingTypeItems}
-            onSelectItem={(item) => {
-              setBuildingType(item);
-            }}
+            items={buildingTypeListItems}
           />
           <ListItemSeparator />
           <CheckboxFormField
@@ -168,12 +149,10 @@ const DetailsFormScreen = ({ route, navigation }) => {
           <ListItemPickerFormField
             name="bathroom_count"
             title="Bathrooms"
-            subTitle={bathroomCount.toString()}
             IconComponent={
               <Icon name="toilet" backgroundColor={colors.primary} />
             }
-            items={bathroomItems}
-            onSelectItem={(item) => setBathroomCount(item)}
+            items={bathroomListItems}
           />
 
           <ListItemSeparator />

@@ -48,24 +48,25 @@ const RoomAddFormModal = ({
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState("No end date");
-  const [roomSize, setRoomSize] = useState("Single room");
-  const [roomFloor, setRoomFloor] = useState(0);
 
   const roomSizePickerItems = [
     {
-      label: "",
-      value: "Single room",
+      label: "Single Room",
+      subTitle: "Single Room",
+      value: 0,
     },
     {
-      label: "",
-      value: "Double room",
+      label: "Double Room",
+      subTitle: "Double Room",
+      value: 1,
     },
   ];
 
   const roomFloorPickerItems = [];
   for (let floor = 0; floor < 100; floor++) {
     let floorObj = {
-      label: "",
+      label: `Floor ${floor} `,
+      subTitle: `Floor ${floor} `,
       value: floor,
     };
     roomFloorPickerItems.push(floorObj);
@@ -88,16 +89,16 @@ const RoomAddFormModal = ({
             <AppForm
               initialValues={{
                 room_description: "",
-                rent: 0,
-                room_deposit: 0,
+                rent: "",
+                room_deposit: "",
                 start_date: getFormatedDate(startDate, "YYYY-MM-DD"),
                 end_date: endDate,
 
-                room_size: 0,
+                room_size: -1,
                 is_desk: false,
                 is_en_suite: false,
                 is_boiler: false,
-                floor: 0,
+                floor: -1,
                 room_is_furnished: false,
                 room_images: [],
               }}
@@ -144,10 +145,12 @@ const RoomAddFormModal = ({
               <DatePickerFormFieldField
                 name="start_date"
                 title="Start Date"
-                subTitle={getFormatedDate(startDate, "DD-MM-YYYY")}
                 IconComponent={
                   <Icon name="calendar" backgroundColor={colors.primary} />
                 }
+                //
+
+                // subTitle={getFormatedDate(startDate, "DD-MM-YYYY")}
                 minDate={getFormatedDate(startDate, "YYYY-MM-DD")}
                 maxDate={
                   endDate === "No end date"
@@ -194,7 +197,6 @@ const RoomAddFormModal = ({
               <ListItemPickerFormField
                 name="room_size"
                 title="Room Size"
-                subTitle={roomSize}
                 IconComponent={
                   <Icon
                     name="image-size-select-small"
@@ -202,20 +204,14 @@ const RoomAddFormModal = ({
                   />
                 }
                 items={roomSizePickerItems}
-                onSelectItem={(item) => setRoomSize(item)}
               />
               <ListItemPickerFormField
                 name="floor"
                 title="Room Floor"
-                subTitle={roomFloor.toString()}
                 IconComponent={
-                  <Icon
-                    name="image-size-select-small"
-                    backgroundColor={colors.primary}
-                  />
+                  <Icon name="stairs" backgroundColor={colors.primary} />
                 }
                 items={roomFloorPickerItems}
-                onSelectItem={(item) => setRoomFloor(item)}
               />
               <ListItemSeparator />
               <CheckboxFormField

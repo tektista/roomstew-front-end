@@ -21,12 +21,11 @@ const DatePickerFormFieldField = ({
   return (
     <ListItemDatePicker
       title={title}
-      subTitle={subTitle}
+      subTitle={values[name]}
       image={image}
       IconComponent={IconComponent}
       onSelectItem={onSelectItem}
       onSelectItemSetFieldValue={(value) => {
-        console.log(value);
         setFieldValue(name, value);
       }}
       maxDate={maxDate}

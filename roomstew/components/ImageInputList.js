@@ -29,9 +29,12 @@ const imageInputList = ({
           ))}
 
           {/* The ImageInput which shows Camera Icon Placeholder (no set imageURI) */}
-          <ImageInput
-            onChangeImage={(imageBase64Data) => onAddImage(imageBase64Data)}
-          />
+          <View style={styles.imageContainer}>
+            <ImageInput
+              onChangeImage={(imageBase64Data) => onAddImage(imageBase64Data)}
+            />
+            <AppText style={styles.indexText}>Add a Photo</AppText>
+          </View>
         </View>
       </ScrollView>
     </View>

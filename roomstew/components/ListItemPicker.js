@@ -21,16 +21,15 @@ import ListItemSeparator from "./ListItemSeparator";
 
 export default function ListItemPicker({
   title,
-  subTitle,
   image,
+  initialSubTitle,
   IconComponent,
   items,
-  itemName,
-  onSelectItem,
   onSelectItemSetFieldValue,
-  selectedItem,
+  onSelectItem,
 }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [subTitle, setSubTitle] = useState(initialSubTitle);
 
   return (
     <>
@@ -45,8 +44,11 @@ export default function ListItemPicker({
 
             <View style={styles.detailsContainer}>
               <AppText style={styles.title}> {title}</AppText>
+
+              {/* <AppText style={styles.subTitle}>{subTitleProp}</AppText> */}
+
               {subTitle && (
-                <AppText style={styles.subTitle}>{subTitle} </AppText>
+                <AppText style={styles.subTitle}>{subTitle}</AppText>
               )}
             </View>
           </View>
@@ -70,12 +72,16 @@ export default function ListItemPicker({
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
               <PickerItem
-                value={item.value}
-                itemName={item.label}
+                label={item.label}
                 onPress={() => {
                   setModalVisible(false);
-                  onSelectItem(item.value);
+                  setSubTitle(item.subTitle);
                   onSelectItemSetFieldValue(item.value);
+
+                  //for handling the age picker item (LAZY FIX)
+                  if (onSelectItem) {
+                    onSelectItem(item.value);
+                  }
                 }}
               />
             )}

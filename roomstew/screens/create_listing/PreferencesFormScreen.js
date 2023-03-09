@@ -15,7 +15,8 @@ const populatePickerItems = (minAge, maxAge) => {
   const pickerItems = [];
   for (let age = minAge; age <= maxAge; age++) {
     let numberObj = {
-      label: "Years old",
+      label: `${age} Years old`,
+      subTitle: `${age} Years old`,
       value: age,
     };
     pickerItems.push(numberObj);
@@ -26,14 +27,8 @@ const populatePickerItems = (minAge, maxAge) => {
 const PreferencesFormScreen = ({ route, navigation }) => {
   const previousMergedValues = route.params.mergedValues;
 
-  //Initial subtitle values
-  const [genderPreference, setGenderPreference] = useState("Any");
-
   const [minAge, setMinAge] = useState(17);
   const [maxAge, setMaxAge] = useState(99);
-
-  const [minAgeSubtitle, setMinAgeSubtitle] = useState(minAge);
-  const [maxAgeSubtitle, setMaxAgeSubtitle] = useState(maxAge);
 
   const [minAgePickerItems, setMinAgePickerItems] = useState(
     populatePickerItems(minAge, maxAge)
@@ -44,18 +39,20 @@ const PreferencesFormScreen = ({ route, navigation }) => {
 
   const genderPreferencePickerItems = [
     {
-      label: "",
-      value: "Any",
+      label: "Any",
+      subTitle: "Any",
+      value: 0,
+    },
+    {
+      label: "Males Only",
+      subTitle: "Males Only",
+      value: 1,
     },
 
     {
-      label: "",
-      value: "Male only",
-    },
-
-    {
-      label: "",
-      value: "Female only",
+      label: "Females Only",
+      subTitle: "Females Only",
+      value: 2,
     },
   ];
 
@@ -76,7 +73,7 @@ const PreferencesFormScreen = ({ route, navigation }) => {
       <View style={styles.appFormContainer}>
         <AppForm
           initialValues={{
-            min_age: 18,
+            min_age: 17,
             max_age: 99,
             gender_preference: 0,
             couples_allowed: false,
@@ -96,7 +93,6 @@ const PreferencesFormScreen = ({ route, navigation }) => {
           <ListItemPickerFormField
             name="min_age"
             title="Minimum Age"
-            subTitle={minAgeSubtitle.toString()}
             IconComponent={
               <Icon
                 name="format-list-numbered"
@@ -107,12 +103,10 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             onSelectItem={(item) => {
               if (item > maxAge) {
                 setMaxAge(item);
-                setMaxAgeSubtitle(item);
                 setMaxAgePickerItems(populatePickerItems(item, 99));
               }
 
               setMinAge(item);
-              setMinAgeSubtitle(item);
               setMinAgePickerItems(populatePickerItems(17, maxAge));
             }}
           />
@@ -120,7 +114,6 @@ const PreferencesFormScreen = ({ route, navigation }) => {
           <ListItemPickerFormField
             name="max_age"
             title="Max Age"
-            subTitle={maxAgeSubtitle.toString()}
             IconComponent={
               <Icon
                 name="format-list-numbered"
@@ -131,12 +124,10 @@ const PreferencesFormScreen = ({ route, navigation }) => {
             onSelectItem={(item) => {
               if (item < minAge) {
                 setMinAge(item);
-                setMinAgeSubtitle(item);
                 setMinAgePickerItems(populatePickerItems(17, item));
               }
 
               setMaxAge(item);
-              setMaxAgeSubtitle(item);
               setMaxAgePickerItems(populatePickerItems(minAge, 99));
             }}
           />
@@ -144,7 +135,6 @@ const PreferencesFormScreen = ({ route, navigation }) => {
           <ListItemPickerFormField
             name="gender_preference"
             title=" Gender"
-            subTitle={genderPreference}
             IconComponent={
               <Icon
                 name="gender-male-female"
@@ -152,7 +142,6 @@ const PreferencesFormScreen = ({ route, navigation }) => {
               />
             }
             items={genderPreferencePickerItems}
-            onSelectItem={(item) => setGenderPreference(item)}
           />
 
           <CheckboxFormField

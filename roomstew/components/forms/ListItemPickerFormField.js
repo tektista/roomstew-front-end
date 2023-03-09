@@ -7,28 +7,33 @@ import ErrorMessage from "./ErrorMessage";
 const AppListItemPickerForm = ({
   name,
   title,
-  subTitle,
   image,
   IconComponent,
   items,
-  itemName,
   onSelectItem,
-  selectedItem,
 }) => {
-  const { values, setFieldValue, errors } = useFormikContext();
+  const { values, setFieldValue, errors, touched } = useFormikContext();
+
+  function getSubTitleByValue(itemList, value) {
+    const item = itemList.find((item) => item.value === value);
+    return item ? item.subTitle : null;
+  }
+
+  const subTitleFromValues = getSubTitleByValue(items, values[name]);
+  console.log(subTitleFromValues);
+
   return (
     <>
       <ListItemPicker
         title={title}
-        subTitle={subTitle}
         image={image}
+        initialSubTitle={subTitleFromValues}
         IconComponent={IconComponent}
         items={items}
-        itemName={itemName}
-        onSelectItem={onSelectItem}
-        selectedItem={selectedItem}
         onSelectItemSetFieldValue={(value) => setFieldValue(name, value)}
+        onSelectItem={onSelectItem}
       />
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
 };
