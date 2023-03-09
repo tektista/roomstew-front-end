@@ -12,7 +12,7 @@ import colors from "../../config/colors";
 import Screen from "../../components/Screen";
 
 const DetailsFormScreen = ({ route, navigation }) => {
-  const numbers = [
+  const bathroomItems = [
     {
       label: "Bathrooms",
       value: 1,
@@ -63,7 +63,23 @@ const DetailsFormScreen = ({ route, navigation }) => {
     },
   ];
 
+  const buildingTypeItems = [
+    {
+      label: "",
+      value: "Flat",
+    },
+    {
+      label: "",
+      value: "House",
+    },
+    {
+      label: "",
+      value: "Other",
+    },
+  ];
+
   const [bathroomCount, setBathroomCount] = useState(1);
+  const [buildingType, setBuildingType] = useState("Flat");
   const previousValues = route.params.values;
 
   return (
@@ -75,6 +91,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
       <View style={styles.appFormContainer}>
         <AppForm
           initialValues={{
+            builidng_type: "Flat",
             bills_included: false,
             internet_included: false,
             is_furnished: false,
@@ -87,8 +104,20 @@ const DetailsFormScreen = ({ route, navigation }) => {
             const mergedValues = Object.assign({}, values, previousValues);
             navigation.navigate("PreferencesFormScreen", { mergedValues });
           }}
-          // validationSchema={validationSchema}
         >
+          <ListItemPickerFormField
+            name="building_type"
+            title="Building Type"
+            subTitle={buildingType}
+            IconComponent={
+              <Icon name="office-building" backgroundColor={colors.primary} />
+            }
+            items={buildingTypeItems}
+            onSelectItem={(item) => {
+              setBuildingType(item);
+            }}
+          />
+          <ListItemSeparator />
           <CheckboxFormField
             name="bills_included"
             title={"Bills included"}
@@ -142,7 +171,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
             IconComponent={
               <Icon name="toilet" backgroundColor={colors.primary} />
             }
-            items={numbers}
+            items={bathroomItems}
             onSelectItem={(item) => setBathroomCount(item)}
           />
 

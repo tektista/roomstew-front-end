@@ -32,6 +32,7 @@ const convertListingObjToDbFormat = (listingObj) => {
     couples_allowed: listingObj.couples_allowed,
     pets_allowed: listingObj.pets_allowed,
     smokers_allowed: listingObj.smokers_allowed,
+    building_type: listingObj.building_type,
     bills_included: listingObj.bills_included,
     internet_included: listingObj.internet_included,
     is_furnished: listingObj.is_furnished,
@@ -46,7 +47,7 @@ const convertListingObjToDbFormat = (listingObj) => {
   };
 
   //list of room objects
-  //each room object has a list of room image object list with order prop
+  //each room object has a list of room image object listgit with order prop
 
   //room details list, each room object has room photo obj list
   const roomListDetailsList = listingObj.roomList.map((room) => ({
