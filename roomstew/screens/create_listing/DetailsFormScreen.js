@@ -99,6 +99,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
             bathroom_count: 0,
             has_garden: false,
             has_parking: false,
+            has_hmo: false,
           }}
           onSubmit={(values) => {
             const mergedValues = Object.assign({}, values, previousValues);
@@ -173,6 +174,19 @@ const DetailsFormScreen = ({ route, navigation }) => {
             }
             items={bathroomItems}
             onSelectItem={(item) => setBathroomCount(item)}
+          />
+
+          <ListItemSeparator />
+
+          <CheckboxFormField
+            name="has_hmo"
+            title={"HMO License"}
+            IconComponent={
+              <Icon
+                name="account-multiple-check"
+                backgroundColor={colors.primary}
+              />
+            }
           />
 
           <ListItemSeparator />

@@ -32,12 +32,16 @@ const convertListingObjToDbFormat = (listingObj) => {
     couples_allowed: listingObj.couples_allowed,
     pets_allowed: listingObj.pets_allowed,
     smokers_allowed: listingObj.smokers_allowed,
+
     building_type: listingObj.building_type,
+
     bills_included: listingObj.bills_included,
     internet_included: listingObj.internet_included,
     is_furnished: listingObj.is_furnished,
     has_living_room: listingObj.has_living_room,
     bathroom_count: listingObj.bathroom_count,
+
+    has_hmo: listingObj.has_hmo,
     has_garden: listingObj.has_garden,
     has_parking: listingObj.has_parking,
     postcode: listingObj.postcode,
