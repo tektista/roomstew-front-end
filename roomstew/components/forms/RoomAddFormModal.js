@@ -23,6 +23,7 @@ import FormSubmitButton from "./FormSubmitButton";
 import AppText from "../AppText";
 import Icon from "../Icon";
 import colors from "../../config/colors";
+import ErrorMessage from "./ErrorMessage";
 
 const RoomAddFormModal = ({
   modalVisible,
@@ -41,9 +42,21 @@ const RoomAddFormModal = ({
       .label("Deposit")
       .min(1)
       .typeError("Please enter a valid number"),
-    room_images: Yup.array()
-      .min(1, "Please select at least one image")
-      .max(8, "Maximum of 8 images allowed"),
+
+    room_size: Yup.number()
+      .required("Room size is required")
+      .test(
+        "is-not-negative-one",
+        "Building type is required",
+        (value) => value !== -1
+      ),
+    floor: Yup.number()
+      .required("Room floor is required")
+      .test(
+        "is-not-negative-one",
+        "Number of bathrooms is required",
+        (value) => value !== -1
+      ),
   });
 
   const [startDate, setStartDate] = useState(new Date());
@@ -205,6 +218,7 @@ const RoomAddFormModal = ({
                 }
                 items={roomSizePickerItems}
               />
+              <ListItemSeparator />
               <ListItemPickerFormField
                 name="floor"
                 title="Room Floor"
@@ -245,6 +259,8 @@ const RoomAddFormModal = ({
                   <Icon name="water-boiler" backgroundColor={colors.primary} />
                 }
               />
+
+              <ErrorMessage />
 
               <FormSubmitButton title="Add Room" />
             </AppForm>

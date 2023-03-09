@@ -11,6 +11,8 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import { getFormatedDate } from "react-native-modern-datepicker";
 
+import ErrorMessage from "../../components/forms/ErrorMessage";
+
 import Screen from "../../components/Screen";
 
 import convertListingObjToDbFormat from "../../helpers/convertListingCreateObjToListingDbObj";
@@ -33,6 +35,12 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
   // I need to set the values of the outer form by returning the values of the inner form
 
+  const validationSchema = Yup.object().shape({
+    roomList: Yup.array()
+      .min(1, "Please add atleast one room.")
+      .max(12, "Maximum of 12 rooms."),
+  });
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
@@ -53,7 +61,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
             console.log(listingDbObj);
           }}
-          //handle validationScheme
+          validationSchema={validationSchema}
         >
           <RoomAddFormField
             modalVisible={modalVisible}
