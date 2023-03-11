@@ -10,9 +10,12 @@ import AppText from "./AppText";
 import colors from "../config/colors";
 
 export default function Card({
-  title,
   image,
   minRoomRent,
+  streetAddress,
+  city,
+  postcode,
+  title,
   numRoomsAvailable,
   earliestRoomDateAvailable,
   dateAdded,
@@ -21,29 +24,64 @@ export default function Card({
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={image}></Image>
-
+        <Image
+          style={styles.image}
+          source={{
+            uri: "https://plus.unsplash.com/premium_photo-1672252617594-247a0b87a274?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+          }}
+        />
         <View style={styles.detailsContainer}>
-          <AppText style={styles.rentText}>
+          <AppText style={styles.rentTextContainer}>
             <AppText style={styles.smallRentText}>from </AppText>£{minRoomRent}
             <AppText style={styles.smallRentText}> /month</AppText>
           </AppText>
 
           <AppText style={styles.titleText}>{title}</AppText>
+          <AppText style={styles.addressText}>
+            {"72 walkmer street"} {"edinburgh"} {"EH17 7nt"}
+          </AppText>
+
           <AppText style={styles.roomsAvailableText}>
-            rooms available: {numRoomsAvailable}
+            {numRoomsAvailable} rooms available
           </AppText>
 
           <View style={styles.datesContainer}>
-            <AppText style={styles.dateAvailableText}>
-              date available: {earliestRoomDateAvailable}
-            </AppText>
-            <AppText style={styles.dateAddedText}>
-              date added: {dateAdded}
-            </AppText>
+            <View style={styles.dateAvailableContainer}>
+              <AppText>Available:</AppText>
+              <AppText style={styles.dateAvailableText}>
+                {earliestRoomDateAvailable}
+              </AppText>
+              <View style={styles.dateAvailableContainer}></View>
+            </View>
+
+            <View style={styles.dateAddedContainer}>
+              <AppText>Added:</AppText>
+              <AppText style={styles.dateAddedText}>{dateAdded}</AppText>
+            </View>
           </View>
         </View>
       </View>
+
+      {/* <View style={styles.detailsContainer}>
+          <View style={styles.rentContainer}>
+            <AppText style={styles.smallRentText}>from</AppText>
+            <AppText style={styles.rentText}> £{minRoomRent}</AppText>
+            <AppText style={styles.smallRentText}> /month</AppText>
+          </View>
+
+          <View style={styles.descriptionContainer}>
+            <AppText style={styles.titleText}>{title}</AppText>
+            <AppText style={styles.addressText}>
+              {"72b Craigu asdfasdf"}, {"Edinbudf"}, {"EH17"}{" "}
+            </AppText>
+            <AppText styles={styles.roomsAvailableText}>
+              {3} rooms available
+            </AppText>
+          </View>
+
+          <View style={styles.descriptionContainer}></View>
+          <View style={styles.datesContainer}></View>
+        </View> */}
     </TouchableWithoutFeedback>
   );
 }
@@ -54,21 +92,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     overflow: "hidden",
     marginBottom: 20,
-
     borderColor: colors.black,
     borderWidth: 1,
+    height: 500,
   },
+
   image: {
     width: "100%",
     height: 200,
   },
+
   detailsContainer: {
-    backgroundColor: "blue",
-    // padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
   },
 
   //RENT
-  rentText: {
+  rentTextContainer: {
     fontSize: 20,
     fontWeight: "bold",
     color: colors.white,
@@ -89,16 +130,139 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.black,
     backgroundColor: colors.white,
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+  },
+  addressText: {
+    fontSize: 16,
+    color: colors.black,
+    backgroundColor: colors.white,
+    paddingHorizontal: 10,
   },
   roomsAvailableText: {
+    fontSize: 16,
     backgroundColor: colors.white,
+    paddingHorizontal: 10,
+  },
+  datesContainer: {
+    fontSize: 20,
+    color: colors.white,
     padding: 10,
+    flex: 0,
+
+    display: "flex",
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "flex-end",
   },
 
-  //DATES
-  datesContainer: { backgroundColor: colors.white, padding: 10 },
+  dateAvailableContainer: {
+    display: "flex",
+  },
+  // card: {
+  //   borderRadius: 15,
+  //   backgroundColor: colors.white,
+  //   overflow: "hidden",
+  //   marginBottom: 20,
+  //   borderColor: colors.black,
+  //   borderWidth: 1,
 
-  dateAvailableText: {},
-  dateAddedText: {},
+  //   height: 450,
+  // },
+
+  // image: {
+  //   width: "100%",
+  //   height: 200,
+  // },
+
+  // detailsContainer: {
+  //   backgroundColor: "blue",
+  //   display: "flex",
+  //   // padding: 20,
+  // },
+
+  // //RENT
+  // rentTextContainer: {
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   color: colors.white,
+  //   backgroundColor: colors.primary,
+
+  //   padding: 10,
+  //   paddingVertical: 20,
+  // },
+
+  // smallRentText: {
+  //   fontSize: 15,
+  //   color: "black",
+  // },
+
+  // //TITLE
+  // titleText: {
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   color: colors.black,
+  //   backgroundColor: colors.white,
+  //   paddingHorizontal: 10,
+  //   paddingTop: 10,
+  // },
+  // addressText: {
+  //   fontSize: 16,
+  //   color: colors.black,
+  //   backgroundColor: colors.white,
+  //   paddingHorizontal: 10,
+  // },
+  // roomsAvailableText: {
+  //   fontSize: 16,
+  //   backgroundColor: colors.white,
+  //   paddingHorizontal: 10,
+  // },
+  // datesContainer: { fontSize: 20, color: colors.white, padding: 10 },
 });
+
+// detailsContainer: {
+//   display: "flex",
+//   flex: 1,
+//   backgroundColor: "blue",
+// },
+
+// rentContainer: {
+//   flex: 0.5,
+//   display: "flex",
+//   flexDirection: "row",
+//   alignItems: "center",
+//   backgroundColor: colors.primary,
+
+//   padding: 10,
+// },
+// descriptionContainer: {
+//   flex: 1,
+//   backgroundColor: "blue",
+//   padding: 10,
+// },
+// datesContainer: {
+//   flex: 1,
+//   backgroundColor: "green",
+// },
+
+// smallRentText: { fontSize: 15, color: colors.black },
+
+// rentText: {
+//   fontSize: 20,
+//   fontWeight: "bold",
+//   color: colors.white,
+// },
+
+// titleText: {
+//   fontSize: 25,
+//   fontWeight: "bold",
+//   color: colors.black,
+
+//   numberOfLines: 2,
+// },
+
+// addressText: {
+//   fontSize: 20,
+//   color: colors.black,
+// },

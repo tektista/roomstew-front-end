@@ -260,8 +260,6 @@ const RoomAddFormModal = ({
                 }
               />
 
-              <ErrorMessage />
-
               <FormSubmitButton title="Add Room" />
             </AppForm>
           </View>

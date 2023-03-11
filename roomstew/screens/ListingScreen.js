@@ -23,8 +23,12 @@ const ListingScreen = ({ navigation }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:3002/api/listings?offset=${offset}`
+        // `http://localhost:3002/api/listings?offset=${offset}`
+        `https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
       );
+
+      console.log(response.data);
+
       const newListings = response.data.map((item) => {
         return {
           id: item.id,
