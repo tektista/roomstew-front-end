@@ -23,8 +23,8 @@ const ListingScreen = ({ navigation }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        // `http://localhost:3002/api/listings?offset=${offset}`
-        `https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
+        `http://localhost:3002/api/listings?offset=${offset}`
+        // `https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
       );
 
       console.log(response.data);
@@ -34,6 +34,9 @@ const ListingScreen = ({ navigation }) => {
           id: item.id,
           image: item.image,
           title: item.title,
+          city: item.city,
+          streetAddress: item.streetAddress,
+          postcode: item.postcode,
           minRoomRent: item.minRoomRent,
           numRoomsAvailable: item.numRoomsAvailable,
           earliestRoomDateAvailable: new Date(
@@ -64,6 +67,9 @@ const ListingScreen = ({ navigation }) => {
             <Card
               title={item.title}
               image={item.image}
+              streetAddress={item.streetAddress}
+              city={item.city}
+              postcode={item.postcode}
               minRoomRent={item.minRoomRent}
               numRoomsAvailable={item.numRoomsAvailable}
               earliestRoomDateAvailable={item.earliestRoomDateAvailable}

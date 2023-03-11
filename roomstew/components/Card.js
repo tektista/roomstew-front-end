@@ -38,7 +38,7 @@ export default function Card({
 
           <AppText style={styles.titleText}>{title}</AppText>
           <AppText style={styles.addressText}>
-            {"72 walkmer street"} {"edinburgh"} {"EH17 7nt"}
+            {streetAddress}, {city}, {postcode}
           </AppText>
 
           <AppText style={styles.roomsAvailableText}>
@@ -134,18 +134,18 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   addressText: {
-    fontSize: 16,
+    fontSize: 17,
     color: colors.black,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
   },
   roomsAvailableText: {
-    fontSize: 16,
+    fontSize: 17,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
   },
   datesContainer: {
-    fontSize: 20,
+    fontSize: 17,
     color: colors.white,
     padding: 10,
     flex: 0,
