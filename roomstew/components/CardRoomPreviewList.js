@@ -20,8 +20,8 @@ const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
             roomNumber={index + 1}
             roomSize={room.room_size}
             isFurnished={room.room_is_furnished}
-            startDate={room.start_date}
-            endDate={room.end_date}
+            startDate={room.start_date.toString()}
+            endDate={room.end_date.toString()}
             rent={room.rent}
             deposit={room.room_deposit}
             onPress={() => handlePress(index)}

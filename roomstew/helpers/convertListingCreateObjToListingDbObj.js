@@ -1,3 +1,4 @@
+//adds order to imageList and changes prop names
 const convertToListingPhotoObjList = (imageBase64DataList) => {
   const imageObjListWithOrder = imageBase64DataList.map(
     (imageBase64Data, index) => ({
@@ -50,21 +51,24 @@ const convertListingObjToDbFormat = (listingObj) => {
   };
 
   const listingPhotoObjList = convertToListingPhotoObjList(listingObj.images);
-  //list of room objects
-  //each room object has a list of room image object listgit with order prop
 
-  //TO DO room details list, each room object has room photo obj list
-  const listingRoomListWithImages = listingObj.roomList.map(({ ...room }) => ({
-    ...room,
-    rent: parseInt(room.rent, 10),
-    room_deposit: parseInt(room.room_deposit, 10),
-    roomImageList: convertToRoomPhotoObjList(room.roomImageList),
-  }));
+  //list of room objects
+  //each room object has a list of room image object list
+  const listingRoomListWithPhotoList = listingObj.roomList.map(
+    ({ roomImageList, ...room }) => [
+      {
+        ...room,
+        rent: parseInt(room.rent, 10),
+        room_deposit: parseInt(room.room_deposit, 10),
+      },
+      convertToRoomPhotoObjList(roomImageList),
+    ]
+  );
 
   const listingDbInFormat = [
     listingDbObj,
     listingPhotoObjList,
-    listingRoomListWithImages,
+    listingRoomListWithPhotoList,
   ];
 
   return listingDbInFormat;

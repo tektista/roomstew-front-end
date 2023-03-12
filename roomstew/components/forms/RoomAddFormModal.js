@@ -161,10 +161,8 @@ const RoomAddFormModal = ({
                 IconComponent={
                   <Icon name="calendar" backgroundColor={colors.primary} />
                 }
-                //
-
-                // subTitle={getFormatedDate(startDate, "DD-MM-YYYY")}
-                minDate={getFormatedDate(startDate, "YYYY-MM-DD")}
+                //max should be
+                minDate={getFormatedDate(new Date(), "YYYY-MM-DD")}
                 maxDate={
                   endDate === "No end date"
                     ? getFormatedDate(
@@ -189,11 +187,6 @@ const RoomAddFormModal = ({
               <DatePickerFormFieldField
                 name="end_date"
                 title="End Date"
-                subTitle={
-                  endDate === "No end date"
-                    ? endDate
-                    : getFormatedDate(endDate, "DD-MM-YYYY")
-                }
                 IconComponent={
                   <Icon name="calendar" backgroundColor={colors.primary} />
                 }
@@ -201,8 +194,9 @@ const RoomAddFormModal = ({
                 minDate={getFormatedDate(startDate, "YYYY-MM-DD")}
                 // there should be no max end date
 
+                //This is the bloody line causing errors TO DO LOOK OVER THIS WHOLE PAGE
                 onSelectItem={(value) => {
-                  setEndDate(new Date(value));
+                  setEndDate(getFormatedDate(new Date(value)), "YYYY-MM-DD");
                 }}
               />
               <ListItemSeparator />
