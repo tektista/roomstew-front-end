@@ -1,3 +1,5 @@
+//This is a helper function to help convert the values from the listing of the database to the values that are displayed on the listing details screen. This is to help with the consistency of the data displayed on the listing details screen.
+
 const convertListingPropsVals = (listingObj) => {
   const listing = { ...listingObj };
 

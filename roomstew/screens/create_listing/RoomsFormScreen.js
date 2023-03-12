@@ -56,9 +56,9 @@ const RoomsFormScreen = ({ navigation, route }) => {
               values,
               previousMergedValues
             );
-            console.log(mergedValues);
 
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
+
             console.log(listingDbObj);
           }}
           validationSchema={validationSchema}

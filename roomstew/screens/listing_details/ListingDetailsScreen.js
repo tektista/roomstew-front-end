@@ -28,13 +28,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
   //state of object pulled from axios
 
   const [listingFromDB, setListingFromDB] = useState({});
-  const [photosFromListing, setPhotosFromListing] = useState([]);
-
-  const images = [
-    "https://images.pexels.com/photos/7438545/pexels-photo-7438545.jpeg",
-    "https://images.pexels.com/photos/12996613/pexels-photo-12996613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    "https://images.pexels.com/photos/6690827/pexels-photo-6690827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  ];
+  const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
 
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
@@ -42,25 +36,10 @@ export default function ListingDetailsScreen({ route, navigation }) {
       const response = await axios.get(
         `http://localhost:3002/api/listings/${listing.id}`
       );
-
+      console.log(response.data[1][0]);
+      console.log(response.data[1][0].data);
       setListingFromDB(convertListingPropsVals(response.data[0][0]));
-
-      const photoList = response.data[1];
-
-      console.log(photoList);
-      const photoDataList = [];
-
-      photoList.forEach((photoObject) => {
-        const base64Image = btoa(
-          new Uint8Array(photoObject.listing_photo.data).reduce(
-            (data, byte) => data + String.fromCharCode(byte),
-            ""
-          )
-        );
-        photoDataList.push(`data:image/jpeg;base64,${base64Image}`);
-      });
-
-      setPhotosFromListing(photoDataList);
+      setListingPhotosFromDB(response.data[1]);
     } catch (error) {
       console.log(error);
     }
@@ -70,13 +49,9 @@ export default function ListingDetailsScreen({ route, navigation }) {
     getListingDetails();
   }, []);
 
-  useEffect(() => {
-    console.log(photosFromListing);
-  }, [photosFromListing]);
-
   return (
     <ScrollView>
-      <Image style={styles.image} source={{ uri: photosFromListing[0] }} />
+      <Image style={styles.image} />
 
       {/* <Image
         style={styles.image}

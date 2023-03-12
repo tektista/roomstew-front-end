@@ -27,8 +27,6 @@ const ListingScreen = ({ navigation }) => {
         // `https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
       );
 
-      console.log(response.data);
-
       const newListings = response.data.map((item) => {
         return {
           id: item.id,
