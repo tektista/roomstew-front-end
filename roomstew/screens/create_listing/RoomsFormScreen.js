@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { getFormatedDate } from "react-native-modern-datepicker";
+import axios from "axios";
 
 import ErrorMessage from "../../components/forms/ErrorMessage";
 
@@ -28,12 +28,15 @@ import RoomAddFormField from "../../components/forms/RoomAddFormField";
 import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreviewListFormField";
 
 const RoomsFormScreen = ({ navigation, route }) => {
+  const postListing = (listingDbObj) => {
+    axios
+      .post("http://localhost:3002/api/listings", listingDbObj)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   const previousMergedValues = route.params.mergedValues;
-  console.log(previousMergedValues);
-
   const [modalVisible, setModalVisible] = useState(false);
-
-  // I need to set the values of the outer form by returning the values of the inner form
 
   const validationSchema = Yup.object().shape({
     roomList: Yup.array()
@@ -57,9 +60,10 @@ const RoomsFormScreen = ({ navigation, route }) => {
               previousMergedValues
             );
 
+            //process the merged values in the correct format for sending to db
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
-
             console.log(listingDbObj);
+            postListing(listingDbObj);
           }}
           validationSchema={validationSchema}
         >

@@ -2,7 +2,7 @@ const convertToListingPhotoObjList = (imageBase64DataList) => {
   const imageObjListWithOrder = imageBase64DataList.map(
     (imageBase64Data, index) => ({
       listing_photo: imageBase64Data,
-      photoOrder: index,
+      listing_photo_order: index,
     })
   );
   return imageObjListWithOrder;
@@ -54,18 +54,19 @@ const convertListingObjToDbFormat = (listingObj) => {
   //each room object has a list of room image object listgit with order prop
 
   //room details list, each room object has room photo obj list
-  const roomListDetailsList = listingObj.roomList.map((room) => ({
+  const listingRoomListWithImages = listingObj.roomList.map((room) => ({
     ...room,
     rent: parseInt(room.rent, 10),
     room_deposit: parseInt(room.room_deposit, 10),
-    room_images: convertToRoomPhotoObjList(room.room_images),
+    roomImageList: convertToRoomPhotoObjList(room.room_images),
   }));
 
   const listingDbInFormat = [
     listingDbObj,
     listingPhotoObjList,
-    roomListDetailsList,
+    listingRoomListWithImages,
   ];
+
   return listingDbInFormat;
 };
 
