@@ -53,15 +53,13 @@ const convertListingObjToDbFormat = (listingObj) => {
   //list of room objects
   //each room object has a list of room image object listgit with order prop
 
-  //room details list, each room object has room photo obj list
-  const listingRoomListWithImages = listingObj.roomList.map(
-    ({ room_images, ...room }) => ({
-      ...room,
-      rent: parseInt(room.rent, 10),
-      room_deposit: parseInt(room.room_deposit, 10),
-      roomImageList: convertToRoomPhotoObjList(room_images),
-    })
-  );
+  //TO DO room details list, each room object has room photo obj list
+  const listingRoomListWithImages = listingObj.roomList.map(({ ...room }) => ({
+    ...room,
+    rent: parseInt(room.rent, 10),
+    room_deposit: parseInt(room.room_deposit, 10),
+    roomImageList: convertToRoomPhotoObjList(room.roomImageList),
+  }));
 
   const listingDbInFormat = [
     listingDbObj,

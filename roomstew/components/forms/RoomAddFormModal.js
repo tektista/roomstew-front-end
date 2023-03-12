@@ -113,7 +113,7 @@ const RoomAddFormModal = ({
                 is_boiler: false,
                 floor: -1,
                 room_is_furnished: false,
-                room_images: [],
+                roomImageList: [],
               }}
               onSubmit={(values) => {
                 console.log(values);
@@ -122,7 +122,7 @@ const RoomAddFormModal = ({
               }}
               validationSchema={validationSchema}
             >
-              <ImagePickerFormField name="room_images" />
+              <ImagePickerFormField name="roomImageList" />
 
               <TextInputFormField
                 maxLength={512}
