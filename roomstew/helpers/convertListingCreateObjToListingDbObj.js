@@ -14,7 +14,7 @@ const convertToRoomPhotoObjList = (imageBase64DataList) => {
   const imageObjListWithOrder = imageBase64DataList.map(
     (imageBase64Data, index) => ({
       room_photo: imageBase64Data,
-      photoOrder: index,
+      room_photo_order: index,
     })
   );
   return imageObjListWithOrder;
@@ -59,7 +59,7 @@ const convertListingObjToDbFormat = (listingObj) => {
       {
         ...room,
         rent: parseInt(room.rent, 10),
-        room_deposit: parseInt(room.room_deposit, 10),
+        deposit: parseInt(room.room_deposit, 10),
       },
       convertToRoomPhotoObjList(roomImageList),
     ]

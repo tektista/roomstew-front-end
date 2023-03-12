@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   Modal,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import * as Yup from "yup";
@@ -59,11 +60,11 @@ const RoomsFormScreen = ({ navigation, route }) => {
               values,
               previousMergedValues
             );
-
             //process the merged values in the correct format for sending to db
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
-            console.log(listingDbObj);
             postListing(listingDbObj);
+
+            //TO DO: Add a success message
           }}
           validationSchema={validationSchema}
         >
