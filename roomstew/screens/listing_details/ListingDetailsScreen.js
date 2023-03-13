@@ -31,8 +31,6 @@ export default function ListingDetailsScreen({ route, navigation }) {
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
 
-  const [photoBase64String, setPhotoBase64String] = useState("");
-
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
     try {
@@ -44,9 +42,18 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
       console.log("Hi");
 
+      // convert to format [{photoObj}...]
       const photoObjList = response.data[1].map((obj) => obj.listingPhoto);
+      const photoObjListWithBase64 = [];
 
-      setListingPhotosFromDB(photoObjList);
+      for (let i = 0; i < photoObjList.length; i++) {
+        const listingPhoto = {
+          type: photoObjList[i].type,
+          data: Buffer.from(photoObjList[i].data).toString("base64"),
+        };
+        photoObjListWithBase64.push(listingPhoto);
+      }
+      setListingPhotosFromDB(photoObjListWithBase64);
     } catch (error) {
       console.log(error);
     }
@@ -59,24 +66,15 @@ export default function ListingDetailsScreen({ route, navigation }) {
   useEffect(() => {
     if (listingPhotosFromDB.length > 0) {
       console.log(listingPhotosFromDB);
-      setPhotoBase64String(
-        Buffer.from(listingPhotosFromDB[0].data).toString("base64")
-      );
     }
   }, [listingPhotosFromDB]);
 
-  useEffect(() => {
-    if (photoBase64String !== "") {
-      console.log(photoBase64String);
-    }
-  }, [photoBase64String]);
-
   return (
     <ScrollView>
-      {photoBase64String !== "" && (
+      {listingPhotosFromDB.length > 0 && (
         <Image
           source={{
-            uri: `data:image/jpeg;base64,${photoBase64String}`,
+            uri: `data:image/jpeg;base64,${listingPhotosFromDB[0].data}`,
           }}
           style={styles.image}
         />
