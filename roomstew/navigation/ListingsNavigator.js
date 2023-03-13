@@ -8,9 +8,9 @@ import ListingDetailsShowMoreDescScreen from "../screens/listing_details/Listing
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
-const FeedNavigator = () => (
+const ListingsNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Feed" component={ListingScreen} />
+    <Stack.Screen name="Listings" component={ListingScreen} />
     <Stack.Screen name="ListingDetails" component={ListingDetailsScreen} />
     <Stack.Screen
       name="ListingDetailsShowMoreDetailsScreen"
@@ -23,6 +23,6 @@ const FeedNavigator = () => (
   </Stack.Navigator>
 );
 
-export default FeedNavigator;
+export default ListingsNavigator;
 
 /* Description: This is a stack navigator for the Listings -> Listing details screen */

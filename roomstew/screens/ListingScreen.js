@@ -7,7 +7,7 @@ import colors from "../config/colors";
 
 import axios from "axios";
 
-//As this screen is listed in FeedNavigator which is also a child of AppNavigator, we can use the navigation prop
+//As this screen is listed in ListingsNavigator which is also a child of AppNavigator, we can use the navigation prop
 const ListingScreen = ({ navigation }) => {
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);

@@ -64,6 +64,8 @@ const RoomsFormScreen = ({ navigation, route }) => {
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
             postListing(listingDbObj);
 
+            navigation.navigate("Listings");
+
             //TO DO: Add a success message
           }}
           validationSchema={validationSchema}
