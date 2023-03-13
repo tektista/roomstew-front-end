@@ -12,6 +12,9 @@ import AppText from "../../components/AppText";
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 
+//TO DO create a form before this screen that will ask what type of property it is e.g. flat, house, room etc
+//TO DO clear this screen and dont make the above changes
+//TO DO alternative, just make a screen before this with one div and a picture saying post a listing
 const LocationFormScreen = ({ navigation }) => {
   const validationSchema = Yup.object().shape({
     postcode: Yup.string().required().min(4).label("Postcode"),

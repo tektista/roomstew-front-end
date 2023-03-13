@@ -8,7 +8,7 @@ import {
   Modal,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -29,6 +29,8 @@ import RoomAddFormField from "../../components/forms/RoomAddFormField";
 import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreviewListFormField";
 
 const RoomsFormScreen = ({ navigation, route }) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const postListing = (listingDbObj) => {
     axios
       .post("http://localhost:3002/api/listings", listingDbObj)
@@ -44,6 +46,18 @@ const RoomsFormScreen = ({ navigation, route }) => {
       .min(1, "Please add atleast one room.")
       .max(12, "Maximum of 12 rooms."),
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      Alert.alert("Listing succesfully created", "", [
+        {
+          text: "OK",
+          onPress: () =>
+            navigation.navigate("LocationFormScreen", { clear: true }),
+        },
+      ]);
+    }
+  }, [isSuccess]);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -62,9 +76,10 @@ const RoomsFormScreen = ({ navigation, route }) => {
             );
             //process the merged values in the correct format for sending to db
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
+
             postListing(listingDbObj);
 
-            navigation.navigate("Listings");
+            setIsSuccess(true);
 
             //TO DO: Add a success message
           }}

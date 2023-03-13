@@ -7,6 +7,7 @@ import {
   Button,
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import { Buffer } from "buffer";
 
 import axios from "axios";
 
@@ -30,16 +31,22 @@ export default function ListingDetailsScreen({ route, navigation }) {
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
 
+  const [photoBase64String, setPhotoBase64String] = useState("");
+
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3002/api/listings/${listing.id}`
       );
-      console.log(response.data[1][0]);
-      console.log(response.data[1][0].data);
+
       setListingFromDB(convertListingPropsVals(response.data[0][0]));
-      setListingPhotosFromDB(response.data[1]);
+
+      console.log("Hi");
+
+      const photoObjList = response.data[1].map((obj) => obj.listingPhoto);
+
+      setListingPhotosFromDB(photoObjList);
     } catch (error) {
       console.log(error);
     }
@@ -49,16 +56,31 @@ export default function ListingDetailsScreen({ route, navigation }) {
     getListingDetails();
   }, []);
 
+  useEffect(() => {
+    if (listingPhotosFromDB.length > 0) {
+      console.log(listingPhotosFromDB);
+      setPhotoBase64String(
+        Buffer.from(listingPhotosFromDB[0].data).toString("base64")
+      );
+    }
+  }, [listingPhotosFromDB]);
+
+  useEffect(() => {
+    if (photoBase64String !== "") {
+      console.log(photoBase64String);
+    }
+  }, [photoBase64String]);
+
   return (
     <ScrollView>
-      <Image style={styles.image} />
-
-      {/* <Image
-        style={styles.image}
-        source={{
-          uri: images[2],
-        }}
-      /> */}
+      {photoBase64String !== "" && (
+        <Image
+          source={{
+            uri: `data:image/jpeg;base64,${photoBase64String}`,
+          }}
+          style={styles.image}
+        />
+      )}
 
       {/* <FlatList
         // horizontal={true}
