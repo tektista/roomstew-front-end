@@ -1,6 +1,6 @@
 import React from "react";
 
-import ListingScreen from "../screens/ListingScreen";
+import ListingsScreen from "../screens/ListingsScreen";
 import ListingDetailsScreen from "../screens/listing_details/ListingDetailsScreen";
 import ListingDetailsShowMoreDetailsScreen from "../screens/listing_details/ListingDetailsShowMoreDetailsScreen";
 import ListingDetailsShowMoreDescScreen from "../screens/listing_details/ListingDetailsShowMoreDescScreen";
@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 const ListingsNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Listings" component={ListingScreen} />
+    <Stack.Screen name="Listings" component={ListingsScreen} />
     <Stack.Screen name="ListingDetails" component={ListingDetailsScreen} />
     <Stack.Screen
       name="ListingDetailsShowMoreDetailsScreen"
