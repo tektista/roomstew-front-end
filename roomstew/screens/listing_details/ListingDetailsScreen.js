@@ -24,6 +24,24 @@ import ListItemSeparator from "../../components/ListItemSeparator";
 import Icon from "../../components/Icon";
 
 export default function ListingDetailsScreen({ route, navigation }) {
+  function getImageType(buffer) {
+    if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+      return "jpeg";
+    } else if (
+      buffer[0] === 0x89 &&
+      buffer[1] === 0x50 &&
+      buffer[2] === 0x4e &&
+      buffer[3] === 0x47 &&
+      buffer[4] === 0x0d &&
+      buffer[5] === 0x0a &&
+      buffer[6] === 0x1a &&
+      buffer[7] === 0x0a
+    ) {
+      return "png";
+    } else {
+      return null;
+    }
+  }
   const listing = route.params.item;
 
   //state of object pulled from axios
@@ -46,10 +64,16 @@ export default function ListingDetailsScreen({ route, navigation }) {
       const photoObjList = response.data[1].map((obj) => obj.listingPhoto);
       const photoObjListWithBase64 = [];
 
+      // convert to format [{type: "image/jpeg", data: "base64encodeddata"}...]
       for (let i = 0; i < photoObjList.length; i++) {
+        //in db format
+        const unconvertedPhotoObj = photoObjList[i];
+        //buffer from
+        const imageBufferPhotoObj = Buffer.from(unconvertedPhotoObj);
+
         const listingPhoto = {
-          type: photoObjList[i].type,
-          data: Buffer.from(photoObjList[i].data).toString("base64"),
+          type: getImageType(imageBufferPhotoObj),
+          data: Buffer.from(unconvertedPhotoObj.data).toString("base64"),
         };
         photoObjListWithBase64.push(listingPhoto);
       }
@@ -74,7 +98,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
       {listingPhotosFromDB.length > 0 && (
         <Image
           source={{
-            uri: `data:image/jpeg;base64,${listingPhotosFromDB[0].data}`,
+            uri: `data:image/${listingPhotosFromDB[0].type};base64,${listingPhotosFromDB[0].data}`,
           }}
           style={styles.image}
         />
