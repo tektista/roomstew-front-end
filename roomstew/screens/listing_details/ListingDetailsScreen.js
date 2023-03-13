@@ -5,6 +5,8 @@ import {
   ScrollView,
   Text,
   Button,
+  FlatList,
+  Dimensions,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Buffer } from "buffer";
@@ -22,6 +24,9 @@ import ShowMoreDesc from "../../components/ShowMoreDesc";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import Icon from "../../components/Icon";
+
+const { width } = Dimensions.get("window");
+const height = (width / 100) * 60;
 
 export default function ListingDetailsScreen({ route, navigation }) {
   function getImageType(buffer) {
@@ -95,26 +100,32 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   return (
     <ScrollView>
-      {listingPhotosFromDB.length > 0 && (
+      {/* {listingPhotosFromDB.length > 0 && (
         <Image
           source={{
             uri: `data:image/${listingPhotosFromDB[0].type};base64,${listingPhotosFromDB[0].data}`,
           }}
           style={styles.image}
         />
-      )}
+      )} */}
 
-      {/* <FlatList
+      <ScrollView
         // horizontal={true}
+        horizontal={true}
         pagingEnabled={true}
-        data={photosFromListing}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.image}>
-            <Image style={styles.image} source={{ uri: images[1] }} />
-          </View>
-        )}
-      ></FlatList> */}
+        showsHorizontalScrollIndicator={false}
+        style={{ width, height }}
+      >
+        {listingPhotosFromDB.map((photoObj, index) => (
+          <Image
+            key={index}
+            source={{
+              uri: `data:image/${listingPhotosFromDB[0].type};base64,${listingPhotosFromDB[0].data}`,
+            }}
+            style={{ width, height, resizeMode: "cover" }}
+          />
+        ))}
+      </ScrollView>
 
       <View style={styles.userContainer}>
         <ListItem
