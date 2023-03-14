@@ -12,6 +12,7 @@ import React, { useState, useEffect } from "react";
 import { Buffer } from "buffer";
 
 import axios from "axios";
+import listingsService from "../../services/listingsService";
 
 import convertListingPropsVals from "../../helpers/convertListingPropsVals";
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
@@ -60,9 +61,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
   //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3002/api/listings/${listing.id}`
-      );
+      const response = await listingsService.getAListingById(listing.id);
 
       setListingFromDB(convertListingPropsVals(response.data[0][0]));
 

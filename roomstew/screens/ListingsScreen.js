@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import colors from "../config/colors";
-
+import listingsService from "../services/listingsService";
 import axios from "axios";
 
 //As this screen is listed in ListingsNavigator which is also a child of AppNavigator, we can use the navigation prop
@@ -22,10 +22,7 @@ const ListingsScreen = ({ navigation }) => {
     if (isLoading) return;
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `http://localhost:3002/api/listings?offset=${offset}`
-        // `https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
-      );
+      const response = await listingsService.getAllListings(offset);
 
       const newListings = response.data.map((item) => {
         return {
