@@ -29,6 +29,9 @@ const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
 
 export default function ListingDetailsScreen({ route, navigation }) {
+  //TO DO move this to DB {determining the type of images}
+
+  //TO DO move this to a helper frunction
   function getImageType(buffer) {
     if (buffer[0] === 0xff && buffer[1] === 0xd8) {
       return "jpeg";
