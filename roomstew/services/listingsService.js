@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// `https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
+//`https://nodejs-cleardb-project.herokuapp.com/api/listings/?offset=${offset}`
 const baseURL = "http://localhost:3002/api/listings";
 
 const getAllListings = (offset) => {

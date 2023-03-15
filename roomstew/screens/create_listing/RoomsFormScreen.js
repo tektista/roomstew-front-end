@@ -76,10 +76,11 @@ const RoomsFormScreen = ({ navigation, route }) => {
             );
             //process the merged values in the correct format for sending to db
             const listingDbObj = convertListingObjToDbFormat(mergedValues);
+            console.log(listingDbObj);
 
             postListing(listingDbObj);
 
-            setIsSuccess(true);
+            // setIsSuccess(true);
 
             //TO DO: Add a success message
           }}

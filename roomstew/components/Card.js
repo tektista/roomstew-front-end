@@ -47,7 +47,7 @@ export default function Card({
 
           <View style={styles.datesContainer}>
             <View style={styles.dateAvailableContainer}>
-              <AppText>Available:</AppText>
+              <AppText>Available from:</AppText>
               <AppText style={styles.dateAvailableText}>
                 {earliestRoomDateAvailable}
               </AppText>

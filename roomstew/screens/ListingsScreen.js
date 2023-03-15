@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import Screen from "../components/Screen";
@@ -6,6 +6,9 @@ import Card from "../components/Card";
 import colors from "../config/colors";
 import listingsService from "../services/listingsService";
 import axios from "axios";
+
+const { width } = Dimensions.get("window");
+const height = (width / 100) * 60;
 
 //As this screen is listed in ListingsNavigator which is also a child of AppNavigator, we can use the navigation prop
 const ListingsScreen = ({ navigation }) => {
@@ -34,10 +37,12 @@ const ListingsScreen = ({ navigation }) => {
           postcode: item.postcode,
           minRoomRent: item.minRoomRent,
           numRoomsAvailable: item.numRoomsAvailable,
-          earliestRoomDateAvailable: new Date(
-            item.earliestRoomDateAvailable
-          ).toLocaleDateString(),
-          dateAdded: new Date(item.dateAdded).toLocaleDateString(),
+          earliestRoomDateAvailable: item.earliestRoomDateAvailable,
+          dateAdded: item.dateAdded,
+          // earliestRoomDateAvailable: new Date(
+          //   item.earliestRoomDateAvailable
+          // ).toLocaleDateString(),
+          // dateAdded: new Date(item.dateAdded).toLocaleDateString(),
         };
       });
       setListings([...listings, ...newListings]);

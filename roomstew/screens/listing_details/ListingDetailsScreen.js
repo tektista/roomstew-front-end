@@ -4,17 +4,14 @@ import {
   View,
   ScrollView,
   Text,
-  Button,
   FlatList,
   Dimensions,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Buffer } from "buffer";
 
-import axios from "axios";
 import listingsService from "../../services/listingsService";
 
-import convertListingPropsVals from "../../helpers/convertListingPropsVals";
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
 
 import colors from "../../config/colors";
@@ -30,7 +27,7 @@ const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
 
 export default function ListingDetailsScreen({ route, navigation }) {
-  //TO DO move this to DB {determining the type of images}
+  //TO DO move this to DB (maybe){determining the type of images}
 
   //TO DO move this to a helper frunction
   function getImageType(buffer) {
@@ -54,7 +51,6 @@ export default function ListingDetailsScreen({ route, navigation }) {
   const listing = route.params.item;
 
   //state of object pulled from axios
-
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
 
@@ -63,28 +59,29 @@ export default function ListingDetailsScreen({ route, navigation }) {
     try {
       const response = await listingsService.getAListingById(listing.id);
 
-      setListingFromDB(convertListingPropsVals(response.data[0][0]));
+      // [ [{listingObj}], [{listingPhotoObj}...], [{roomObj}...]  ]
+      setListingFromDB(response.data[0][0]);
+      setListingPhotosFromDB(response.data[1]);
 
-      console.log("Hi");
+      //
+      // // convert to format [{photoObj}...]
+      // const photoObjList = response.data[1].map((obj) => obj.listingPhoto);
+      // const photoObjListWithBase64 = [];
 
-      // convert to format [{photoObj}...]
-      const photoObjList = response.data[1].map((obj) => obj.listingPhoto);
-      const photoObjListWithBase64 = [];
+      // // convert to format [{type: "image/jpeg", data: "base64encodeddata"}...]
+      // for (let i = 0; i < photoObjList.length; i++) {
+      //   //in db format
+      //   const unconvertedPhotoObj = photoObjList[i];
+      //   //buffer from
+      //   const imageBufferPhotoObj = Buffer.from(unconvertedPhotoObj);
 
-      // convert to format [{type: "image/jpeg", data: "base64encodeddata"}...]
-      for (let i = 0; i < photoObjList.length; i++) {
-        //in db format
-        const unconvertedPhotoObj = photoObjList[i];
-        //buffer from
-        const imageBufferPhotoObj = Buffer.from(unconvertedPhotoObj);
-
-        const listingPhoto = {
-          type: getImageType(imageBufferPhotoObj),
-          data: Buffer.from(unconvertedPhotoObj.data).toString("base64"),
-        };
-        photoObjListWithBase64.push(listingPhoto);
-      }
-      setListingPhotosFromDB(photoObjListWithBase64);
+      //   const listingPhoto = {
+      //     type: getImageType(imageBufferPhotoObj),
+      //     data: Buffer.from(unconvertedPhotoObj.data).toString("base64"),
+      //   };
+      //   photoObjListWithBase64.push(listingPhoto);
+      // }
+      // //
     } catch (error) {
       console.log(error);
     }
@@ -102,17 +99,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   return (
     <ScrollView>
-      {/* {listingPhotosFromDB.length > 0 && (
-        <Image
-          source={{
-            uri: `data:image/${listingPhotosFromDB[0].type};base64,${listingPhotosFromDB[0].data}`,
-          }}
-          style={styles.image}
-        />
-      )} */}
-
       <ScrollView
-        // horizontal={true}
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
@@ -122,7 +109,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
           <Image
             key={index}
             source={{
-              uri: `data:image/${listingPhotosFromDB[0].type};base64,${listingPhotosFromDB[0].data}`,
+              uri: photoObj.dataUrl,
             }}
             style={{ width, height, resizeMode: "cover" }}
           />
@@ -132,7 +119,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
       <View style={styles.userContainer}>
         <ListItem
           image={require("../../assets/apartment.jpg")}
-          title="Mosh Hamedani"
+          title="John Bautista"
           subTitle="5 Listings"
         ></ListItem>
       </View>
@@ -156,15 +143,6 @@ export default function ListingDetailsScreen({ route, navigation }) {
           >
             Show More
           </ShowMoreDesc>
-
-          {/* <Button
-            title="Show More"
-            onPress={() => {
-              navigation.navigate("ListingDetailsShowMoreDescScreen", {
-                listingDescription: listingFromDB.description,
-              });
-            }}
-          /> */}
         </View>
       </View>
 
