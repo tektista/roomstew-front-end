@@ -58,10 +58,11 @@ export default function ListingDetailsScreen({ route, navigation }) {
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
-
+      console.log(response.data);
+      //{listingObj}, [{listingPhotoObj}...], [{roomObj}...]
       // [ [{listingObj}], [{listingPhotoObj}...], [{roomObj}...]  ]
-      setListingFromDB(response.data[0][0]);
-      setListingPhotosFromDB(response.data[1]);
+      setListingFromDB(response.data.listingObj);
+      setListingPhotosFromDB(response.data.listingPhotoObjList);
 
       //
       // // convert to format [{photoObj}...]
