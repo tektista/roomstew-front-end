@@ -1,6 +1,8 @@
 import { FlatList, StyleSheet, Text, View, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 
+import convertPhotoListForFrontEnd from "../helpers/convertPhotoListForFrontEnd";
+
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import colors from "../config/colors";
@@ -27,10 +29,12 @@ const ListingsScreen = ({ navigation }) => {
     try {
       const response = await listingsService.getAllListings(offset);
 
+      console.log(response.data);
+
       const newListings = response.data.map((item) => {
         return {
           id: item.id,
-          image: item.image,
+          listingPhoto: convertPhotoListForFrontEnd(item.listingPhoto),
           title: item.title,
           city: item.city,
           streetAddress: item.streetAddress,
@@ -39,10 +43,6 @@ const ListingsScreen = ({ navigation }) => {
           numRoomsAvailable: item.numRoomsAvailable,
           earliestRoomDateAvailable: item.earliestRoomDateAvailable,
           dateAdded: item.dateAdded,
-          // earliestRoomDateAvailable: new Date(
-          //   item.earliestRoomDateAvailable
-          // ).toLocaleDateString(),
-          // dateAdded: new Date(item.dateAdded).toLocaleDateString(),
         };
       });
       setListings([...listings, ...newListings]);
@@ -56,6 +56,10 @@ const ListingsScreen = ({ navigation }) => {
   useEffect(() => {
     getListings();
   }, [offset]);
+
+  useEffect(() => {
+    console.log(listings);
+  }, [listings]);
 
   return (
     <Screen style={styles.screen}>
@@ -74,6 +78,9 @@ const ListingsScreen = ({ navigation }) => {
               numRoomsAvailable={item.numRoomsAvailable}
               earliestRoomDateAvailable={item.earliestRoomDateAvailable}
               dateAdded={item.dateAdded}
+              dataUrl={
+                item.listingPhoto.length > 0 ? item.listingPhoto[0].dataUrl : ""
+              }
               //We use the navigation prop to navigate to the ListingDetails screen
 
               /* pass the listing to the listing details screen, where we can use the id
@@ -97,7 +104,7 @@ export default ListingsScreen;
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    paddingHorizontal: 10,
     backgroundColor: colors.light,
   },
 });

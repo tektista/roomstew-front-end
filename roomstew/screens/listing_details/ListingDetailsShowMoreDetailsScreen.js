@@ -11,8 +11,6 @@ const ListingDetailsShowMoreDetailsScreen = ({ route }) => {
   const listingFromDB = route.params.listingFromDB;
   const roomCount = route.params.roomCount;
 
-  console.log(listingFromDB);
-
   return (
     <ScrollView>
       <View style={styles.detailsContainer}>

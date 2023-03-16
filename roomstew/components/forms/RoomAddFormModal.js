@@ -116,7 +116,6 @@ const RoomAddFormModal = ({
                 roomImageList: [],
               }}
               onSubmit={(values) => {
-                console.log(values);
                 handleRoomSubmit(values);
                 handleModalClose(false);
               }}

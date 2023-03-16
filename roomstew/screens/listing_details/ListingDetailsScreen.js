@@ -8,11 +8,12 @@ import {
   Dimensions,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Buffer } from "buffer";
 
 import listingsService from "../../services/listingsService";
 
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
+
+import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontEnd";
 
 import colors from "../../config/colors";
 import AppText from "../../components/AppText";
@@ -27,62 +28,20 @@ const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
 
 export default function ListingDetailsScreen({ route, navigation }) {
-  //TO DO move this to DB (maybe){determining the type of images}
-
-  //TO DO move this to a helper frunction
-  function getImageType(buffer) {
-    if (buffer[0] === 0xff && buffer[1] === 0xd8) {
-      return "jpeg";
-    } else if (
-      buffer[0] === 0x89 &&
-      buffer[1] === 0x50 &&
-      buffer[2] === 0x4e &&
-      buffer[3] === 0x47 &&
-      buffer[4] === 0x0d &&
-      buffer[5] === 0x0a &&
-      buffer[6] === 0x1a &&
-      buffer[7] === 0x0a
-    ) {
-      return "png";
-    } else {
-      return null;
-    }
-  }
   const listing = route.params.item;
 
-  //state of object pulled from axios
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
 
-  //we need this to get the listing details from the server once the listing is clicked
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
-      console.log(response.data);
-      //{listingObj}, [{listingPhotoObj}...], [{roomObj}...]
-      // [ [{listingObj}], [{listingPhotoObj}...], [{roomObj}...]  ]
-      setListingFromDB(response.data.listingObj);
-      setListingPhotosFromDB(response.data.listingPhotoObjList);
 
-      //
-      // // convert to format [{photoObj}...]
-      // const photoObjList = response.data[1].map((obj) => obj.listingPhoto);
-      // const photoObjListWithBase64 = [];
+      setListingFromDB(response.data.listingObj[0]);
 
-      // // convert to format [{type: "image/jpeg", data: "base64encodeddata"}...]
-      // for (let i = 0; i < photoObjList.length; i++) {
-      //   //in db format
-      //   const unconvertedPhotoObj = photoObjList[i];
-      //   //buffer from
-      //   const imageBufferPhotoObj = Buffer.from(unconvertedPhotoObj);
-
-      //   const listingPhoto = {
-      //     type: getImageType(imageBufferPhotoObj),
-      //     data: Buffer.from(unconvertedPhotoObj.data).toString("base64"),
-      //   };
-      //   photoObjListWithBase64.push(listingPhoto);
-      // }
-      // //
+      setListingPhotosFromDB(
+        convertPhotoListForFrontEnd(response.data.listingPhotoObjList)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -94,7 +53,6 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   useEffect(() => {
     if (listingPhotosFromDB.length > 0) {
-      console.log(listingPhotosFromDB);
     }
   }, [listingPhotosFromDB]);
 

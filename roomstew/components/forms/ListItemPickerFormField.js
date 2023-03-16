@@ -20,7 +20,6 @@ const AppListItemPickerForm = ({
   }
 
   const subTitleFromValues = getSubTitleByValue(items, values[name]);
-  console.log(subTitleFromValues);
 
   return (
     <>

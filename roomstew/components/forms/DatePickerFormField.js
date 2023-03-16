@@ -17,7 +17,6 @@ const DatePickerFormFieldField = ({
 }) => {
   const { values, setFieldValue, errors } = useFormikContext();
 
-  console.log(minDate);
   return (
     <ListItemDatePicker
       title={title}

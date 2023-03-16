@@ -20,6 +20,7 @@ export default function Card({
   earliestRoomDateAvailable,
   dateAdded,
   onPress,
+  dataUrl,
 }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
@@ -27,7 +28,7 @@ export default function Card({
         <Image
           style={styles.image}
           source={{
-            uri: "https://plus.unsplash.com/premium_photo-1672252617594-247a0b87a274?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+            uri: dataUrl,
           }}
         />
         <View style={styles.detailsContainer}>
@@ -91,7 +92,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: colors.white,
     overflow: "hidden",
-    marginBottom: 20,
+    marginBottom: 5,
+    marginTop: 20,
+
     borderColor: colors.black,
     borderWidth: 1,
     height: 500,
