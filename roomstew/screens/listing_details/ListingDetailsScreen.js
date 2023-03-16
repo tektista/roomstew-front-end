@@ -15,6 +15,8 @@ import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
 
 import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontEnd";
 
+import convertListingForFrontEnd from "../../helpers/convertListingForFrontEnd";
+
 import colors from "../../config/colors";
 import AppText from "../../components/AppText";
 import ShowMoreText from "../../components/ShowMoreText";
@@ -32,15 +34,23 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
+  const [
+    listingRoomCardDetailsListFromDB,
+    setListingRoomCardDetailsListFromDB,
+  ] = useState([]);
 
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
 
-      setListingFromDB(response.data.listingObj[0]);
+      setListingFromDB(convertListingForFrontEnd(response.data.listingObj[0]));
 
       setListingPhotosFromDB(
         convertPhotoListForFrontEnd(response.data.listingPhotoObjList)
+      );
+
+      setListingRoomCardDetailsListFromDB(
+        response.data.listingRoomCardDetailsList
       );
     } catch (error) {
       console.log(error);
@@ -50,6 +60,10 @@ export default function ListingDetailsScreen({ route, navigation }) {
   useEffect(() => {
     getListingDetails();
   }, []);
+
+  useEffect(() => {
+    console.log(listingRoomCardDetailsListFromDB);
+  }, [listingRoomCardDetailsListFromDB]);
 
   useEffect(() => {
     if (listingPhotosFromDB.length > 0) {

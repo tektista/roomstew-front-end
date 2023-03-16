@@ -29,8 +29,6 @@ const ListingsScreen = ({ navigation }) => {
     try {
       const response = await listingsService.getAllListings(offset);
 
-      console.log(response.data);
-
       const newListings = response.data.map((item) => {
         return {
           id: item.id,

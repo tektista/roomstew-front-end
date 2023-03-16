@@ -54,22 +54,37 @@ const convertListingObjToDbFormat = (listingObj) => {
 
   //list of room objects
   //each room object has a list of room image object list
-  const listingRoomListWithPhotoList = listingObj.roomList.map(
-    ({ roomImageList, ...room }) => [
-      {
+
+  //A list of objects. Each object has a prop roomObj which holds the room, and a prop roomPhotoObjList which holds a list of room photo objects
+  // A list of objects with the following format
+
+  // [ {roomObj: {roomObj}, roomPhotoObjList: [{roomPhotoObj}... ]}... ]
+
+  console.log("Hi");
+  console.log(listingObj.roomList);
+  const listingRoomsAndRoomPhotosObjList = listingObj.roomList.map(
+    ({ roomImageList, room_deposit, room_is_furnished, ...room }) => {
+      const parsedRoom = {
         ...room,
         rent: parseInt(room.rent, 10),
-        deposit: parseInt(room.room_deposit, 10),
-      },
-      convertToRoomPhotoObjList(roomImageList),
-    ]
+        deposit: parseInt(room_deposit, 10),
+        is_furnished: room.room_is_furnished,
+      };
+
+      const roomPhotoObjList = convertToRoomPhotoObjList(roomImageList);
+
+      return {
+        roomObj: parsedRoom,
+        roomPhotoObjList: roomPhotoObjList,
+      };
+    }
   );
 
-  const listingDbInFormat = [
-    listingDbObj,
-    listingPhotoObjList,
-    listingRoomListWithPhotoList,
-  ];
+  const listingDbInFormat = {
+    listingObj: listingDbObj,
+    listingPhotoObjList: listingPhotoObjList,
+    listingRoomsAndRoomPhotosObjList: listingRoomsAndRoomPhotosObjList,
+  };
 
   return listingDbInFormat;
 };

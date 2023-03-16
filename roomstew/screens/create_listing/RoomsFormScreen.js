@@ -16,7 +16,7 @@ import ErrorMessage from "../../components/forms/ErrorMessage";
 
 import Screen from "../../components/Screen";
 
-import convertListingObjToDbFormat from "../../helpers/convertListingCreateObjToListingDbObj";
+import convertListingCreateObjToListingDbObj from "../../helpers/convertListingCreateObjToListingDbObj";
 //FORM
 import AppForm from "../../components/forms/AppForm";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
@@ -74,8 +74,12 @@ const RoomsFormScreen = ({ navigation, route }) => {
               values,
               previousMergedValues
             );
+
             //process the merged values in the correct format for sending to db
-            const listingDbObj = convertListingObjToDbFormat(mergedValues);
+            const listingDbObj =
+              convertListingCreateObjToListingDbObj(mergedValues);
+            console.log("convertedListingDbObj");
+            console.log(listingDbObj);
 
             postListing(listingDbObj);
 
