@@ -4,6 +4,7 @@ import ListingsScreen from "../screens/ListingsScreen";
 import ListingDetailsScreen from "../screens/listing_details/ListingDetailsScreen";
 import ListingDetailsShowMoreDetailsScreen from "../screens/listing_details/ListingDetailsShowMoreDetailsScreen";
 import ListingDetailsShowMoreDescScreen from "../screens/listing_details/ListingDetailsShowMoreDescScreen";
+import ListingDetailsRoomDetailsScreen from "../screens/listing_details/ListingRoomDetailsScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -20,9 +21,12 @@ const ListingsNavigator = () => (
       name="ListingDetailsShowMoreDescScreen"
       component={ListingDetailsShowMoreDescScreen}
     />
+    <Stack.Screen
+      name="ListingDetailsRoomDetailsScreen"
+      component={ListingDetailsRoomDetailsScreen}
+    />
   </Stack.Navigator>
 );
 
 export default ListingsNavigator;
-
 /* Description: This is a stack navigator for the Listings -> Listing details screen */
