@@ -8,7 +8,7 @@ import React from "react";
 
 import defaultStyles from "../config/styles";
 
-export default function ShowMoreText({
+export default function ShowMoreDetails({
   pageToNavigateTo,
   listingFromDB,
   roomCount,

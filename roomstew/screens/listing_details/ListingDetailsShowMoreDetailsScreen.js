@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
-
 import Icon from "../../components/Icon";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
@@ -14,7 +13,7 @@ const ListingDetailsShowMoreDetailsScreen = ({ route }) => {
   return (
     <ScrollView>
       <View style={styles.detailsContainer}>
-        {ListingDetailsScreenItems.map((item) => (
+        {ListingDetailsScreenItems.slice(0, 8).map((item) => (
           <View key={item.title}>
             <ListItem
               title={item.title}

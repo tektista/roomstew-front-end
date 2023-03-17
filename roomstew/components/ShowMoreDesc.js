@@ -3,12 +3,12 @@
 
 import { useNavigation } from "@react-navigation/native";
 
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 
 import defaultStyles from "../config/styles";
 
-export default function ShowMoreText({
+export default function ShowMoreDesc({
   pageToNavigateTo,
   dataToPassToPage,
   children,
