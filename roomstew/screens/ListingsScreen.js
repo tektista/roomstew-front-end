@@ -32,7 +32,10 @@ const ListingsScreen = ({ navigation }) => {
       const newListings = response.data.map((item) => {
         return {
           id: item.id,
-          listingPhoto: convertPhotoListForFrontEnd(item.listingPhoto),
+          listingPhoto: convertPhotoListForFrontEnd(
+            item.listingPhoto,
+            "listing_photo"
+          ),
           title: item.title,
           city: item.city,
           streetAddress: item.streetAddress,

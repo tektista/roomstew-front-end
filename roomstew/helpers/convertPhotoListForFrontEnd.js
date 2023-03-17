@@ -1,6 +1,6 @@
 const { Buffer } = require("buffer");
 
-const convertPhotoListForFrontEnd = (photoObjList) => {
+const convertPhotoListForFrontEnd = (photoObjList, photoType) => {
   //determine the image type and send this back to the front end
   function getImageType(buffer) {
     if (buffer[0] === 0xff && buffer[1] === 0xd8) {
@@ -22,9 +22,9 @@ const convertPhotoListForFrontEnd = (photoObjList) => {
   }
 
   const photoObjListWithDataUrls = photoObjList.map((unconvertedPhotoObj) => {
-    const imageType = getImageType(unconvertedPhotoObj.listing_photo.data);
+    const imageType = getImageType(unconvertedPhotoObj[photoType].data);
     const base64Data = Buffer.from(
-      unconvertedPhotoObj.listing_photo.data
+      unconvertedPhotoObj[photoType].data
     ).toString("base64");
 
     const dataUrl = `data:image/${imageType};base64,${base64Data}`;
