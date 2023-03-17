@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
 
   descriptionContainer: {
-    padding: 10,
+    paddingHorizontal: 15,
   },
 
   title: {
@@ -296,14 +296,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  description: {},
+  description: { marginBottom: 10 },
 
   showMoreContainer: {
     display: "flex",
 
     alignItems: "flex-start",
-    padding: 10,
-    paddingHorizontal: 0,
+    marginBottom: 10,
   },
 
   showMore: {
@@ -321,6 +320,7 @@ const styles = StyleSheet.create({
     width: 275,
     padding: 10,
     marginRight: 15,
+    marginBottom: 10,
 
     display: "flex",
 
