@@ -20,7 +20,7 @@ const convertListingForFrontEnd = (listingObj) => {
     : (newListing.has_living_room = "No");
 
   newListing.has_garden == 1
-    ? (newListing.had_garden = "Yes")
+    ? (newListing.has_garden = "Yes")
     : (newListing.has_garden = "No");
 
   newListing.has_parking == 1
@@ -59,9 +59,7 @@ const convertListingForFrontEnd = (listingObj) => {
     newListing.gender_preference = "Any";
   }
 
-  if (newListing.hasOwnProperty("age_preference")) {
-    newListing.age_preference = `${newListing.min_age} - ${newListing.max_age}`;
-  }
+  newListing.age_preference = `${newListing.min_age} - ${newListing.max_age}`;
 
   // Card Listings
   if (newListing.hasOwnProperty("earliestRoomDateAvailable")) {
