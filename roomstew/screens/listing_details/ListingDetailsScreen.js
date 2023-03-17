@@ -13,9 +13,9 @@ import listingsService from "../../services/listingsService";
 
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
 
-import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontEnd";
-
 import convertListingForFrontEnd from "../../helpers/convertListingForFrontEnd";
+import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontEnd";
+import convertRoomObjListForCards from "../../helpers/convertRoomObjListForCards";
 
 import colors from "../../config/colors";
 import AppText from "../../components/AppText";
@@ -34,10 +34,8 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
-  const [
-    listingRoomCardDetailsListFromDB,
-    setListingRoomCardDetailsListFromDB,
-  ] = useState([]);
+  const [listingRoomsCardDetailsFromDB, setListingRoomCardDetailsListFromDB] =
+    useState([]);
 
   const getListingDetails = async () => {
     try {
@@ -50,7 +48,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
       );
 
       setListingRoomCardDetailsListFromDB(
-        response.data.listingRoomCardDetailsList
+        convertRoomObjListForCards(response.data.listingRoomCardDetailsList)
       );
     } catch (error) {
       console.log(error);
@@ -62,8 +60,8 @@ export default function ListingDetailsScreen({ route, navigation }) {
   }, []);
 
   useEffect(() => {
-    console.log(listingRoomCardDetailsListFromDB);
-  }, [listingRoomCardDetailsListFromDB]);
+    console.log(listingRoomsCardDetailsFromDB);
+  }, [listingRoomsCardDetailsFromDB]);
 
   useEffect(() => {
     if (listingPhotosFromDB.length > 0) {
@@ -72,6 +70,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   return (
     <ScrollView>
+      {/* Image ScrollView */}
       <ScrollView
         horizontal={true}
         pagingEnabled={true}
@@ -116,6 +115,90 @@ export default function ListingDetailsScreen({ route, navigation }) {
           >
             Show More
           </ShowMoreDesc>
+
+          {/* Room ScrollView */}
+          <ScrollView
+            style={styles.roomScrollView}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            {listingRoomsCardDetailsFromDB.map((roomObj, index) => (
+              <View style={styles.roomCardContainer} key={index}>
+                {/* 1/3 */}
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View>
+                    <AppText>Room {index + 1}</AppText>
+                    <AppText>{roomObj.room_size}</AppText>
+                  </View>
+
+                  <View>
+                    <AppText>Available:</AppText>
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <AppText>{roomObj.start_date}</AppText>
+                    </View>
+                  </View>
+                </View>
+
+                {/* 2/3 */}
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <View>
+                    <AppText>{roomObj.room_is_furnished}</AppText>
+                  </View>
+
+                  <View>
+                    <AppText>{roomObj.is_en_suite}</AppText>
+                  </View>
+                </View>
+
+                {/* 2/3 */}
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View>
+                    <AppText>Rent:</AppText>
+                    <AppText>£{roomObj.rent} /month</AppText>
+                  </View>
+
+                  <View>
+                    <AppText>Deposit:</AppText>
+
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <AppText>£{roomObj.deposit}</AppText>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
         </View>
       </View>
 
@@ -177,10 +260,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  description: {},
-
-  detailsContainer: {},
-
   showMoreContainer: {
     display: "flex",
     alignItems: "center",
@@ -190,5 +269,22 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontWeight: "bold",
     textDecorationLine: "underline",
+  },
+
+  roomScrollView: {
+    width: "100%",
+    height: 200,
+    paddingTop: 20,
+  },
+
+  roomCardContainer: {
+    width: 275,
+    padding: 10,
+    marginRight: 15,
+
+    display: "flex",
+
+    borderWidth: 1,
+    borderColor: "black",
   },
 });
