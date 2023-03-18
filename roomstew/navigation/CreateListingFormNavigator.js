@@ -1,5 +1,6 @@
 import React from "react";
 
+import IntroScreen from "../screens/create_listing/IntroScreen";
 import LocationFormScreen from "../screens/create_listing/LocationFormScreen";
 import DetailsFormScreen from "../screens/create_listing/DetailsFormScreen";
 import PreferencesFormScreen from "../screens/create_listing/PreferencesFormScreen";
@@ -12,6 +13,7 @@ const Stack = createNativeStackNavigator();
 const CreateListingFormNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="IntroScreen" component={IntroScreen} />
       <Stack.Screen name="LocationFormScreen" component={LocationFormScreen} />
       <Stack.Screen name="DetailsFormScreen" component={DetailsFormScreen} />
       <Stack.Screen

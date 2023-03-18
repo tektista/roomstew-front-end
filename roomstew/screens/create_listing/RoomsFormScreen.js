@@ -52,8 +52,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
       Alert.alert("Listing succesfully created", "", [
         {
           text: "OK",
-          onPress: () =>
-            navigation.navigate("LocationFormScreen", { clear: true }),
+          onPress: () => navigation.navigate("IntroScreen", { clear: true }),
         },
       ]);
     }
@@ -76,6 +75,8 @@ const RoomsFormScreen = ({ navigation, route }) => {
             );
 
             //process the merged values in the correct format for sending to db
+            console.log("mergedValues");
+            console.log(mergedValues);
             const listingDbObj =
               convertListingCreateObjToListingDbObj(mergedValues);
             console.log("convertedListingDbObj");
@@ -83,7 +84,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
             postListing(listingDbObj);
 
-            // setIsSuccess(true);
+            setIsSuccess(true);
 
             //TO DO: Add a success message
           }}
