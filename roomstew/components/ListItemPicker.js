@@ -69,7 +69,7 @@ export default function ListItemPicker({
         <Screen>
           <FlatList
             data={items}
-            keyExtractor={(item) => item.value.toString()}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <PickerItem
                 label={item.label}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: colors.medium,
-    width: "75%",
+    width: "74%",
   },
 
   detailsWrapper: {
