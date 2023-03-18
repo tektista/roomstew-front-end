@@ -65,6 +65,7 @@ const ListingsScreen = ({ navigation }) => {
   return (
     <Screen style={styles.screen}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => {
