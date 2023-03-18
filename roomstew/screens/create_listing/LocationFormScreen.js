@@ -76,7 +76,7 @@ const LocationFormScreen = ({ navigation }) => {
             // country: "",
           }}
           onSubmit={(values) => {
-            const location = {
+            const locationValues = {
               postcode: values.postcode,
               street_address: values.street_address,
               city: values.city,
