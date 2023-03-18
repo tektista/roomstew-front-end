@@ -44,16 +44,16 @@ const LocationFormScreen = ({ navigation }) => {
 
   useEffect(() => {}, []);
 
-  const countryListItems = [
-    { label: "England", subTitle: "England", value: "England" },
-    {
-      label: "Northern Ireland",
-      subTitle: "Northern Ireland",
-      value: "Northern Ireland",
-    },
-    { label: "Scotland", subTitle: "Scotland", value: "Scotland" },
-    { label: "Wales", subTitle: "Wales", value: "Wales" },
-  ];
+  // const countryListItems = [
+  //   { label: "England", subTitle: "England", value: "England" },
+  //   {
+  //     label: "Northern Ireland",
+  //     subTitle: "Northern Ireland",
+  //     value: "Northern Ireland",
+  //   },
+  //   { label: "Scotland", subTitle: "Scotland", value: "Scotland" },
+  //   { label: "Wales", subTitle: "Wales", value: "Wales" },
+  // ];
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View>
@@ -73,10 +73,10 @@ const LocationFormScreen = ({ navigation }) => {
             city: "",
 
             //REMOVE
-            country: "",
+            // country: "",
           }}
           onSubmit={(values) => {
-            const locationValues = {
+            const location = {
               postcode: values.postcode,
               street_address: values.street_address,
               city: values.city,
