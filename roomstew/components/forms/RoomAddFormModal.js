@@ -222,7 +222,7 @@ const RoomAddFormModal = ({
               />
               <ListItemSeparator />
               <CheckboxFormField
-                name="is_furnished"
+                name="room_is_furnished"
                 title={"Furnished"}
                 IconComponent={
                   <Icon name="table-chair" backgroundColor={colors.primary} />
