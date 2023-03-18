@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: colors.medium,
+    width: "75%",
   },
 
   detailsWrapper: {
