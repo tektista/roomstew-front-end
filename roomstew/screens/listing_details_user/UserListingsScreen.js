@@ -88,7 +88,6 @@ const UserListingsScreen = ({ navigation }) => {
 
               */
               onPress={() => {
-                console.log("Hi");
                 navigation.navigate("ListingDetails", { item });
               }}
             />

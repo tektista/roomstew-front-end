@@ -35,8 +35,6 @@ export default function ListingRoomDetailsScreen({ route, navigation }) {
     try {
       const response = await roomsService.getARoomsDetailsById(roomId);
 
-      console.log(response.data);
-
       const convertedRoomObjList = convertRoomObjListForFrontEnd(
         response.data.roomObj
       );

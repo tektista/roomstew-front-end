@@ -50,7 +50,6 @@ const PostcodeInputFormField = ({
 
       //unconverted response list
       const addressList = response.data;
-      console.log(addressList);
 
       //convertedPickerItemsList
       const addressListPickerItems = [];
@@ -72,7 +71,6 @@ const PostcodeInputFormField = ({
         addressListPickerItems.push(addressListPickerItem);
       }
 
-      console.log(addressListPickerItems);
       setFieldValue(sendAddressListToFieldName, addressListPickerItems);
     } catch (error) {
       console.log(error);

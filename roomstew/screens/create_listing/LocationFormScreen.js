@@ -28,7 +28,6 @@ const LocationFormScreen = ({ navigation }) => {
       const response = await axios.get(
         `https://ws.postcoder.com/pcw/${API_KEY}/address/${"uk"}/${"eh17%207nt"}`
       );
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

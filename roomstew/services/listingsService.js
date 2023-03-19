@@ -11,7 +11,6 @@ const getAListingById = (id) => {
 };
 
 const getAllListingsByUserId = (offset) => {
-  console.log(offset);
   return axios.get(`${baseURL}/user/?offset=${offset}`);
 };
 
