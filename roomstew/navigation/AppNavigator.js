@@ -7,6 +7,8 @@ import AccountScreen from "../screens/AccountScreen";
 import ListingsNavigator from "./ListingsNavigator";
 import CreateListingFormNavigator from "./CreateListingFormNavigator";
 
+import AccountNavigator from "./AccountNavigator";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 
@@ -48,8 +50,8 @@ const AppNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="Account"
-      component={AccountScreen}
+      name="AccountNavigator"
+      component={AccountNavigator}
       options={{
         tabBarIcon: ({ size, color }) => (
           <MaterialCommunityIcons name="account" size={size} color={color} />
