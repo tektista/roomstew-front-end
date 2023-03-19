@@ -11,6 +11,7 @@ import {
 import React, { useState, useEffect } from "react";
 
 import listingsService from "../../services/listingsService";
+import saveService from "../../services/saveService";
 
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
 
@@ -26,9 +27,20 @@ import ShowMoreDesc from "../../components/ShowMoreDesc";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import Icon from "../../components/Icon";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
+
+/*
+
+if they unsave, delete the row in the db, where the user id and listing id match
+re render component to show the save button status
+
+if they save, add a row to the db with the user_id and listing listng id,
+re render componenn to show the unsave button status
+
+*/
 
 export default function ListingDetailsScreen({ route, navigation }) {
   const listing = route.params.item;
@@ -37,6 +49,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
   const [listingRoomsCardDetailsFromDB, setListingRoomCardDetailsListFromDB] =
     useState([]);
+  const [listingIsSaved, setListingIsSaved] = useState(false);
 
   const getListingDetails = async () => {
     try {
@@ -59,18 +72,54 @@ export default function ListingDetailsScreen({ route, navigation }) {
     }
   };
 
+  const checkIfListingIsSaved = async () => {
+    try {
+      const response = await saveService.getSavedListingIdsByUserId(listing.id);
+      const saveQueryRows = response.data;
+
+      setListingIsSaved(
+        saveQueryRows.some(
+          (obj) => obj.listing_listing_id === listingFromDB.listing_id
+        )
+      );
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const handleSaveUnsaveListing = async () => {
+    try {
+      if (listingIsSaved) {
+        // Unsave the listing
+        await saveService.deleteASavedListingByUserAndListingId(
+          listingFromDB.listing_id
+        );
+      } else {
+        // Save the listing
+        await saveService.saveAListingByUserAndListingId(
+          listingFromDB.listing_id
+        );
+      }
+      // Toggle listingIsSaved state
+      setListingIsSaved(!listingIsSaved);
+    } catch (err) {
+      console.error("Error saving/un-saving listing:", err);
+    }
+  };
+
+  //Mount
   useEffect(() => {
     getListingDetails();
   }, []);
 
+  //once listingFromDB is set, check if listing is saved
   useEffect(() => {
-    console.log(listingRoomsCardDetailsFromDB);
-  }, [listingRoomsCardDetailsFromDB]);
+    checkIfListingIsSaved();
+  }, [listingFromDB]);
 
   useEffect(() => {
-    if (listingPhotosFromDB.length > 0) {
-    }
-  }, [listingPhotosFromDB]);
+    console.log(listingIsSaved);
+  }, [listingIsSaved]);
 
   return (
     <ScrollView>
@@ -98,6 +147,24 @@ export default function ListingDetailsScreen({ route, navigation }) {
           title="John Bautista"
           subTitle="5 Listings"
         ></ListItem>
+
+        <TouchableOpacity onPress={handleSaveUnsaveListing}>
+          <View style={styles.saveContainer}>
+            {listingIsSaved === false ? (
+              <MaterialCommunityIcons
+                name="cards-heart-outline"
+                size={35}
+                color="red"
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="cards-heart"
+                size={35}
+                color="red"
+              />
+            )}
+          </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.descriptionContainer}>
@@ -285,6 +352,16 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 300,
+  },
+
+  userContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  saveContainer: {
+    padding: 20,
   },
 
   descriptionContainer: {
