@@ -20,15 +20,16 @@ export default function CardUser({
   title,
   numRoomsAvailable,
   earliestRoomDateAvailable,
+  dataUrl,
   dateAdded,
   onPress,
   onPressEdit,
-  dataUrl,
+  onPressDelete,
 }) {
   return (
     <View style={styles.card}>
       <TouchableWithoutFeedback onPress={onPress}>
-        <View style={{ flex: 0.9 }}>
+        <View style={{ flex: 9 }}>
           <Image
             style={styles.image}
             source={{
@@ -69,11 +70,34 @@ export default function CardUser({
         </View>
       </TouchableWithoutFeedback>
 
-      <TouchableOpacity style={{ flex: 0.1 }} onPress={onPressEdit}>
-        <View style={styles.editContainer}>
-          <MaterialCommunityIcons name="lead-pencil" size={24} color="black" />
-        </View>
-      </TouchableOpacity>
+      <View
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "row",
+        }}
+        onPress={onPressEdit}
+      >
+        <TouchableOpacity onPress={onPressEdit} style={{ flex: 1 }}>
+          <View style={styles.editContainer}>
+            <MaterialCommunityIcons
+              name="pencil-outline"
+              size={24}
+              color="black"
+            />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onPressDelete} style={{ flex: 1 }}>
+          <View style={styles.deleteContainer}>
+            <MaterialCommunityIcons
+              name="trash-can-outline"
+              size={24}
+              color="black"
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -159,6 +183,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
 
+    borderRightWidth: 0.5,
+
+    flex: 1,
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.black,
+    backgroundColor: colors.white,
+  },
+  deleteContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    borderLeftWidth: 0.5,
+
+    flex: 1,
     padding: 10,
     borderTopWidth: 1,
     borderTopColor: colors.black,
