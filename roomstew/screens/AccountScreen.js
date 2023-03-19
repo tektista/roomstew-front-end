@@ -7,7 +7,13 @@ import Icon from "../components/Icon";
 
 import colors from "../config/colors";
 
-import { StyleSheet, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 
 const menuItems = [
   {
@@ -19,42 +25,50 @@ const menuItems = [
   },
 
   {
-    title: "My Messages",
+    title: "Saved Listings",
     icon: {
-      name: "email",
+      name: "heart",
       backgroundColor: colors.secondary,
     },
   },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
-        <ListItem
-          title="John Bautista"
-          subTitle="john@email.com"
-          image={require("../assets/apartment.jpg")}
-        ></ListItem>
+        <TouchableOpacity onPress={() => console.log("hello")}>
+          <ListItem
+            title="John Batista"
+            subTitle="john@email.com"
+            image={require("../assets/apartment.jpg")}
+          ></ListItem>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.container}>
-        <FlatList
-          data={menuItems}
-          keyExtractor={(menuItem) => menuItem.title}
-          ItemSeparatorComponent={ListItemSeparator}
-          renderItem={({ item }) => (
-            <ListItem
-              title={item.title}
-              IconComponent={
-                <Icon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
-              }
-            />
-          )}
-        ></FlatList>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("UserListingsScreen")}
+        >
+          <ListItem
+            title={"My Listings"}
+            IconComponent={
+              <Icon
+                name={"format-list-bulleted"}
+                backgroundColor={colors.primary}
+              />
+            }
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <ListItem
+            title={"Saved Listings"}
+            IconComponent={
+              <Icon name={"heart"} backgroundColor={colors.primary} />
+            }
+          />
+        </TouchableOpacity>
       </View>
 
       <ListItem
