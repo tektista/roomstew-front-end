@@ -2,6 +2,8 @@ import React from "react";
 import AccountScreen from "../screens/AccountScreen";
 import UserListingsScreen from "../screens/listing_details_user/UserListingsScreen";
 import ListingDetailsScreen from "../screens/listing_details/ListingDetailsScreen";
+import ListingDetailsShowMoreDetailsScreen from "../screens/listing_details/ListingDetailsShowMoreDetailsScreen";
+import ListingDetailsShowMoreDescScreen from "../screens/listing_details/ListingDetailsShowMoreDescScreen";
 import ListingDetailsRoomDetailsScreen from "../screens/listing_details/ListingRoomDetailsScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -21,6 +23,14 @@ const AccountNavigator = () => {
       <Stack.Screen
         name="ListingDetailsRoomDetailsScreen"
         component={ListingDetailsRoomDetailsScreen}
+      />
+      <Stack.Screen
+        name="ListingDetailsShowMoreDescScreen"
+        component={ListingDetailsShowMoreDescScreen}
+      />
+      <Stack.Screen
+        name="ListingDetailsShowMoreDetailsScreen"
+        component={ListingDetailsShowMoreDetailsScreen}
       />
     </Stack.Navigator>
   );
