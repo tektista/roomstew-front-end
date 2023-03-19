@@ -82,7 +82,7 @@ export default function CardUser({
           <View style={styles.editContainer}>
             <MaterialCommunityIcons
               name="pencil-outline"
-              size={24}
+              size={30}
               color="black"
             />
           </View>
