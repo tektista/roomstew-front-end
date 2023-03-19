@@ -10,7 +10,13 @@ const getAListingById = (id) => {
   return axios.get(`${baseURL}/${id}`);
 };
 
+const getAllListingsByUserId = (offset) => {
+  console.log(offset);
+  return axios.get(`${baseURL}/user/?offset=${offset}`);
+};
+
 export default {
-  getAllListings: getAllListings,
-  getAListingById: getAListingById,
+  getAllListings,
+  getAListingById,
+  getAllListingsByUserId,
 };
