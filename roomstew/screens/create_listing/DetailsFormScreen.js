@@ -14,7 +14,6 @@ import Screen from "../../components/Screen";
 
 const DetailsFormScreen = ({ route, navigation }) => {
   const previousValues = route.params.locationValues;
-  console.log(previousValues);
 
   const createBathroomListItems = (maxBathroomCount) => {
     const bathroomListItems = [];
