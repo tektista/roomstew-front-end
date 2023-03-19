@@ -6,6 +6,10 @@ const getAllListings = (offset) => {
   return axios.get(`${baseURL}/?offset=${offset}`);
 };
 
+const getAllListingsByListingIds = (offset) => {
+  return axios.get(`${baseURL}/save/?offset=${offset}`);
+};
+
 const getAListingById = (id) => {
   return axios.get(`${baseURL}/${id}`);
 };
@@ -16,6 +20,7 @@ const getAllListingsByUserId = (offset) => {
 
 export default {
   getAllListings,
+  getAllListingsByListingIds,
   getAListingById,
   getAllListingsByUserId,
 };

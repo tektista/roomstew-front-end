@@ -61,7 +61,9 @@ function AccountScreen({ navigation }) {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SavedListingsScreen")}
+        >
           <ListItem
             title={"Saved Listings"}
             IconComponent={
