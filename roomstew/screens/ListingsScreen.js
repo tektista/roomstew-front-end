@@ -48,6 +48,7 @@ const ListingsScreen = ({ navigation }) => {
           numRoomsAvailable: item.numRoomsAvailable,
           earliestRoomDateAvailable: item.earliestRoomDateAvailable,
           dateAdded: item.dateAdded,
+          // saved: item.saved,
         };
       });
       setListings([...listings, ...newListings]);
@@ -93,6 +94,7 @@ const ListingsScreen = ({ navigation }) => {
               dataUrl={
                 item.listingPhoto.length > 0 ? item.listingPhoto[0].dataUrl : ""
               }
+              // saved={item.saved}
               //We use the navigation prop to navigate to the ListingDetails screen
 
               /* pass the listing to the listing details screen, where we can use the id
