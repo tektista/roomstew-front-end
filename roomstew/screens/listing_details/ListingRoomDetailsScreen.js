@@ -19,6 +19,9 @@ import ShowMoreDesc from "../../components/ShowMoreDesc";
 import RoomDetailsScreenItems from "../../config/RoomDetailsScreenItems.js";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
+import PhotoScrollView from "../../components/PhotoScrollView";
+import Description from "../../components/Description";
+import ListItemList from "../../components/ListItemList";
 
 const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
@@ -67,24 +70,9 @@ export default function ListingRoomDetailsScreen({ route, navigation }) {
 
   return (
     <ScrollView>
-      <ScrollView
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        style={{ width, height }}
-      >
-        {roomPhotosFromDB.map((photoObj, index) => (
-          <Image
-            key={index}
-            source={{
-              uri: photoObj.dataUrl,
-            }}
-            style={{ width, height, resizeMode: "cover" }}
-          />
-        ))}
-      </ScrollView>
+      <PhotoScrollView photoObjListWIthDataUrl={roomPhotosFromDB} />
 
-      <View style={styles.descriptionContainer}>
+      <View style={styles.rentDepositContainerWrapper}>
         <View style={styles.rentDepositContainer}>
           <AppText style={styles.title}>
             £{roomFromDB.rent}
@@ -99,44 +87,22 @@ export default function ListingRoomDetailsScreen({ route, navigation }) {
             </AppText>
           </AppText>
         </View>
+      </View>
 
-        <AppText style={styles.description}>
-          {roomFromDB.room_description &&
-          roomFromDB.room_description.length > 256
-            ? roomFromDB.room_description.slice(0, 256) + " ..."
-            : roomFromDB.room_description}
-        </AppText>
+      <View style={styles.descriptionContainer}>
+        <Description description={roomFromDB.room_description} />
 
-        {roomFromDB.room_description &&
-          roomFromDB.room_description.length > 256 && (
-            <View style={styles.showMoreContainer}>
-              <ShowMoreDesc
-                style={styles.showMore}
-                pageToNavigateTo={"ListingDetailsShowMoreDescScreen"}
-                dataToPassToPage={roomFromDB.room_description}
-              >
-                Show More
-              </ShowMoreDesc>
-            </View>
-          )}
+        <ShowMoreDesc
+          onPress={() =>
+            navigation.navigate("ListingDetailsShowMoreDescScreen", {
+              listingDescription: roomFromDB.room_description,
+            })
+          }
+        />
       </View>
 
       <View style={styles.detailsContainer}>
-        {RoomDetailsScreenItems.map((item) => (
-          <View key={item.title}>
-            <ListItem
-              title={item.title}
-              subTitle={<Text>{roomFromDB[item.roomFromDBName]}</Text>}
-              IconComponent={
-                <Icon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
-              }
-            />
-            <ListItemSeparator />
-          </View>
-        ))}
+        <ListItemList objFromDB={roomFromDB} items={RoomDetailsScreenItems} />
       </View>
     </ScrollView>
   );
@@ -148,7 +114,7 @@ const styles = StyleSheet.create({
     height: 300,
   },
 
-  descriptionContainer: { padding: 10, backgroundColor: colors.primary },
+  rentDepositContainerWrapper: { backgroundColor: colors.primary, padding: 15 },
 
   rentDepositContainer: {
     display: "flex",
@@ -163,7 +129,9 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
 
-  description: {},
+  descriptionContainer: {
+    padding: 15,
+  },
 
   showMoreContainer: {
     display: "flex",

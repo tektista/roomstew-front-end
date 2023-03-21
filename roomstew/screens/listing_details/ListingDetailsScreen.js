@@ -24,13 +24,24 @@ import AppText from "../../components/AppText";
 import ShowMoreDetails from "../../components/ShowMoreDetails";
 import ShowMoreDesc from "../../components/ShowMoreDesc";
 
+import SaveButton from "../../components/SaveButton";
+import LocationButton from "../../components/LocationButton";
+import PhotoScrollView from "../../components/PhotoScrollView";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import Icon from "../../components/Icon";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
+import RoomScrollView from "../../components/RoomScrollView";
+import Description from "../../components/Description";
+import ListItemList from "../../components/ListItemList";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
+
+//I would need to reuse
 
 /*
 
@@ -51,6 +62,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
     useState([]);
   const [listingIsSaved, setListingIsSaved] = useState(false);
 
+  //Get
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
@@ -63,7 +75,6 @@ export default function ListingDetailsScreen({ route, navigation }) {
           "listing_photo"
         )
       );
-
       setListingRoomCardDetailsListFromDB(
         convertRoomObjListForCards(response.data.listingRoomCardDetailsList)
       );
@@ -115,6 +126,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
   //once listingFromDB is set, check if listing is saved
   useEffect(() => {
     checkIfListingIsSaved();
+    console.log(listingFromDB);
   }, [listingFromDB]);
 
   useEffect(() => {
@@ -123,23 +135,7 @@ export default function ListingDetailsScreen({ route, navigation }) {
 
   return (
     <ScrollView>
-      {/* Image ScrollView */}
-      <ScrollView
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        style={{ width, height }}
-      >
-        {listingPhotosFromDB.map((photoObj, index) => (
-          <Image
-            key={index}
-            source={{
-              uri: photoObj.dataUrl,
-            }}
-            style={{ width, height, resizeMode: "cover" }}
-          />
-        ))}
-      </ScrollView>
+      <PhotoScrollView photoObjListWIthDataUrl={listingPhotosFromDB} />
 
       <View style={styles.userContainer}>
         <ListItem
@@ -148,178 +144,104 @@ export default function ListingDetailsScreen({ route, navigation }) {
           subTitle="5 Listings"
         ></ListItem>
 
-        <TouchableOpacity onPress={handleSaveUnsaveListing}>
-          <View style={styles.saveContainer}>
-            {listingIsSaved === false ? (
-              <MaterialCommunityIcons
-                name="cards-heart-outline"
-                size={35}
-                color="red"
-              />
-            ) : (
-              <MaterialCommunityIcons
-                name="cards-heart"
-                size={35}
-                color="red"
-              />
-            )}
+        {/* LOCATION BUTTON */}
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <LocationButton
+            family="i"
+            name="location-outline"
+            size={35}
+            color={colors.black}
+            onPress={() =>
+              navigation.navigate("ListingDetailsMapScreen", {
+                street_address: listingFromDB.street_address,
+                city: listingFromDB.city,
+                postcode: listingFromDB.postcode,
+              })
+            }
+          />
+          {/* SAVE BUTTON */}
+          <View style={{ padding: 20 }}>
+            <SaveButton
+              isSaved={listingIsSaved}
+              onPress={handleSaveUnsaveListing}
+            />
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
 
+      {/* ADDRESS CONTAINER */}
+      <View
+        style={{
+          paddingHorizontal: 20,
+          paddingVertical: 10,
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <AppText>
+          {listingFromDB.street_address}, {listingFromDB.city},{" "}
+          {listingFromDB.postcode}
+        </AppText>
+      </View>
+
+      {/* MAIN DETAILS CONTAINER */}
       <View style={styles.descriptionContainer}>
         <AppText style={styles.title}>
           {listingFromDB.title} {listingFromDB.listing_id}
         </AppText>
 
-        <AppText style={styles.description}>
-          {listingFromDB.description && listingFromDB.description.length > 256
-            ? listingFromDB.description.slice(0, 256) + " ..."
-            : listingFromDB.description}
-        </AppText>
+        <Description description={listingFromDB.description} />
 
-        {listingFromDB.description &&
-          listingFromDB.description.length > 256 && (
-            <View style={styles.showMoreContainer}>
-              <ShowMoreDesc
-                style={styles.showMore}
-                pageToNavigateTo={"ListingDetailsShowMoreDescScreen"}
-                dataToPassToPage={listingFromDB.description}
-              >
-                Show More
-              </ShowMoreDesc>
-            </View>
-          )}
+        <View style={styles.showMoreContainer}>
+          <ShowMoreDesc
+            style={styles.showMore}
+            description={listingFromDB.description}
+            onPress={() =>
+              navigation.navigate("ListingDetailsShowMoreDescScreen", {
+                listingDescription: listingFromDB.description,
+              })
+            }
+          >
+            Show More
+          </ShowMoreDesc>
+        </View>
 
-        {/* Room ScrollView */}
-        <ScrollView
-          style={styles.roomScrollView}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        >
-          {listingRoomsCardDetailsFromDB.map((roomObj, index) => (
-            <TouchableOpacity
-              style={styles.roomCardContainer}
-              key={index}
-              onPress={() =>
-                navigation.navigate("ListingDetailsRoomDetailsScreen", {
-                  roomId: roomObj.room_id,
-                })
-              }
-            >
-              {/* 1/3 */}
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View>
-                  <AppText>Room {index + 1}</AppText>
-                  <AppText>{roomObj.room_size}</AppText>
-                </View>
-
-                <View>
-                  <AppText>Available:</AppText>
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <AppText>{roomObj.start_date}</AppText>
-                  </View>
-                </View>
-              </View>
-
-              {/* 2/3 */}
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <View>
-                  <AppText>{roomObj.room_is_furnished}</AppText>
-                </View>
-
-                <View>
-                  <AppText>{roomObj.is_en_suite}</AppText>
-                </View>
-              </View>
-
-              {/* 2/3 */}
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
-                }}
-              >
-                <View>
-                  <AppText>Rent:</AppText>
-                  <AppText>£{roomObj.rent} /month</AppText>
-                </View>
-
-                <View>
-                  <AppText>Deposit:</AppText>
-
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <AppText>£{roomObj.deposit}</AppText>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        {/* ROOM CARD SCROLL VIEW*/}
+        <RoomScrollView
+          formattedRoomDetailsList={listingRoomsCardDetailsFromDB}
+          onPress={(roomObj) =>
+            navigation.navigate("ListingDetailsRoomDetailsScreen", roomObj)
+          }
+        />
       </View>
 
+      {/* AMENITIES */}
       <View style={styles.detailsContainer}>
         <View style={{ padding: 10, paddingBottom: 0 }}>
           <AppText style={{ fontSize: 20, fontWeight: "bold" }}>
             Property Details{" "}
             <ShowMoreDetails
               style={styles.showMore}
-              pageToNavigateTo={"ListingDetailsShowMoreDetailsScreen"}
-              listingFromDB={listingFromDB}
-              roomCount={listing.numRoomsAvailable}
+              onPress={() => {
+                navigation.navigate("ListingDetailsShowMoreDetailsScreen", {
+                  listingFromDB: listingFromDB,
+                  roomCount: listing.numRoomsAvailable,
+                });
+              }}
             >
               Show More
             </ShowMoreDetails>
           </AppText>
         </View>
-        {ListingDetailsScreenItems.slice(0, 5).map((item) => (
-          <View key={item.title}>
-            <ListItem
-              title={item.title}
-              subTitle={
-                item.title === "Rooms" && listing.numRoomsAvailable ? (
-                  listing.numRoomsAvailable + " available"
-                ) : (
-                  <Text>{listingFromDB[item.listingFromDBName]}</Text>
-                )
-              }
-              IconComponent={
-                <Icon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
-              }
-            />
-            <ListItemSeparator />
-          </View>
-        ))}
+
+        <ListItemList
+          objFromDB={listingFromDB}
+          localObj={listing}
+          items={ListingDetailsScreenItems}
+          sliceAtIndex={0}
+          sliceToIndex={5}
+        />
 
         <ListItemSeparator />
 
@@ -328,21 +250,13 @@ export default function ListingDetailsScreen({ route, navigation }) {
             Roommate Preferences
           </AppText>
         </View>
-        {ListingDetailsScreenItems.slice(8, 14).map((item) => (
-          <View key={item.title}>
-            <ListItem
-              title={item.title}
-              subTitle={<Text>{listingFromDB[item.listingFromDBName]}</Text>}
-              IconComponent={
-                <Icon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
-              }
-            />
-            <ListItemSeparator />
-          </View>
-        ))}
+
+        <ListItemList
+          objFromDB={listingFromDB}
+          items={ListingDetailsScreenItems}
+          sliceAtIndex={8}
+          sliceToIndex={14}
+        />
       </View>
     </ScrollView>
   );
@@ -372,8 +286,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "500",
   },
-
-  description: { marginBottom: 10 },
 
   showMoreContainer: {
     display: "flex",
