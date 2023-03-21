@@ -1,6 +1,7 @@
 import React from "react";
 
 import AccountScreen from "../screens/AccountScreen";
+
 import UserListingsResultsScreen from "../screens/listing_details_user/UserListingsResultsScreen";
 import UserListingDetailsScreen from "../screens/listing_details_user/UserListingDetailsScreen";
 import UserListingMapScreen from "../screens/listing_details_user/UserListingMapScreen";
@@ -8,7 +9,15 @@ import UserListingRoomDetailsScreen from "../screens/listing_details_user/UserLi
 import UserListingShowMoreDescriptionScreen from "../screens/listing_details_user/UserListingShowMoreDescriptionScreen";
 import UserListingShowMoreDetailsScreen from "../screens/listing_details_user/UserListingShowMoreDetailsScreen";
 
+import SavedListingsResultsScreen from "../screens/listing_details_user_saved/SavedListingsResultsScreen";
+import SavedListingDetailsScreen from "../screens/listing_details_user_saved/SavedListingDetailsScreen";
+import SavedListingMapScreen from "../screens/listing_details_user_saved/SavedListingMapScreen";
+import SavedListingRoomDetailsScreen from "../screens/listing_details_user_saved/SavedListingRoomDetailsScreen";
+import SavedListingShowMoreDescriptionScreen from "../screens/listing_details_user_saved/SavedListingShowMoreDescriptionScreen";
+import SavedListingShowMoreDetailsScreen from "../screens/listing_details_user_saved/SavedListingShowMoreDetailsScreen";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 const Stack = createNativeStackNavigator();
 
 // reuse: listings, listing details, listing room details, listing show more desc, listing show more details
@@ -25,7 +34,7 @@ Edit a room - Each card has an edit button, takes you to form page of ONLY the r
 const AccountNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* Account Main Page */}
+      {/* MY ACCOUNT PAGE */}
       <Stack.Screen name="AccountScreen" component={AccountScreen} />
 
       {/* USER LISTINGS*/}
@@ -57,6 +66,36 @@ const AccountNavigator = () => {
       <Stack.Screen
         name="UserListingShowMoreDetailsScreen"
         component={UserListingShowMoreDetailsScreen}
+      />
+      {/* USER SAVED LISTINGS */}
+      <Stack.Screen
+        name="SavedListingsResultsScreen"
+        component={SavedListingsResultsScreen}
+      />
+
+      <Stack.Screen
+        name="SavedListingDetailsScreen"
+        component={SavedListingDetailsScreen}
+      />
+
+      <Stack.Screen
+        name="SavedListingMapScreen"
+        component={SavedListingMapScreen}
+      />
+
+      <Stack.Screen
+        name="SavedListingRoomDetailsScreen"
+        component={SavedListingRoomDetailsScreen}
+      />
+
+      <Stack.Screen
+        name="SavedListingShowMoreDescriptionScreen"
+        component={SavedListingShowMoreDescriptionScreen}
+      />
+
+      <Stack.Screen
+        name="SavedListingShowMoreDetailsScreen"
+        component={SavedListingShowMoreDetailsScreen}
       />
     </Stack.Navigator>
   );
