@@ -94,15 +94,8 @@ const SavedListingsScreen = ({ navigation }) => {
               dataUrl={
                 item.listingPhoto.length > 0 ? item.listingPhoto[0].dataUrl : ""
               }
-              // saved={item.saved}
-              //We use the navigation prop to navigate to the ListingDetails screen
-
-              /* pass the listing to the listing details screen, where we can use the id
-              to get the listing details from the database, which we can then display
-
-              */
               onPress={() => {
-                navigation.navigate("SavedListingsDetailsScreen", { item });
+                navigation.navigate("SavedListingDetailsScreen", { item });
               }}
             />
           );
