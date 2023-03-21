@@ -2,8 +2,6 @@ import React from "react";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import AccountScreen from "../screens/AccountScreen";
-
 import ListingsNavigator from "./ListingsNavigator";
 import CreateListingFormNavigator from "./CreateListingFormNavigator";
 
