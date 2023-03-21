@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-import ListingsScreenComponent from "../../components/listing_details_screen_components/ListingsScreenComponent";
+import ListingsResultsScreenComponent from "../../components/listing_details_screen_components/ListingsResultsScreenComponent";
 
 const ListingsResultsScreen = () => {
   return (
-    <ListingsScreenComponent
+    <ListingsResultsScreenComponent
       searchOrSavedOrUser="search"
       navigateToScreenName="ListingDetailsScreen"
     />
