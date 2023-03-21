@@ -39,8 +39,8 @@ function AccountScreen({ navigation }) {
       <View style={styles.container}>
         <TouchableOpacity onPress={() => console.log("hello")}>
           <ListItem
-            title="John Batista"
-            subTitle="john@email.com"
+            title="John Bautista"
+            subTitle="john.bautista.2018@uni.strath.ac.uk"
             image={require("../assets/apartment.jpg")}
           ></ListItem>
         </TouchableOpacity>
