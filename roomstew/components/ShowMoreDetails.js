@@ -1,32 +1,14 @@
 //a custom AppText component. The style of the text is set from config/styles
 //style propr is passed incase any additional styles are needed from the caller of the component
 
-import { useNavigation } from "@react-navigation/native";
-
-import { Text, TouchableOpacity } from "react-native";
+import { Text } from "react-native";
 import React from "react";
 
 import defaultStyles from "../config/styles";
 
-export default function ShowMoreDetails({
-  pageToNavigateTo,
-  listingFromDB,
-  roomCount,
-  children,
-  style,
-}) {
-  const navigation = useNavigation();
-
+export default function ShowMoreDetails({ onPress, children, style }) {
   return (
-    <Text
-      onPress={() =>
-        navigation.navigate(pageToNavigateTo, {
-          listingFromDB: listingFromDB,
-          roomCount: roomCount,
-        })
-      }
-      style={[defaultStyles.text, style]}
-    >
+    <Text onPress={onPress} style={[defaultStyles.text, style]}>
       {children}
     </Text>
   );

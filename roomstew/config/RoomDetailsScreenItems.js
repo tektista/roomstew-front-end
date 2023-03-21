@@ -3,7 +3,7 @@ import colors from "./colors";
 const RoomDetailsScreenItems = [
   {
     title: "Available:",
-    roomFromDBName: "start_date",
+    DBFieldName: "start_date",
     icon: {
       name: "calendar",
       backgroundColor: colors.primary,
@@ -11,7 +11,7 @@ const RoomDetailsScreenItems = [
   },
   {
     title: "End date",
-    roomFromDBName: "end_date",
+    DBFieldName: "end_date",
     icon: {
       name: "calendar",
       backgroundColor: colors.primary,
@@ -19,7 +19,7 @@ const RoomDetailsScreenItems = [
   },
   {
     title: "Furnished",
-    roomFromDBName: "room_is_furnished",
+    DBFieldName: "room_is_furnished",
     icon: {
       name: "table-chair",
       backgroundColor: colors.primary,
@@ -27,7 +27,7 @@ const RoomDetailsScreenItems = [
   },
   {
     title: "Room size",
-    roomFromDBName: "room_size",
+    DBFieldName: "room_size",
     icon: {
       name: "image-size-select-small",
       backgroundColor: colors.primary,
@@ -35,7 +35,7 @@ const RoomDetailsScreenItems = [
   },
   {
     title: "En-suite",
-    roomFromDBName: "is_en_suite",
+    DBFieldName: "is_en_suite",
     icon: {
       name: "toilet",
       backgroundColor: colors.primary,
@@ -43,7 +43,7 @@ const RoomDetailsScreenItems = [
   },
   {
     title: "Desk",
-    roomFromDBName: "is_desk",
+    DBFieldName: "is_desk",
     icon: {
       name: "desk",
       backgroundColor: colors.primary,
@@ -52,7 +52,7 @@ const RoomDetailsScreenItems = [
 
   {
     title: "Boiler in room",
-    roomFromDBName: "is_boiler",
+    DBFieldName: "is_boiler",
     icon: {
       name: "water-boiler",
       backgroundColor: colors.primary,
@@ -60,7 +60,7 @@ const RoomDetailsScreenItems = [
   },
   {
     title: "Floor",
-    roomFromDBName: "floor",
+    DBFieldName: "floor",
     icon: {
       name: "stairs",
       backgroundColor: colors.primary,

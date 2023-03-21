@@ -2,8 +2,8 @@ import colors from "../config/colors";
 
 const ListingDetailsScreenItems = [
   {
-    title: "Rooms",
-    listingFromDBName: "rooms_available",
+    title: "Rooms available",
+    DBFieldName: "numRoomsAvailable",
     icon: {
       name: "bed",
       backgroundColor: colors.primary,
@@ -11,7 +11,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Furnished",
-    listingFromDBName: "is_furnished",
+    DBFieldName: "is_furnished",
     icon: {
       name: "table-chair",
       backgroundColor: colors.primary,
@@ -19,7 +19,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Bills",
-    listingFromDBName: "bills_included",
+    DBFieldName: "bills_included",
     icon: {
       name: "home-lightning-bolt",
       backgroundColor: colors.primary,
@@ -27,7 +27,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Internet",
-    listingFromDBName: "internet_included",
+    DBFieldName: "internet_included",
     icon: {
       name: "wifi",
       backgroundColor: colors.primary,
@@ -35,7 +35,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Living room",
-    listingFromDBName: "has_living_room",
+    DBFieldName: "has_living_room",
     icon: {
       name: "sofa",
       backgroundColor: colors.primary,
@@ -43,7 +43,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Bathrooms",
-    listingFromDBName: "bathroom_count",
+    DBFieldName: "bathroom_count",
     icon: {
       name: "toilet",
       backgroundColor: colors.primary,
@@ -51,7 +51,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Building type",
-    listingFromDBName: "building_type",
+    DBFieldName: "building_type",
     icon: {
       name: "office-building",
       backgroundColor: colors.primary,
@@ -59,7 +59,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Garden",
-    listingFromDBName: "has_garden",
+    DBFieldName: "has_garden",
     icon: {
       name: "grass",
       backgroundColor: colors.primary,
@@ -67,7 +67,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Parking",
-    listingFromDBName: "has_parking",
+    DBFieldName: "has_parking",
     icon: {
       name: "parking",
       backgroundColor: colors.primary,
@@ -75,7 +75,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Age preference",
-    listingFromDBName: "age_preference",
+    DBFieldName: "age_preference",
     icon: {
       name: "format-list-numbered",
       backgroundColor: colors.primary,
@@ -83,7 +83,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Gender preference",
-    listingFromDBName: "gender_preference",
+    DBFieldName: "gender_preference",
     icon: {
       name: "gender-male-female",
       backgroundColor: colors.primary,
@@ -91,7 +91,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Couples",
-    listingFromDBName: "couples_allowed",
+    DBFieldName: "couples_allowed",
     icon: {
       name: "account-heart",
       backgroundColor: colors.primary,
@@ -100,7 +100,7 @@ const ListingDetailsScreenItems = [
 
   {
     title: "Smokers",
-    listingFromDBName: "smokers_allowed",
+    DBFieldName: "smokers_allowed",
     icon: {
       name: "cigar",
       backgroundColor: colors.primary,
@@ -108,7 +108,7 @@ const ListingDetailsScreenItems = [
   },
   {
     title: "Pets",
-    listingFromDBName: "pets_allowed",
+    DBFieldName: "pets_allowed",
     icon: {
       name: "dog-side",
       backgroundColor: colors.primary,
