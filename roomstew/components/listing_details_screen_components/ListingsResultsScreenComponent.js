@@ -21,6 +21,7 @@ get listings, then set the offset to the length of the listings array
 const ListingsResultsScreenComponent = ({
   searchOrSavedOrUser = "search",
   navigateToScreenName = "",
+  isUserListing,
 }) => {
   console.log(searchOrSavedOrUser);
   const navigation = useNavigation();
@@ -46,6 +47,7 @@ const ListingsResultsScreenComponent = ({
       } else if (searchOrSavedOrUser === "saved") {
         response = await listingsService.getAllListingsByListingIds(offset);
       }
+
       const newListings = response.data.map((item) => {
         return {
           id: item.id,
@@ -107,6 +109,7 @@ const ListingsResultsScreenComponent = ({
               dataUrl={
                 item.listingPhoto.length > 0 ? item.listingPhoto[0].dataUrl : ""
               }
+              isUserListing={isUserListing}
               //   CHANGE TOCallback function to pass data to the next screen
               onPress={() => {
                 navigation.navigate(navigateToScreenName, { item });
@@ -115,7 +118,7 @@ const ListingsResultsScreenComponent = ({
           );
         }}
         onEndReached={handleEndReached}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.7}
       ></FlatList>
     </Screen>
   );

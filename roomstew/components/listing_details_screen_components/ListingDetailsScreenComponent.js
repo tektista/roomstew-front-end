@@ -58,6 +58,7 @@ export default function ListingDetailsScreenComponent({
   navigateToRoomDetailsScreenName,
   navigateToShowMoreDescScreenName,
   navigateToShowMoreDetailsScreenName,
+  isUserListing,
 }) {
   const navigation = useNavigation();
   const route = useRoute();
@@ -74,6 +75,8 @@ export default function ListingDetailsScreenComponent({
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
+
+      console.log(response.data);
 
       setListingFromDB(convertListingForFrontEnd(response.data.listingObj[0]));
 
@@ -131,6 +134,12 @@ export default function ListingDetailsScreenComponent({
     getListingDetails();
   }, []);
 
+  useEffect(() => {
+    getListingDetails();
+
+    console.log(listingPhotosFromDB);
+  }, [listingPhotosFromDB]);
+
   //once listingFromDB is set, check if listing is saved
   useEffect(() => {
     checkIfListingIsSaved();
@@ -153,7 +162,9 @@ export default function ListingDetailsScreenComponent({
         ></ListItem>
 
         {/* LOCATION BUTTON */}
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", padding: 20 }}
+        >
           <LocationButton
             family="i"
             name="location-outline"
@@ -168,12 +179,15 @@ export default function ListingDetailsScreenComponent({
             }
           />
           {/* SAVE BUTTON */}
-          <View style={{ padding: 20 }}>
-            <SaveButton
-              isSaved={listingIsSaved}
-              onPress={handleSaveUnsaveListing}
-            />
-          </View>
+
+          {isUserListing !== true && (
+            <View style={{ padding: 20 }}>
+              <SaveButton
+                isSaved={listingIsSaved}
+                onPress={handleSaveUnsaveListing}
+              />
+            </View>
+          )}
         </View>
       </View>
 

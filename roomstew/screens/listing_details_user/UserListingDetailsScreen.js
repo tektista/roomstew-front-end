@@ -10,6 +10,7 @@ const UserListingDetailsScreen = () => {
       navigateToRoomDetailsScreenName="UserListingRoomDetailsScreen"
       navigateToShowMoreDescScreenName={"UserListingShowMoreDescriptionScreen"}
       navigateToShowMoreDetailsScreenName={"UserListingShowMoreDetailsScreen"}
+      isUserListing={true}
     />
   );
 };

@@ -5,13 +5,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 
 import AppText from "./AppText";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Card({
+  image,
   minRoomRent,
   streetAddress,
   city,
@@ -19,17 +20,17 @@ export default function Card({
   title,
   numRoomsAvailable,
   earliestRoomDateAvailable,
-  dateAdded,
   dataUrl,
-  saved,
+  dateAdded,
   onPress,
-  onPressSave,
+  onPressEdit,
+  onPressDelete,
+  isUserListing,
 }) {
-  // const [isSaved, setIsSaved] = useState(saved);
   return (
     <View style={styles.card}>
       <TouchableWithoutFeedback onPress={onPress}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 9 }}>
           <Image
             style={styles.image}
             source={{
@@ -70,34 +71,36 @@ export default function Card({
         </View>
       </TouchableWithoutFeedback>
 
-      {/* <TouchableOpacity
-        style={{ flex: 1 }}
-        onPress={
+      {isUserListing && (
+        <View
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "row",
+          }}
+          onPress={onPressEdit}
+        >
+          <TouchableOpacity onPress={onPressEdit} style={{ flex: 1 }}>
+            <View style={styles.editContainer}>
+              <MaterialCommunityIcons
+                name="pencil-outline"
+                size={30}
+                color="black"
+              />
+            </View>
+          </TouchableOpacity>
 
-          () => {
-            
-            setIsSaved(!isSaved)
-            onPressSave()
-          }
-        
-        }
-      >
-        <View style={styles.saveContainer}>
-          {isSaved === true ? (
-            <MaterialCommunityIcons
-              name="cards-heart"
-              size={30}
-              color="black"
-            />
-          ) : (
-            <MaterialCommunityIcons
-              name="cards-heart-outline"
-              size={30}
-              color="black"
-            />
-          )}
+          <TouchableOpacity onPress={onPressDelete} style={{ flex: 1 }}>
+            <View style={styles.deleteContainer}>
+              <MaterialCommunityIcons
+                name="trash-can-outline"
+                size={24}
+                color="black"
+              />
+            </View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity> */}
+      )}
     </View>
   );
 }
@@ -112,8 +115,7 @@ const styles = StyleSheet.create({
 
     borderColor: colors.black,
     borderWidth: 1,
-    height: 500,
-    // height: 500 + 20,
+    height: 500 + 20,
   },
 
   image: {
@@ -167,7 +169,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: colors.white,
     padding: 10,
-    flex: 0,
 
     display: "flex",
     flexDirection: "row",
@@ -180,11 +181,30 @@ const styles = StyleSheet.create({
     display: "flex",
   },
 
-  saveContainer: {
-    flex: 1,
+  editContainer: {
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
 
+    borderRightWidth: 0.5,
+
+    flex: 1,
+    padding: 10,
     borderTopWidth: 1,
+    borderTopColor: colors.black,
+    backgroundColor: colors.white,
+  },
+  deleteContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    borderLeftWidth: 0.5,
+
+    flex: 1,
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.black,
+    backgroundColor: colors.white,
   },
 });
