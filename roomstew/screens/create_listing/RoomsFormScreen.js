@@ -11,7 +11,7 @@ import {
 import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import axios from "axios";
-
+import listingsService from "../../services/listingsService";
 import ErrorMessage from "../../components/forms/ErrorMessage";
 
 import Screen from "../../components/Screen";
@@ -31,11 +31,12 @@ import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreview
 const RoomsFormScreen = ({ navigation, route }) => {
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const postListing = (listingDbObj) => {
-    axios
-      .post("http://localhost:3002/api/listings", listingDbObj)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  const postListing = async (listingDbObj) => {
+    try {
+      const response = await listingsService.createAListing(listingDbObj);
+    } catch (err) {
+      throw err;
+    }
   };
 
   const previousMergedValues = route.params.mergedValues;
@@ -76,15 +77,14 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
             //process the merged values in the correct format for sending to db
             console.log("mergedValues");
-            console.log(mergedValues);
             const listingDbObj =
               convertListingCreateObjToListingDbObj(mergedValues);
-            console.log("convertedListingDbObj");
+
+            console.log("convertedListingDbObj: ");
             console.log(listingDbObj);
 
             postListing(listingDbObj);
-
-            setIsSuccess(true);
+            // setIsSuccess(true);
 
             //TO DO: Add a success message
           }}
@@ -98,9 +98,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
           />
 
           <RoomCardPreviewListFormField name="roomList" />
-
           <View style={{ flex: 1 }}></View>
-
           <FormSubmitButton title="Post Listing 5/5" />
         </AppForm>
       </View>

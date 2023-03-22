@@ -18,9 +18,14 @@ const getAllListingsByUserId = (offset) => {
   return axios.get(`${baseURL}/user/?offset=${offset}`);
 };
 
+const createAListing = (listingDbObj) => {
+  return axios.post(`${baseURL}`, listingDbObj);
+};
+
 export default {
   getAllListings,
   getAllListingsByListingIds,
   getAListingById,
   getAllListingsByUserId,
+  createAListing,
 };
