@@ -149,21 +149,12 @@ export default function ListingDetailsScreenComponent({
 
         {/* LOCATION BUTTON */}
         <View
-          style={{ flexDirection: "row", alignItems: "center", padding: 20 }}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
         >
-          <LocationButton
-            family="i"
-            name="location-outline"
-            size={35}
-            color={colors.black}
-            onPress={() =>
-              navigation.navigate(navigateToMapScreenName, {
-                street_address: listingFromDB.street_address,
-                city: listingFromDB.city,
-                postcode: listingFromDB.postcode,
-              })
-            }
-          />
           {/* SAVE BUTTON */}
 
           {isUserListing !== true && (
@@ -178,19 +169,26 @@ export default function ListingDetailsScreenComponent({
       </View>
 
       {/* ADDRESS CONTAINER */}
-      <View
-        style={{
-          paddingHorizontal: 20,
-          paddingVertical: 10,
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: "row",
-        }}
-      >
-        <AppText>
-          {listingFromDB.street_address}, {listingFromDB.city},{" "}
-          {listingFromDB.postcode}
-        </AppText>
+      <View style={{ padding: 5 }}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <LocationButton
+            color={colors.black}
+            onPress={() =>
+              navigation.navigate(navigateToMapScreenName, {
+                street_address: listingFromDB.street_address,
+                city: listingFromDB.city,
+                postcode: listingFromDB.postcode,
+              })
+            }
+          >
+            <View>
+              <AppText style={{ textDecorationLine: "underline" }}>
+                {listingFromDB.street_address}, {listingFromDB.city},{" "}
+                {listingFromDB.postcode}
+              </AppText>
+            </View>
+          </LocationButton>
+        </View>
       </View>
 
       {/* MAIN DETAILS CONTAINER */}
