@@ -13,7 +13,7 @@ import AppText from "../../components/AppText";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
 
-const items = [];
+const items = [{ label: "Any", value: "", subTitle: "Any" }];
 
 for (let i = 1; i <= 12; i++) {
   const label = `${i} room${i > 1 ? "s" : ""} available`;
