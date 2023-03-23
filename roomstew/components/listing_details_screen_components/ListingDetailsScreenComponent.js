@@ -75,11 +75,8 @@ export default function ListingDetailsScreenComponent({
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
-
       console.log(response.data);
-
       setListingFromDB(convertListingForFrontEnd(response.data.listingObj[0]));
-
       setListingPhotosFromDB(
         convertPhotoListForFrontEnd(
           response.data.listingPhotoObjList,
@@ -134,21 +131,10 @@ export default function ListingDetailsScreenComponent({
     getListingDetails();
   }, []);
 
-  useEffect(() => {
-    getListingDetails();
-
-    console.log(listingPhotosFromDB);
-  }, [listingPhotosFromDB]);
-
   //once listingFromDB is set, check if listing is saved
   useEffect(() => {
     checkIfListingIsSaved();
-    console.log(listingFromDB);
   }, [listingFromDB]);
-
-  useEffect(() => {
-    console.log(listingIsSaved);
-  }, [listingIsSaved]);
 
   return (
     <ScrollView>
@@ -250,9 +236,6 @@ export default function ListingDetailsScreenComponent({
                   listingFromDB: listingFromDB,
                   listing: listing,
                 });
-
-                console.log(listingFromDB);
-                console.log(listing.numRoomsAvailable);
               }}
             >
               Show More
