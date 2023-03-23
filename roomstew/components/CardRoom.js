@@ -5,8 +5,14 @@ import colors from "../config/colors";
 
 import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
 
-const CardRoom = ({ isUserListing, roomObj, roomNumber, onPress }) => {
-  console.log(roomObj);
+const CardRoom = ({
+  isUserListing,
+  roomObj,
+  roomNumber,
+  onPress,
+  onPressEdit,
+  onPressDelete,
+}) => {
   return (
     <View style={styles.roomCardContainer}>
       <TouchableOpacity onPress={onPress} style={{ flex: 9, padding: 10 }}>
@@ -92,7 +98,7 @@ const CardRoom = ({ isUserListing, roomObj, roomNumber, onPress }) => {
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity style={{ flex: 1 }}>
+          <TouchableOpacity style={{ flex: 1 }} onPress={onPressEdit}>
             <View
               style={{
                 flex: 1,
@@ -105,7 +111,7 @@ const CardRoom = ({ isUserListing, roomObj, roomNumber, onPress }) => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ flex: 1 }}>
+          <TouchableOpacity style={{ flex: 1 }} onPress={onPressDelete}>
             <View
               style={{
                 flex: 1,

@@ -7,10 +7,12 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import listingsService from "../../services/listingsService";
+import roomsService from "../../services/roomsService";
 import saveService from "../../services/saveService";
 
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
@@ -102,7 +104,7 @@ export default function ListingDetailsScreenComponent({
         )
       );
     } catch (err) {
-      throw err;
+      console.log(err);
     }
   };
 
@@ -123,6 +125,18 @@ export default function ListingDetailsScreenComponent({
       setListingIsSaved(!listingIsSaved);
     } catch (err) {
       console.error("Error saving/un-saving listing:", err);
+    }
+  };
+
+  const handleRoomDelete = async (roomId) => {
+    const response = await roomsService.removeARoomById(roomId);
+    console.log(response);
+    //IF res status success remove the room from the the local useState array
+    if (response.status === 200) {
+      //refresh page
+      Alert.alert("Success", "Room deleted successfully", [
+        { text: "OK", onPress: () => setListingRoomCardDetailsListFromDB() },
+      ]);
     }
   };
 
@@ -220,6 +234,8 @@ export default function ListingDetailsScreenComponent({
           onPress={(roomObj) =>
             navigation.navigate(navigateToRoomDetailsScreenName, roomObj)
           }
+          onPressEdit
+          onPressDelete={(roomObj) => handleRoomDelete(roomObj)}
         />
       </View>
 

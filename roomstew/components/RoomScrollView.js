@@ -14,6 +14,8 @@ const RoomScrollView = ({
   isUserListing,
   formattedRoomDetailsList,
   onPress,
+  onPressEdit,
+  onPressDelete,
 }) => {
   return (
     <ScrollView
@@ -28,6 +30,8 @@ const RoomScrollView = ({
           roomObj={roomObj}
           roomNumber={index}
           onPress={() => onPress({ roomId: roomObj.room_id })}
+          onPressEdit={onPressEdit}
+          onPressDelete={() => onPressDelete(roomObj.room_id)}
         />
       ))}
     </ScrollView>
