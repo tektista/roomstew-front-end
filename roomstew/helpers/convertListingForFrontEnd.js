@@ -19,9 +19,6 @@ const convertListingForFrontEnd = (listingObj, savedQueryRows) => {
       listingObj.gender_preference
     ],
     age_preference: `${listingObj.min_age} - ${listingObj.max_age}`,
-    // saved: savedQueryRows.some(
-    //   (obj) => obj.listing_listing_id === listingObj.listing_id
-    // ),
   };
 
   return newListing;
