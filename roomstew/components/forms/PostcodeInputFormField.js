@@ -50,27 +50,43 @@ const PostcodeInputFormField = ({
 
       //unconverted response list
       const addressList = response.data;
+      console.log(addressList);
 
       //convertedPickerItemsList
       const addressListPickerItems = [];
 
       //TO DO separate into function
-      for (const addressObj of addressList) {
-        const addressListPickerItem = {
-          label: `${addressObj.number || addressObj.premise} ${
-            addressObj.street
-          }, ${addressObj.posttown}, ${addressObj.postcode}`,
-          subTitle: `${addressObj.number || addressObj.premise} ${
-            addressObj.street
-          }, ${addressObj.posttown}, ${addressObj.postcode}`,
-          value: `${addressObj.number || addressObj.premise} ${
-            addressObj.street
-          }, ${addressObj.posttown}, ${addressObj.postcode}`,
-        };
+      // for (const addressObj of addressList) {
+      //   const addressListPickerItem = {
+      //     label: `${addressObj.subbuildingname|| addressObj.number || addressObj.premise} ${
+      //       addressObj.street
+      //     }, ${addressObj.posttown}, ${addressObj.postcode}`,
 
+      //     subTitle: `${addressObj.number || addressObj.premise} ${
+      //       addressObj.street
+      //     }, ${addressObj.posttown}, ${addressObj.postcode}`,
+
+      //     value: `${addressObj.number || addressObj.premise} ${
+      //       addressObj.street
+      //     }, ${addressObj.posttown}, ${addressObj.postcode}`,
+      //   };
+
+      // TO DO separate into function
+      for (const addressObj of addressList) {
+        const summaryLine = addressObj.summaryline;
+
+        const summaryLineItems = summaryLine.split(", ");
+        const streetAddress = summaryLineItems[0]; // "34/1 Craighouse Gardens"
+        const city = summaryLineItems[1]; // "Edinburgh"
+        const postcode = summaryLineItems[summaryLineItems.length - 1]; // "EH10 5TY"
+
+        const addressListPickerItem = {
+          label: `${streetAddress}, ${city}, ${postcode}`,
+          subTitle: `${streetAddress}, ${city}, ${postcode}`,
+          value: `${streetAddress}, ${city}, ${postcode}`,
+        };
         addressListPickerItems.push(addressListPickerItem);
       }
-
       setFieldValue(sendAddressListToFieldName, addressListPickerItems);
     } catch (error) {
       console.log(error);
