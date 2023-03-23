@@ -23,7 +23,6 @@ const ListingsResultsScreenComponent = ({
   navigateToScreenName = "",
   isUserListing,
 }) => {
-  console.log(searchOrSavedOrUser);
   const navigation = useNavigation();
 
   const [offset, setOffset] = useState(0);
@@ -118,7 +117,7 @@ const ListingsResultsScreenComponent = ({
           );
         }}
         onEndReached={handleEndReached}
-        onEndReachedThreshold={0.7}
+        onEndReachedThreshold={0.9}
       ></FlatList>
     </Screen>
   );
