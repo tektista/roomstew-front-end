@@ -10,6 +10,9 @@ import React from "react";
 import AppText from "./AppText";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Shadow } from "react-native-shadow-2";
+
+import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
 
 export default function Card({
   image,
@@ -26,6 +29,8 @@ export default function Card({
   onPressEdit,
   onPressDelete,
   isUserListing,
+  hasLivingRoom,
+  bathroomCount,
 }) {
   return (
     <View style={styles.card}>
@@ -37,34 +42,79 @@ export default function Card({
               uri: dataUrl,
             }}
           />
-          <View style={styles.detailsContainer}>
-            <AppText style={styles.rentTextContainer}>
-              <AppText style={styles.smallRentText}>from </AppText>£
-              {minRoomRent}
+
+          <View style={styles.topBarContainer}>
+            <View style={styles.rentContainer}>
+              <AppText style={styles.smallRentText}>from </AppText>
+              <AppText style={styles.rentText}>£{minRoomRent}</AppText>
               <AppText style={styles.smallRentText}> /month</AppText>
-            </AppText>
+            </View>
 
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row", paddingHorizontal: 5 }}>
+                <ExpoVectorIcon family="mci" name="sofa" />
+
+                {hasLivingRoom === 1 ? (
+                  <ExpoVectorIcon family="mi" name="check-circle" />
+                ) : (
+                  <ExpoVectorIcon family="mi" name="close-circle" />
+                )}
+              </View>
+
+              <View style={{ flexDirection: "row", paddingHorizontal: 5 }}>
+                <ExpoVectorIcon family="mci" name="toilet" />
+                <AppText style={{ fontWeight: "bold" }}>
+                  {bathroomCount}
+                </AppText>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.detailsContainer}>
             <AppText style={styles.titleText}>{title}</AppText>
-            <AppText style={styles.addressText}>
-              {streetAddress}, {city}, {postcode}
-            </AppText>
 
-            <AppText style={styles.roomsAvailableText}>
-              {numRoomsAvailable} rooms available
-            </AppText>
+            <View
+              style={{
+                flexDirection: "row",
+                width: "80%",
+                paddingHorizontal: 7,
+                paddingTop: 5,
+              }}
+            >
+              <ExpoVectorIcon family="i" name="location-outline" />
+
+              <AppText style={styles.addressText}>
+                {streetAddress}, {city}, {postcode}
+              </AppText>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                paddingHorizontal: 10,
+                paddingTop: 5,
+              }}
+            >
+              <ExpoVectorIcon family="mci" name="bed" />
+
+              <AppText style={styles.roomsAvailableText}>
+                {numRoomsAvailable} rooms available
+              </AppText>
+            </View>
 
             <View style={styles.datesContainer}>
               <View style={styles.dateAvailableContainer}>
-                <AppText>Available from:</AppText>
+                <AppText>Available</AppText>
                 <AppText style={styles.dateAvailableText}>
                   {earliestRoomDateAvailable}
                 </AppText>
                 <View style={styles.dateAvailableContainer}></View>
               </View>
-
               <View style={styles.dateAddedContainer}>
-                <AppText>Added:</AppText>
-                <AppText style={styles.dateAddedText}>{dateAdded}</AppText>
+                <View style={{ alignItems: "flex-end" }}>
+                  <AppText>Added</AppText>
+                  <AppText style={styles.dateAddedText}>{dateAdded}</AppText>
+                </View>
               </View>
             </View>
           </View>
@@ -110,12 +160,17 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: colors.white,
     overflow: "hidden",
-    marginBottom: 5,
-    marginTop: 20,
-
     borderColor: colors.black,
-    borderWidth: 1,
+    // borderWidth: 1,
     height: 500 + 20,
+
+    shadowColor: "#000", // Add this line
+    shadowOffset: {
+      width: 0,
+      height: 2, // Add this line
+    },
+    shadowOpacity: 0.25, // Add this line
+    shadowRadius: 3.84, // Add this line
   },
 
   image: {
@@ -123,26 +178,37 @@ const styles = StyleSheet.create({
     height: 200,
   },
 
-  detailsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    flex: 1,
+  //TOP BAR CONTAINER
+  topBarContainer: {
+    flexDirection: "row",
+    backgroundColor: colors.primary,
+    padding: 15,
+    paddingVertical: 20,
+    justifyContent: "space-between",
   },
 
-  //RENT
-  rentTextContainer: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: colors.white,
-    backgroundColor: colors.primary,
-
-    padding: 10,
-    paddingVertical: 20,
+  rentContainer: {
+    flexDirection: "row",
+    alignItems: "flex-end",
   },
 
   smallRentText: {
     fontSize: 15,
+    fontWeight: "bold",
     color: "black",
+  },
+
+  rentText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.white,
+  },
+
+  // DETAILS CONTAINER
+  detailsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
   },
 
   //TITLE
@@ -155,12 +221,19 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   addressText: {
+    display: "flex",
+
+    alignItems: "center",
     fontSize: 17,
     color: colors.black,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
   },
   roomsAvailableText: {
+    display: "flex",
+
+    alignItems: "center",
+
     fontSize: 17,
     backgroundColor: colors.white,
     paddingHorizontal: 10,
