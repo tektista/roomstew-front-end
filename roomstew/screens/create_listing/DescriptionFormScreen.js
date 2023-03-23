@@ -5,6 +5,7 @@ import {
   Button,
   Image,
   ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 
@@ -29,59 +30,62 @@ const DescriptionFormScreen = ({ route, navigation }) => {
   });
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View>
-        <AppText style={styles.formTitle}>
-          Property Description & Photos
-        </AppText>
-      </View>
+    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View>
+          <AppText style={styles.formTitle}>
+            Property Description & Photos
+          </AppText>
+        </View>
 
-      <View style={styles.appFormContainer}>
-        <AppForm
-          initialValues={{
-            title: "",
-            description: "",
-            images: [],
-          }}
-          onSubmit={(values) => {
-            const mergedValues = Object.assign(
-              {},
-              values,
-              previousMergedValues
-            );
-            navigation.navigate("RoomsFormScreen", { mergedValues });
-          }}
-          validationSchema={validationSchema}
-        >
-          <ImagePickerFormField name="images" />
+        <View style={styles.appFormContainer}>
+          <AppForm
+            initialValues={{
+              title: "",
+              description: "",
+              images: [],
+            }}
+            onSubmit={(values) => {
+              const mergedValues = Object.assign(
+                {},
+                values,
+                previousMergedValues
+              );
+              navigation.navigate("RoomsFormScreen", { mergedValues });
+            }}
+            validationSchema={validationSchema}
+          >
+            <ImagePickerFormField name="images" />
 
-          <TextInputFormField
-            maxLength={128}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            name="title"
-            title="Title"
-            placeholder="e.g. 2 bed flat in London Available From..."
-          />
+            <TextInputFormField
+              maxLength={128}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              name="title"
+              title="Title"
+              placeholder="e.g. 2 bed flat in London Available From..."
+            />
 
-          <TextInputFormField
-            maxLength={1024}
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            name="description"
-            title="Description"
-            placeholder="e.g. Looking for a flatmate to share my 2 bed flat in London... Looking for someone who is... You can contact me at..."
-            multiline={true}
-            numberOfLines={3}
-          />
-          <View style={{ flex: 1 }}></View>
+            <TextInputFormField
+              maxLength={1024}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              name="description"
+              title="Description"
+              placeholder="e.g. Looking for a flatmate to share my 2 bed flat in London... Looking for someone who is... You can contact me at..."
+              multiline={true}
+              numberOfLines={3}
+            />
 
-          <FormSubmitButton title="Next 4/5" />
-        </AppForm>
-      </View>
-    </ScrollView>
+            <View style={{ flex: 1 }}></View>
+
+            <FormSubmitButton title="Next 4/5" />
+          </AppForm>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -52,7 +52,7 @@ function AccountScreenComponent({
         <TouchableOpacity onPress={() => console.log("hello")}>
           <ListItem
             title="John Bautista"
-            subTitle="john.bautista.2018@uni.strath.ac.uk"
+            subTitle="john.bautista@email.com"
             image={require("../../assets/apartment.jpg")}
           ></ListItem>
         </TouchableOpacity>
