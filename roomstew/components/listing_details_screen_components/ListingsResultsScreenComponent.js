@@ -39,6 +39,7 @@ const ListingsResultsScreenComponent = ({
     setIsLoading(true);
     try {
       let response;
+
       if (searchOrSavedOrUser === "search") {
         response = await listingsService.getAllListings(offset);
       } else if (searchOrSavedOrUser === "user") {
@@ -47,25 +48,32 @@ const ListingsResultsScreenComponent = ({
         response = await listingsService.getAllListingsByListingIds(offset);
       }
 
-      const newListings = response.data.map((item) => {
-        return {
-          id: item.id,
+      const convertedListings = response.data.map((item) => {
+        const convertedListing = {
+          id: item.listing_id,
           listingPhoto: convertPhotoListForFrontEnd(
-            item.listingPhoto,
+            item.listingPhotoRows,
             "listing_photo"
           ),
           title: item.title,
           city: item.city,
-          streetAddress: item.streetAddress,
+          streetAddress: item.street_address,
           postcode: item.postcode,
+          dateAdded: new Date(item.date_added).toLocaleDateString(),
           minRoomRent: item.minRoomRent,
           numRoomsAvailable: item.numRoomsAvailable,
-          earliestRoomDateAvailable: item.earliestRoomDateAvailable,
-          dateAdded: item.dateAdded,
-          // saved: item.saved,
+          earliestRoomDateAvailable:
+            item.earliestRoomDateAvailable &&
+            new Date(item.earliestRoomDateAvailable) <= new Date()
+              ? "Now"
+              : item.earliestRoomDateAvailable,
+          hasLivingRoom: item.hasLivingRoom,
+          bathroomCount: item.bathroomCount,
         };
+
+        return convertedListing;
       });
-      setListings([...listings, ...newListings]);
+      setListings([...listings, ...convertedListings]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -94,26 +102,32 @@ const ListingsResultsScreenComponent = ({
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => {
+          console.log(item);
           return (
-            <Card
-              title={item.title}
-              image={item.image}
-              streetAddress={item.streetAddress}
-              city={item.city}
-              postcode={item.postcode}
-              minRoomRent={item.minRoomRent}
-              numRoomsAvailable={item.numRoomsAvailable}
-              earliestRoomDateAvailable={item.earliestRoomDateAvailable}
-              dateAdded={item.dateAdded}
-              dataUrl={
-                item.listingPhoto.length > 0 ? item.listingPhoto[0].dataUrl : ""
-              }
-              isUserListing={isUserListing}
-              //   CHANGE TOCallback function to pass data to the next screen
-              onPress={() => {
-                navigation.navigate(navigateToScreenName, { item });
-              }}
-            />
+            <View style={styles.cardView}>
+              <Card
+                title={item.title}
+                image={item.image}
+                streetAddress={item.streetAddress}
+                city={item.city}
+                postcode={item.postcode}
+                minRoomRent={item.minRoomRent}
+                numRoomsAvailable={item.numRoomsAvailable}
+                earliestRoomDateAvailable={item.earliestRoomDateAvailable}
+                dateAdded={item.dateAdded}
+                dataUrl={
+                  item.listingPhoto.length > 0
+                    ? item.listingPhoto[0].dataUrl
+                    : ""
+                }
+                hasLivingRoom={item.hasLivingRoom}
+                bathroomCount={item.bathroomCount}
+                isUserListing={isUserListing}
+                onPress={() => {
+                  navigation.navigate(navigateToScreenName, { item });
+                }}
+              />
+            </View>
           );
         }}
         onEndReached={handleEndReached}
@@ -127,7 +141,16 @@ export default ListingsResultsScreenComponent;
 
 const styles = StyleSheet.create({
   screen: {
-    paddingHorizontal: 10,
     backgroundColor: colors.light,
+  },
+
+  cardView: {
+    padding: 15,
+    shadowOffset: {
+      width: 2,
+      height: 2, // Add this line
+    },
+    shadowOpacity: 0.3, // Add this line
+    shadowRadius: 5, // Add this line
   },
 });
