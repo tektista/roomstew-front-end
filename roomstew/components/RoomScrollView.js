@@ -10,7 +10,11 @@ import colors from "../config/colors";
 import AppText from "./AppText";
 import CardRoom from "./CardRoom";
 
-const RoomScrollView = ({ formattedRoomDetailsList, onPress }) => {
+const RoomScrollView = ({
+  isUserListing,
+  formattedRoomDetailsList,
+  onPress,
+}) => {
   return (
     <ScrollView
       style={styles.roomScrollView}
@@ -19,6 +23,7 @@ const RoomScrollView = ({ formattedRoomDetailsList, onPress }) => {
     >
       {formattedRoomDetailsList.map((roomObj, index) => (
         <CardRoom
+          isUserListing={isUserListing}
           key={index}
           roomObj={roomObj}
           roomNumber={index}
@@ -34,6 +39,6 @@ export default RoomScrollView;
 const styles = StyleSheet.create({
   roomScrollView: {
     width: "100%",
-    height: 200,
+    height: 250,
   },
 });

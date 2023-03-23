@@ -215,6 +215,7 @@ export default function ListingDetailsScreenComponent({
 
         {/* ROOM CARD SCROLL VIEW*/}
         <RoomScrollView
+          isUserListing={isUserListing}
           formattedRoomDetailsList={listingRoomsCardDetailsFromDB}
           onPress={(roomObj) =>
             navigation.navigate(navigateToRoomDetailsScreenName, roomObj)
