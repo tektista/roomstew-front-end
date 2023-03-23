@@ -127,7 +127,6 @@ export default function Card({
             display: "flex",
             flexDirection: "row",
           }}
-          onPress={onPressEdit}
         >
           <TouchableOpacity onPress={onPressEdit} style={{ flex: 1 }}>
             <View style={styles.editContainer}>

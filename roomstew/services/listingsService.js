@@ -22,10 +22,15 @@ const createAListing = (listingDbObj) => {
   return axios.post(`${baseURL}`, listingDbObj);
 };
 
+const deleteAListingById = (id) => {
+  return axios.delete(`${baseURL}/${id}`);
+};
+
 export default {
   getAllListings,
   getAllListingsByListingIds,
   getAListingById,
   getAllListingsByUserId,
   createAListing,
+  deleteAListingById,
 };

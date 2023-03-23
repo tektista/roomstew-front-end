@@ -1,4 +1,11 @@
-import { FlatList, StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Alert,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import listingsService from "../../services/listingsService";
 import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontEnd";
@@ -84,6 +91,23 @@ const ListingsResultsScreenComponent = ({
     }
   };
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const response = await listingsService.deleteAListingById(listingId);
+      console.log(response);
+
+      //TO DO: CHANGE IF IMPLEMENTING CACHE
+      if (response.status === 200) {
+        //refresh page
+        Alert.alert("Success", "Listing deleted successfully", [
+          { text: "OK", onPress: () => getListings() },
+        ]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   //Need this to initially load the listings
   useEffect(() => {
     getListings();
@@ -129,6 +153,7 @@ const ListingsResultsScreenComponent = ({
                 onPress={() => {
                   navigation.navigate(navigateToScreenName, { item });
                 }}
+                onPressDelete={() => handleListingDelete(item.id)}
               />
             </View>
           );

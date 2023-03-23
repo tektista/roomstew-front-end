@@ -132,10 +132,12 @@ export default function ListingDetailsScreenComponent({
     const response = await roomsService.deleteARoomById(roomId);
     console.log(response);
     //IF res status success remove the room from the the local useState array
+
+    //TO DO: CHANGE IF IMPLEMENTING CACHE
     if (response.status === 200) {
       //refresh page
       Alert.alert("Success", "Room deleted successfully", [
-        { text: "OK", onPress: () => setListingRoomCardDetailsListFromDB() },
+        { text: "OK", onPress: () => getListingDetails() },
       ]);
     }
   };
