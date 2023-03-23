@@ -10,7 +10,6 @@ import React from "react";
 import AppText from "./AppText";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Shadow } from "react-native-shadow-2";
 
 import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
 
@@ -161,16 +160,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     overflow: "hidden",
     borderColor: colors.black,
-    // borderWidth: 1,
-    height: 500 + 20,
 
-    shadowColor: "#000", // Add this line
-    shadowOffset: {
-      width: 0,
-      height: 2, // Add this line
-    },
-    shadowOpacity: 0.25, // Add this line
-    shadowRadius: 3.84, // Add this line
+    height: 500 + 20,
   },
 
   image: {
