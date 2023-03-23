@@ -153,7 +153,7 @@ export default function ListingDetailsScreenComponent({
   }, [listingFromDB]);
 
   return (
-    <ScrollView>
+    <ScrollView style={{ flexGrow: 1 }}>
       <PhotoScrollView photoObjListWIthDataUrl={listingPhotosFromDB} />
 
       <View style={styles.userContainer}>

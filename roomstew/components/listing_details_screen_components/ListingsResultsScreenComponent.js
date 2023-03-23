@@ -14,7 +14,7 @@ import Card from "../Card";
 import colors from "../../config/colors";
 const moment = require("moment");
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 /*
 When end is reached, we want to get the next listing based on the offset
@@ -32,6 +32,19 @@ const ListingsResultsScreenComponent = ({
   isUserListing,
 }) => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  let cityToSearch;
+  let minRoomsAvailable;
+  let minRent;
+  let maxRent;
+
+  if (searchOrSavedOrUser === "search") {
+    cityToSearch = route.params.values.cityToSearch;
+    minRoomsAvailable = route.params.values.minRoomsAvailable;
+    minRent = parseInt(route.params.values.minRent);
+    maxRent = parseInt(route.params.values.maxRent);
+  }
 
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +62,14 @@ const ListingsResultsScreenComponent = ({
       let response;
 
       if (searchOrSavedOrUser === "search") {
-        response = await listingsService.getAllListings(offset);
+        console.log("cityToSearch", cityToSearch);
+        response = await listingsService.getAllListings(
+          offset,
+          cityToSearch,
+          minRoomsAvailable,
+          minRent,
+          maxRent
+        );
       } else if (searchOrSavedOrUser === "user") {
         response = await listingsService.getAllListingsByUserId(offset);
       } else if (searchOrSavedOrUser === "saved") {

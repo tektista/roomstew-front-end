@@ -7,6 +7,7 @@ import React from "react";
 // import ListingDetailsRoomDetailsScreen from "../screens/listing_details/ListingRoomDetailsScreen";
 // import ListingDetailsMapScreen from "../screens/listing_details/ListingDetailsMapScreen";
 
+import ListingsSearchScreen from "../screens/listing_details_search/ListingsSearchScreen";
 import ListingsResultsScreen from "../screens/listing_details_search/ListingsResultsScreen";
 import ListingMapScreen from "../screens/listing_details_search/ListingMapScreen";
 import ListingDetailsScreen from "../screens/listing_details_search/ListingDetailsScreen";
@@ -20,7 +21,12 @@ const Stack = createNativeStackNavigator();
 const ListingsNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="ListingResultsScreen"
+      name="ListingsSearchScreen"
+      component={ListingsSearchScreen}
+    />
+
+    <Stack.Screen
+      name="ListingsResultsScreen"
       component={ListingsResultsScreen}
     />
 
