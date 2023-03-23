@@ -129,7 +129,7 @@ export default function ListingDetailsScreenComponent({
   };
 
   const handleRoomDelete = async (roomId) => {
-    const response = await roomsService.removeARoomById(roomId);
+    const response = await roomsService.deleteARoomById(roomId);
     console.log(response);
     //IF res status success remove the room from the the local useState array
     if (response.status === 200) {

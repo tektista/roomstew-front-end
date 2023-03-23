@@ -7,10 +7,10 @@ const getARoomsDetailsById = (id) => {
   return axios.get(`${baseURL}/${id}`);
 };
 
-const removeARoomById = (id) => {
+const deleteARoomById = (id) => {
   return axios.delete(`${baseURL}/${id}`);
 };
 export default {
   getARoomsDetailsById,
-  removeARoomById,
+  deleteARoomById,
 };
