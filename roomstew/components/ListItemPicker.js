@@ -67,6 +67,8 @@ export default function ListItemPicker({
 
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
+          <Button title="Close" onPress={() => setModalVisible(false)} />
+          <ListItemSeparator />
           <FlatList
             data={items}
             keyExtractor={(item, index) => index.toString()}
