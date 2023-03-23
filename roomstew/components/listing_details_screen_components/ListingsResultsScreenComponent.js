@@ -5,6 +5,7 @@ import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontE
 import Screen from "../Screen";
 import Card from "../Card";
 import colors from "../../config/colors";
+const moment = require("moment");
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -59,14 +60,16 @@ const ListingsResultsScreenComponent = ({
           city: item.city,
           streetAddress: item.street_address,
           postcode: item.postcode,
-          dateAdded: new Date(item.date_added).toLocaleDateString(),
+          dateAdded: moment(new Date(item.listing_create_date)).format("MMM D"),
           minRoomRent: item.minRoomRent,
           numRoomsAvailable: item.numRoomsAvailable,
           earliestRoomDateAvailable:
             item.earliestRoomDateAvailable &&
             new Date(item.earliestRoomDateAvailable) <= new Date()
               ? "Now"
-              : item.earliestRoomDateAvailable,
+              : moment(new Date(item.earliestRoomDateAvailable)).format(
+                  "MMMM D"
+                ),
           hasLivingRoom: item.hasLivingRoom,
           bathroomCount: item.bathroomCount,
         };
