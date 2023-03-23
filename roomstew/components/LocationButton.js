@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
 
@@ -9,7 +9,7 @@ const LocationButton = ({ onPress, children }) => {
       style={{ flexDirection: "row", alignItems: "center" }}
     >
       <ExpoVectorIcon family="i" name="location-outline" size={35} />
-      {children}
+      <View style={{ width: "85%" }}>{children}</View>
     </TouchableOpacity>
   );
 };
