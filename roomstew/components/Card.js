@@ -56,7 +56,7 @@ export default function Card({
                 {hasLivingRoom === 1 ? (
                   <ExpoVectorIcon family="mi" name="check-circle" />
                 ) : (
-                  <ExpoVectorIcon family="mi" name="close-circle" />
+                  <ExpoVectorIcon family="mci" name="close-circle" />
                 )}
               </View>
 
