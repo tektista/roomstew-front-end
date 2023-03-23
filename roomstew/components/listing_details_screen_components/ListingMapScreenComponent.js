@@ -40,10 +40,6 @@ const ListingMapScreenComponent = () => {
     getLatitudeAndLongitude();
   }, []);
 
-  useEffect(() => {
-    console.log(listingLocation);
-  }, [listingLocation]);
-
   return (
     <View style={styles.container}>
       {listingLocation && (
