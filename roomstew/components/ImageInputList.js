@@ -22,7 +22,7 @@ const imageInputList = ({
             <View key={index} style={styles.imageContainer}>
               <ImageInput
                 imageBase64Data={imageBase64Data}
-                onChangeImage={() => onRemoveImage(imageBase64Data)}
+                onChangeImage={() => onRemoveImage(imageBase64Data, index)}
               />
               <AppText style={styles.indexText}>Photo {index + 1}</AppText>
             </View>
