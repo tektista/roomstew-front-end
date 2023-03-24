@@ -47,6 +47,10 @@ const deleteAListingById = (id) => {
   return axios.delete(`${baseURL}/${id}`);
 };
 
+const updateAListingById = (id, listingDbObj) => {
+  return axios.put(`${baseURL}/${id}`, listingDbObj);
+};
+
 export default {
   getAllListings,
   getAllListingsByListingIds,
@@ -54,4 +58,5 @@ export default {
   getAllListingsByUserId,
   createAListing,
   deleteAListingById,
+  updateAListingById,
 };

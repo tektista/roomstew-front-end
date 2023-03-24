@@ -29,6 +29,7 @@ get listings, then set the offset to the length of the listings array
 const ListingsResultsScreenComponent = ({
   searchOrSavedOrUser = "search",
   navigateToScreenName = "",
+  navigateToEditScreenName = "UserListingUpdatePrefsScreen",
   isUserListing,
 }) => {
   const navigation = useNavigation();
@@ -170,6 +171,9 @@ const ListingsResultsScreenComponent = ({
                   navigation.navigate(navigateToScreenName, { item });
                 }}
                 onPressDelete={() => handleListingDelete(item.id)}
+                onPressEdit={() =>
+                  navigation.navigate(navigateToEditScreenName, { item })
+                }
               />
             </View>
           );

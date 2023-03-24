@@ -18,6 +18,9 @@ import SavedListingShowMoreDetailsScreen from "../screens/listing_details_user_s
 
 import UserListingUpdateRoomScreen from "../screens/listing_details_user/UserListingUpdateRoomScreen";
 
+import UserListingUpdatePrefsScreen from "../screens/listing_details_user/UserListingUpdatePrefsScreen";
+import UserListingUpdateDescScreen from "../screens/listing_details_user/UserListingUpdateDescScreen";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -45,6 +48,18 @@ const AccountNavigator = () => {
         component={UserListingsResultsScreen}
       />
 
+      {/* EDIT LISTING SCREENS */}
+      <Stack.Screen
+        name="UserListingUpdatePrefsScreen"
+        component={UserListingUpdatePrefsScreen}
+      />
+
+      <Stack.Screen
+        name="UserListingUpdateDescScreen"
+        component={UserListingUpdateDescScreen}
+      />
+      {/* EDIT LISTING SCREENS */}
+
       <Stack.Screen
         name="UserListingDetailsScreen"
         component={UserListingDetailsScreen}
@@ -69,6 +84,13 @@ const AccountNavigator = () => {
         name="UserListingShowMoreDetailsScreen"
         component={UserListingShowMoreDetailsScreen}
       />
+      {/* EDIT A ROOM SCREEN */}
+      <Stack.Screen
+        name="UserListingUpdateRoomScreen"
+        component={UserListingUpdateRoomScreen}
+      />
+      {/* EDIT A ROOM SCREEN */}
+
       {/* USER SAVED LISTINGS */}
       <Stack.Screen
         name="SavedListingsResultsScreen"
@@ -86,11 +108,6 @@ const AccountNavigator = () => {
       />
 
       <Stack.Screen
-        name="SavedListingRoomDetailsScreen"
-        component={SavedListingRoomDetailsScreen}
-      />
-
-      <Stack.Screen
         name="SavedListingShowMoreDescriptionScreen"
         component={SavedListingShowMoreDescriptionScreen}
       />
@@ -100,9 +117,10 @@ const AccountNavigator = () => {
         component={SavedListingShowMoreDetailsScreen}
       />
 
+      {/* ROOM SCREEN */}
       <Stack.Screen
-        name="UserListingUpdateRoomScreen"
-        component={UserListingUpdateRoomScreen}
+        name="SavedListingRoomDetailsScreen"
+        component={SavedListingRoomDetailsScreen}
       />
     </Stack.Navigator>
   );

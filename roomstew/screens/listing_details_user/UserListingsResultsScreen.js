@@ -8,6 +8,7 @@ const UserListingsResultsScreen = () => {
     <ListingsResultsScreenComponent
       searchOrSavedOrUser="user"
       navigateToScreenName="UserListingDetailsScreen"
+      navigateToEditScreenName="UserListingUpdatePrefsScreen"
       isUserListing={true}
     />
   );
