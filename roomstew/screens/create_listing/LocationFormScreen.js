@@ -15,11 +15,6 @@ import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 
 import axios from "axios";
-
-//TO DO create a form before this screen that will ask what type of property it is e.g. flat, house, room etc
-//TO DO clear this screen and dont make the above changes
-//TO DO alternative, just make a screen before this with one div and a picture saying post a listing
-
 import { API_KEY } from "@env";
 
 const LocationFormScreen = ({ navigation }) => {
@@ -106,47 +101,6 @@ const LocationFormScreen = ({ navigation }) => {
             cityVarName="city"
             postcodeVarName="postcode"
           />
-          {/* <TextInputFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            name="postcode"
-            title="Postcode"
-            placeholder="e.g. G128XX"
-            textContentType="postalCode"
-          />
-          <TextInputFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            name="street_address"
-            title="Street Address"
-            placeholder="e.g. 3/2 Main Street"
-            textContentType="streetAddressLine1"
-          />
-          <TextInputFormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="default"
-            name="city"
-            title="City/Town"
-            placeholder="e.g. Glasgow"
-            textContentType="addressCity"
-          />
-          <ListItemPickerFormField
-            name="country"
-            title="Country"
-            IconComponent={
-              <Icon name="flag" backgroundColor={colors.primary} />
-            }
-            items={countryListItems}
-          />
-
-          <ListItemPickerFormField
-            name="postcode_alt"
-            title="postcode alt"
-            items={countryListItems}
-          /> */}
 
           <View style={{ flex: 1 }}></View>
           <FormSubmitButton title="Next 1/5" />
