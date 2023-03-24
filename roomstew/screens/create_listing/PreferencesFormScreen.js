@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
-import Screen from "../../components/Screen";
+
 import AppText from "../../components/AppText";
 
 import AppForm from "../../components/forms/AppForm";
