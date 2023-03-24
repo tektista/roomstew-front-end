@@ -43,18 +43,6 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
 
-//I would need to reuse
-
-/*
-  
-  if they unsave, delete the row in the db, where the user id and listing id match
-  re render component to show the save button status
-  
-  if they save, add a row to the db with the user_id and listing listng id,
-  re render componenn to show the unsave button status
-  
-  */
-
 export default function ListingDetailsScreenComponent({
   navigateToMapScreenName,
   navigateToRoomDetailsScreenName,
@@ -73,7 +61,6 @@ export default function ListingDetailsScreenComponent({
     useState([]);
   const [listingIsSaved, setListingIsSaved] = useState(false);
 
-  //Get
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listing.id);
@@ -111,17 +98,15 @@ export default function ListingDetailsScreenComponent({
   const handleSaveUnsaveListing = async () => {
     try {
       if (listingIsSaved) {
-        // Unsave the listing
         await saveService.deleteASavedListingByUserAndListingId(
           listingFromDB.listing_id
         );
       } else {
-        // Save the listing
         await saveService.saveAListingByUserAndListingId(
           listingFromDB.listing_id
         );
       }
-      // Toggle listingIsSaved state
+
       setListingIsSaved(!listingIsSaved);
     } catch (err) {
       console.error("Error saving/un-saving listing:", err);
@@ -131,23 +116,18 @@ export default function ListingDetailsScreenComponent({
   const handleRoomDelete = async (roomId) => {
     const response = await roomsService.deleteARoomById(roomId);
     console.log(response);
-    //IF res status success remove the room from the the local useState array
 
-    //TO DO: CHANGE IF IMPLEMENTING CACHE
     if (response.status === 200) {
-      //refresh page
       Alert.alert("Success", "Room deleted successfully", [
         { text: "OK", onPress: () => getListingDetails() },
       ]);
     }
   };
 
-  //Mount
   useEffect(() => {
     getListingDetails();
   }, []);
 
-  //once listingFromDB is set, check if listing is saved
   useEffect(() => {
     checkIfListingIsSaved();
   }, [listingFromDB]);
@@ -236,7 +216,9 @@ export default function ListingDetailsScreenComponent({
           onPress={(roomObj) =>
             navigation.navigate(navigateToRoomDetailsScreenName, roomObj)
           }
-          onPressEdit
+          onPressEdit={(roomObj) =>
+            navigation.navigate("UserListingUpdateRoomScreen", { roomObj })
+          }
           onPressDelete={(roomObj) => handleRoomDelete(roomObj)}
         />
       </View>

@@ -16,6 +16,8 @@ import SavedListingRoomDetailsScreen from "../screens/listing_details_user_saved
 import SavedListingShowMoreDescriptionScreen from "../screens/listing_details_user_saved/SavedListingShowMoreDescriptionScreen";
 import SavedListingShowMoreDetailsScreen from "../screens/listing_details_user_saved/SavedListingShowMoreDetailsScreen";
 
+import UserListingUpdateRoomScreen from "../screens/listing_details_user/UserListingUpdateRoomScreen";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -96,6 +98,11 @@ const AccountNavigator = () => {
       <Stack.Screen
         name="SavedListingShowMoreDetailsScreen"
         component={SavedListingShowMoreDetailsScreen}
+      />
+
+      <Stack.Screen
+        name="UserListingUpdateRoomScreen"
+        component={UserListingUpdateRoomScreen}
       />
     </Stack.Navigator>
   );
