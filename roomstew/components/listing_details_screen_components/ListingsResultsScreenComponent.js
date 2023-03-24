@@ -116,9 +116,7 @@ const ListingsResultsScreenComponent = ({
       const response = await listingsService.deleteAListingById(listingId);
       console.log(response);
 
-      //TO DO: CHANGE IF IMPLEMENTING CACHE
       if (response.status === 200) {
-        //refresh page
         Alert.alert("Success", "Listing deleted successfully", [
           { text: "OK", onPress: () => getListings() },
         ]);
@@ -128,12 +126,10 @@ const ListingsResultsScreenComponent = ({
     }
   };
 
-  //Need this to initially load the listings
   useEffect(() => {
     getListings();
   }, [listings]);
 
-  //Update the offset when the listings change
   useEffect(() => {
     setOffset(listings.length);
   }, [listings]);
