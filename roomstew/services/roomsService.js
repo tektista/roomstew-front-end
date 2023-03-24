@@ -10,7 +10,15 @@ const getARoomsDetailsById = (id) => {
 const deleteARoomById = (id) => {
   return axios.delete(`${baseURL}/${id}`);
 };
+
+const updateARoomById = (id, roomObj) => {
+  console.log("here");
+  console.log(roomObj);
+
+  return axios.put(`${baseURL}/${id}`, roomObj);
+};
 export default {
   getARoomsDetailsById,
   deleteARoomById,
+  updateARoomById,
 };

@@ -17,7 +17,7 @@ import colors from "../../config/colors";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 import roomsService from "../../services/roomsService";
-import RoomSizePickerFormField from "../../components/forms/RoomSizePickerFormField";
+
 const moment = require("moment");
 
 const UserListingUpdateRoomScreen = () => {
@@ -50,34 +50,34 @@ const UserListingUpdateRoomScreen = () => {
     roomFloorPickerItems.push(floorObj);
   }
 
-  const validationSchema = Yup.object().shape({
-    room_description: Yup.string().required().min(1).label("Description"),
-    rent: Yup.number()
-      .required()
-      .label("Rent per month")
-      .min(1)
-      .typeError("Please enter a valid number."),
-    room_deposit: Yup.number()
-      .required()
-      .label("Deposit")
-      .min(1)
-      .typeError("Please enter a valid number"),
+  // const validationSchema = Yup.object().shape({
+  //   room_description: Yup.string().required().min(1).label("Description"),
+  //   rent: Yup.number()
+  //     .required()
+  //     .label("Rent per month")
+  //     .min(1)
+  //     .typeError("Please enter a valid number."),
+  //   deposit: Yup.number()
+  //     .required()
+  //     .label("Deposit")
+  //     .min(1)
+  //     .typeError("Please enter a valid number"),
 
-    room_size: Yup.number()
-      .required("Room size is required")
-      .test(
-        "is-not-negative-one",
-        "Building type is required",
-        (value) => value !== -1
-      ),
-    floor: Yup.number()
-      .required("Room floor is required")
-      .test(
-        "is-not-negative-one",
-        "Number of bathrooms is required",
-        (value) => value !== -1
-      ),
-  });
+  //   room_size: Yup.number()
+  //     .required("Room size is required")
+  //     .test(
+  //       "is-not-negative-one",
+  //       "Building type is required",
+  //       (value) => value !== -1
+  //     ),
+  //   floor: Yup.number()
+  //     .required("Room floor is required")
+  //     .test(
+  //       "is-not-negative-one",
+  //       "Number of bathrooms is required",
+  //       (value) => value !== -1
+  //     ),
+  // });
 
   const [isLoading, setIsLoading] = useState(true);
   const [roomFromDB, setRoomFromDB] = useState({});
@@ -96,6 +96,18 @@ const UserListingUpdateRoomScreen = () => {
     }
   };
 
+  const updateRoomWithPhotos = async (id, roomObjWithPhotos) => {
+    try {
+      const response = await roomsService.updateARoomById(
+        id,
+        roomObjWithPhotos
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getRoomDetails();
   }, []);
@@ -103,10 +115,10 @@ const UserListingUpdateRoomScreen = () => {
   useEffect(() => {
     console.log("Room from DB");
     console.log(roomFromDB);
-    console.log(roomFromDB.room_description);
   }, [roomFromDB]);
 
   useEffect(() => {
+    console.log("Room Photos from DB");
     console.log(roomPhotosFromDB);
   }, [roomPhotosFromDB]);
 
@@ -122,21 +134,36 @@ const UserListingUpdateRoomScreen = () => {
               initialValues={{
                 room_description: roomFromDB.room_description,
                 rent: roomFromDB.rent,
-                room_deposit: roomFromDB.deposit,
-                start_date: moment(new Date()).format("YYYY-MM-DD"),
+                deposit: roomFromDB.deposit,
+                start_date: moment(new Date()).format("YYYY/MM/DD"),
                 end_date: roomFromDB.end_date,
                 room_size: roomFromDB.room_size,
                 floor: roomFromDB.floor,
-
                 is_desk: Boolean(roomFromDB.is_desk),
                 is_en_suite: Boolean(roomFromDB.is_en_suite),
                 is_boiler: Boolean(roomFromDB.is_boiler),
                 room_is_furnished: Boolean(roomFromDB.room_is_furnished),
-
                 roomImageList: roomPhotosFromDB,
               }}
               onSubmit={(values) => {
                 console.log(values);
+                const { roomImageList, ...roomObj } = values;
+
+                // Create a new list of objects with room_photo and room_photo_order properties
+                const newRoomImageList = roomImageList.map(
+                  (base64String, index) => {
+                    return {
+                      room_photo: base64String,
+                      room_photo_order: index,
+                    };
+                  }
+                );
+                const roomObjWithImageList = {
+                  roomObj: roomObj,
+                  roomImageList: newRoomImageList,
+                };
+
+                updateRoomWithPhotos(roomId, roomObjWithImageList);
               }}
               // validationSchema={validationSchema}
             >
@@ -168,7 +195,7 @@ const UserListingUpdateRoomScreen = () => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 keyboardType="numeric"
-                name="room_deposit"
+                name="deposit"
                 title="Deposit in £"
                 placeholder="650"
                 dataFromDB={roomFromDB.deposit}
