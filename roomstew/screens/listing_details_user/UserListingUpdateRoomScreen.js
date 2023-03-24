@@ -50,34 +50,34 @@ const UserListingUpdateRoomScreen = () => {
     roomFloorPickerItems.push(floorObj);
   }
 
-  // const validationSchema = Yup.object().shape({
-  //   room_description: Yup.string().required().min(1).label("Description"),
-  //   rent: Yup.number()
-  //     .required()
-  //     .label("Rent per month")
-  //     .min(1)
-  //     .typeError("Please enter a valid number."),
-  //   deposit: Yup.number()
-  //     .required()
-  //     .label("Deposit")
-  //     .min(1)
-  //     .typeError("Please enter a valid number"),
+  const validationSchema = Yup.object().shape({
+    room_description: Yup.string().required().min(1).label("Description"),
+    rent: Yup.number()
+      .required()
+      .label("Rent per month")
+      .min(1)
+      .typeError("Please enter a valid number."),
+    deposit: Yup.number()
+      .required()
+      .label("Deposit")
+      .min(1)
+      .typeError("Please enter a valid number"),
 
-  //   room_size: Yup.number()
-  //     .required("Room size is required")
-  //     .test(
-  //       "is-not-negative-one",
-  //       "Building type is required",
-  //       (value) => value !== -1
-  //     ),
-  //   floor: Yup.number()
-  //     .required("Room floor is required")
-  //     .test(
-  //       "is-not-negative-one",
-  //       "Number of bathrooms is required",
-  //       (value) => value !== -1
-  //     ),
-  // });
+    room_size: Yup.number()
+      .required("Room size is required")
+      .test(
+        "is-not-negative-one",
+        "Building type is required",
+        (value) => value !== -1
+      ),
+    floor: Yup.number()
+      .required("Room floor is required")
+      .test(
+        "is-not-negative-one",
+        "Number of bathrooms is required",
+        (value) => value !== -1
+      ),
+  });
 
   const [isLoading, setIsLoading] = useState(true);
   const [roomFromDB, setRoomFromDB] = useState({});
@@ -165,7 +165,7 @@ const UserListingUpdateRoomScreen = () => {
 
                 updateRoomWithPhotos(roomId, roomObjWithImageList);
               }}
-              // validationSchema={validationSchema}
+              validationSchema={validationSchema}
             >
               <ImagePickerFormField name="roomImageList" />
 
