@@ -30,7 +30,7 @@ const RoomScrollView = ({
           roomObj={roomObj}
           roomNumber={index}
           onPress={() => onPress({ roomId: roomObj.room_id })}
-          onPressEdit={onPressEdit}
+          onPressEdit={() => onPressEdit(roomObj.room_id)}
           onPressDelete={() => onPressDelete(roomObj.room_id)}
         />
       ))}

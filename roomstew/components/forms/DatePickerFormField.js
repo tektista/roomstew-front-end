@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-
 import { useFormikContext } from "formik";
 
 import ListItemDatePicker from "../ListItemDatePicker";
+const moment = require("moment");
 
 const DatePickerFormFieldField = ({
   name,
@@ -20,7 +20,11 @@ const DatePickerFormFieldField = ({
   return (
     <ListItemDatePicker
       title={title}
-      subTitle={values[name]}
+      subTitle={
+        values[name] === "No end date"
+          ? "No end date"
+          : moment(values[name]).format("DD/MM/YYYY")
+      }
       image={image}
       IconComponent={IconComponent}
       onSelectItem={onSelectItem}

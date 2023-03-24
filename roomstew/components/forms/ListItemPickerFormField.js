@@ -14,12 +14,9 @@ const AppListItemPickerForm = ({
 }) => {
   const { values, setFieldValue, errors, touched } = useFormikContext();
 
-  function getSubTitleByValue(itemList, value) {
-    const item = itemList.find((item) => item.value === value);
-    return item ? item.subTitle : null;
-  }
-
-  const subTitleFromValues = getSubTitleByValue(items, values[name]);
+  const subTitleFromValues = items.find(
+    (item) => item.value === values[name]
+  )?.subTitle;
 
   return (
     <>
