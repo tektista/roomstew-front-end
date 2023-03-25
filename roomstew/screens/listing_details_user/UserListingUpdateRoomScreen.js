@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Button,
+  ActivityIndicator,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { getFormatedDate } from "react-native-modern-datepicker";
 import * as Yup from "yup";
@@ -21,6 +28,7 @@ import roomsService from "../../services/roomsService";
 const moment = require("moment");
 
 const UserListingUpdateRoomScreen = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const roomId = route.params.roomObj;
 
@@ -93,6 +101,8 @@ const UserListingUpdateRoomScreen = () => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -121,6 +131,14 @@ const UserListingUpdateRoomScreen = () => {
     console.log("Room Photos from DB");
     console.log(roomPhotosFromDB);
   }, [roomPhotosFromDB]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <Screen>
@@ -164,6 +182,8 @@ const UserListingUpdateRoomScreen = () => {
                 };
 
                 updateRoomWithPhotos(roomId, roomObjWithImageList);
+
+                navigation.goBack();
               }}
               validationSchema={validationSchema}
             >
@@ -315,6 +335,11 @@ const UserListingUpdateRoomScreen = () => {
 export default UserListingUpdateRoomScreen;
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   appFormContainer: { padding: 15 },
   button: {
     color: "red",
