@@ -33,6 +33,7 @@ const RoomScrollView = ({
             onPress={() => onPress({ roomId: roomObj.room_id })}
             onPressEdit={() => onPressEdit(roomObj.room_id)}
             onPressDelete={() => onPressDelete(roomObj.room_id)}
+            style={{ width: 310 }}
           />
         ))}
       </View>
@@ -48,11 +49,13 @@ const styles = StyleSheet.create({
     height: 250,
   },
   roomCardContainer: {
+    width: 310,
+    padding: 5,
     shadowOffset: {
       width: 2,
-      height: 2, // Add this line
+      height: 2,
     },
-    shadowOpacity: 0.3, // Add this line
-    shadowRadius: 5, // Add this line
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
 });

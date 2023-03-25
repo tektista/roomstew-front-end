@@ -96,8 +96,9 @@ const RoomsFormScreen = ({ navigation, route }) => {
               setModalVisible(value);
             }}
           />
-
+          <View></View>
           <RoomCardPreviewListFormField name="roomList" />
+
           <View style={{ flex: 1 }}></View>
           <FormSubmitButton title="Post Listing 5/5" />
         </AppForm>
@@ -105,6 +106,23 @@ const RoomsFormScreen = ({ navigation, route }) => {
     </ScrollView>
   );
 };
+
+{
+  /* <View
+style={{
+  flexGrow: 1,
+  height: 450,
+  padding: 5,
+
+  shadowOffset: {
+    width: 2,
+    height: 2,
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 5,
+}}
+> */
+}
 
 export default RoomsFormScreen;
 

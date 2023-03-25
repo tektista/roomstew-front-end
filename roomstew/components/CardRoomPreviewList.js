@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, Alert } from "react-native";
 import React from "react";
 
 import CardRoomPreview from "./CardRoomPreview";
+import CardRoom from "./CardRoom";
 
 const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
   const handlePress = (index) => {
@@ -10,21 +11,33 @@ const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
       { text: "No" },
     ]);
   };
+
   return (
     <View>
       {roomList.map((room, index) => {
+        console.log(room);
         return (
-          <CardRoomPreview
-            key={index}
-            roomNumber={index + 1}
-            roomSize={room.room_size}
-            isFurnished={room.room_is_furnished}
-            startDate={room.start_date.toString()}
-            endDate={room.end_date.toString()}
-            rent={room.rent}
-            deposit={room.room_deposit}
-            onPress={() => handlePress(index)}
-          />
+          <View
+            style={{
+              height: 250,
+              paddingVertical: 5,
+
+              shadowOffset: {
+                width: 2,
+                height: 2,
+              },
+              shadowOpacity: 0.3,
+              shadowRadius: 5,
+            }}
+          >
+            <CardRoom
+              roomObj={room}
+              roomNumber={index}
+              isCreateListing={true}
+              style={{ width: "100%" }}
+              onPressDeleteCreate={() => handlePress(index)}
+            />
+          </View>
         );
       })}
     </View>
