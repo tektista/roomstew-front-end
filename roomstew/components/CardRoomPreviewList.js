@@ -18,6 +18,7 @@ const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
         console.log(room);
         return (
           <View
+            key={index}
             style={{
               height: 250,
               paddingVertical: 5,
