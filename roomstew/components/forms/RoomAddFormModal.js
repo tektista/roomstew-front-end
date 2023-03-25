@@ -37,7 +37,7 @@ const RoomAddFormModal = ({
       .label("Rent per month")
       .min(1)
       .typeError("Please enter a valid number."),
-    room_deposit: Yup.number()
+    deposit: Yup.number()
       .required()
       .label("Deposit")
       .min(1)
@@ -103,7 +103,7 @@ const RoomAddFormModal = ({
               initialValues={{
                 room_description: "",
                 rent: "",
-                room_deposit: "",
+                deposit: "",
                 start_date: getFormatedDate(startDate, "YYYY-MM-DD"),
                 end_date: endDate,
 
@@ -147,7 +147,7 @@ const RoomAddFormModal = ({
                 autoCapitalize="none"
                 autoCorrect={false}
                 keyboardType="numeric"
-                name="room_deposit"
+                name="deposit"
                 title="Deposit in £"
                 placeholder="650"
               />

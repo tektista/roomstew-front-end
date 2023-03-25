@@ -60,11 +60,11 @@ const convertListingObjToDbFormat = (listingObj) => {
   // [ {roomObj: {roomObj}, roomPhotoObjList: [{roomPhotoObj}... ]}... ]
 
   const listingRoomsAndRoomPhotosObjList = listingObj.roomList.map(
-    ({ roomImageList, room_deposit, ...room }) => {
+    ({ roomImageList, deposit, ...room }) => {
       const parsedRoom = {
         ...room,
         rent: parseInt(room.rent, 10),
-        deposit: parseInt(room_deposit, 10),
+        deposit: parseInt(deposit, 10),
       };
 
       const roomPhotoObjList = convertToRoomPhotoObjList(roomImageList);
