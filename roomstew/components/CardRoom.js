@@ -35,7 +35,6 @@ const CardRoom = ({
             <View>
               <AppText style={styles.headerText}>Room {roomNumber + 1}</AppText>
               <AppText>
-                {" "}
                 {roomObj.room_size === 0
                   ? "Single Room"
                   : roomObj.room_size === 1

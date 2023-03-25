@@ -96,7 +96,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
               setModalVisible(value);
             }}
           />
-          <View></View>
+
           <RoomCardPreviewListFormField name="roomList" />
 
           <View style={{ flex: 1 }}></View>

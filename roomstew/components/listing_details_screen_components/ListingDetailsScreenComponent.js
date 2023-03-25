@@ -8,14 +8,17 @@ import {
   Dimensions,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import listingsService from "../../services/listingsService";
 import roomsService from "../../services/roomsService";
 import saveService from "../../services/saveService";
+import moment from "moment";
 
 import ListingDetailsScreenItems from "../../config/ListingDetailsScreenItems";
+import AppForm from "../forms/AppForm";
 
 import convertListingForFrontEnd from "../../helpers/convertListingForFrontEnd";
 import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontEnd";
@@ -39,6 +42,9 @@ import RoomScrollView from "../../components/RoomScrollView";
 import Description from "../../components/Description";
 import ListItemList from "../../components/ListItemList";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import ExpoVectorIcon from "../ExpoVectorIcon";
+import RoomAddFormModal from "../forms/RoomAddFormModal";
+import RoomAddFormField from "../forms/RoomAddFormField";
 
 const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
@@ -55,11 +61,13 @@ export default function ListingDetailsScreenComponent({
 
   const listing = route.params.item;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
   const [listingRoomsCardDetailsFromDB, setListingRoomCardDetailsListFromDB] =
     useState([]);
   const [listingIsSaved, setListingIsSaved] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const getListingDetails = async () => {
     try {
@@ -75,6 +83,8 @@ export default function ListingDetailsScreenComponent({
       setListingRoomCardDetailsListFromDB(
         convertRoomObjListForCards(response.data.listingRoomCardDetailsList)
       );
+
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -114,13 +124,60 @@ export default function ListingDetailsScreenComponent({
   };
 
   const handleRoomDelete = async (roomId) => {
-    const response = await roomsService.deleteARoomById(roomId);
-    console.log(response);
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete this room?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: async () => {
+            const response = await roomsService.deleteARoomById(roomId);
+            console.log(response);
 
-    if (response.status === 200) {
-      Alert.alert("Success", "Room deleted successfully", [
-        { text: "OK", onPress: () => getListingDetails() },
-      ]);
+            if (response.status === 200) {
+              Alert.alert("Success", "Room deleted successfully", [
+                { text: "OK", onPress: () => getListingDetails() },
+              ]);
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const handleRoomAdd = async (id, values) => {
+    const { roomImageList, ...newRoomObj } = values;
+    const base64ImageList = roomImageList;
+
+    const photoObjList = base64ImageList.map((base64Data, index) => {
+      return {
+        room_photo: base64Data,
+        room_photo_order: index,
+      };
+    });
+
+    const roomDataObj = {
+      roomObj: newRoomObj,
+      roomPhotoObjList: photoObjList,
+    };
+
+    try {
+      const response = await roomsService.createARoomByListingId(
+        id,
+        roomDataObj
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Room succesfully added", [
+          { text: "OK", onPress: () => getListingDetails() },
+        ]);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -131,6 +188,14 @@ export default function ListingDetailsScreenComponent({
   useEffect(() => {
     checkIfListingIsSaved();
   }, [listingFromDB]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={{ flexGrow: 1 }}>
@@ -210,6 +275,29 @@ export default function ListingDetailsScreenComponent({
         </View>
 
         {/* ROOM CARD SCROLL VIEW*/}
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ padding: 2 }}>
+            <AppText style={{ fontSize: 20, fontWeight: "bold" }}>
+              Rooms
+            </AppText>
+          </View>
+
+          {isUserListing && (
+            <TouchableOpacity
+              style={{ padding: 2 }}
+              onPress={() => setModalVisible(true)}
+            >
+              <ExpoVectorIcon family="f" name="plus-circle" />
+            </TouchableOpacity>
+          )}
+        </View>
+
+        <RoomAddFormModal
+          modalVisible={modalVisible}
+          handleModalClose={(value) => setModalVisible(value)}
+          handleRoomSubmit={(values) => handleRoomAdd(listing.id, values)}
+        />
+
         <RoomScrollView
           isUserListing={isUserListing}
           formattedRoomDetailsList={listingRoomsCardDetailsFromDB}
@@ -270,6 +358,11 @@ export default function ListingDetailsScreenComponent({
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   image: {
     width: "100%",
     height: 300,

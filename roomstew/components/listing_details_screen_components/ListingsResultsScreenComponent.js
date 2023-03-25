@@ -5,6 +5,7 @@ import {
   View,
   Dimensions,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import listingsService from "../../services/listingsService";
@@ -48,6 +49,7 @@ const ListingsResultsScreenComponent = ({
   }
 
   const [offset, setOffset] = useState(0);
+  const [isScreenLoading, setIsScreenLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
 
@@ -105,6 +107,7 @@ const ListingsResultsScreenComponent = ({
         return convertedListing;
       });
       setListings([...listings, ...convertedListings]);
+      setIsScreenLoading(false);
     } catch (error) {
       console.log(error);
     } finally {
@@ -113,18 +116,35 @@ const ListingsResultsScreenComponent = ({
   };
 
   const handleListingDelete = async (listingId) => {
-    try {
-      const response = await listingsService.deleteAListingById(listingId);
-      console.log(response);
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete this listing?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: async () => {
+            try {
+              const response = await listingsService.deleteAListingById(
+                listingId
+              );
+              console.log(response);
 
-      if (response.status === 200) {
-        Alert.alert("Success", "Listing deleted successfully", [
-          { text: "OK", onPress: () => getListings() },
-        ]);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+              if (response.status === 200) {
+                Alert.alert("Success", "Listing deleted successfully", [
+                  { text: "OK", onPress: () => getListings() },
+                ]);
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          },
+        },
+      ]
+    );
   };
 
   useEffect(() => {
@@ -136,8 +156,21 @@ const ListingsResultsScreenComponent = ({
   }, [listings]);
 
   useEffect(() => {
+    getListings();
+    setOffset(listings.length);
+  }, []);
+
+  useEffect(() => {
     console.log(offset);
   }, [offset]);
+
+  if (isScreenLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <Screen style={styles.screen}>
@@ -188,6 +221,11 @@ const ListingsResultsScreenComponent = ({
 export default ListingsResultsScreenComponent;
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   screen: {
     backgroundColor: colors.light,
   },

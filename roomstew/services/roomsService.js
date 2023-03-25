@@ -17,8 +17,13 @@ const updateARoomById = (id, roomObj) => {
 
   return axios.put(`${baseURL}/${id}`, roomObj);
 };
+
+const createARoomByListingId = (id, roomObj) => {
+  return axios.post(`${baseURL}/${id}`, roomObj);
+};
 export default {
   getARoomsDetailsById,
+  createARoomByListingId,
   deleteARoomById,
   updateARoomById,
 };
