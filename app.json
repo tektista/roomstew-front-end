@@ -12,10 +12,10 @@
     "slug": "roomstew",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": ".app/assets/icon.png",
+    "icon": "./roomstew/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": ".app/assets/splash.png",
+      "image": "./roomstew/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -28,7 +28,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./roomstew/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
