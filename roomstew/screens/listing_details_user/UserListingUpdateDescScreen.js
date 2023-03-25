@@ -3,10 +3,12 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import listingsService from "../../services/listingsService";
+import colors from "../../config/colors";
 
 import AppForm from "../../components/forms/AppForm";
 import TextInputFormField from "../../components/forms/TextInputFormField";
@@ -19,6 +21,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 const UserListingUpdateDescScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const listingId = route.params.listingId;
   const title = route.params.title;
@@ -38,6 +42,7 @@ const UserListingUpdateDescScreen = () => {
   });
 
   const updateListing = async (listingId, updateObj) => {
+    setIsLoading(true);
     try {
       const response = await listingsService.updateAListingById(
         listingId,
@@ -46,8 +51,18 @@ const UserListingUpdateDescScreen = () => {
       console.log(response);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
@@ -88,8 +103,8 @@ const UserListingUpdateDescScreen = () => {
               };
 
               console.log("updateObj: ", updateObj);
-
               updateListing(listingId, updateObj);
+              navigation.navigate("UserListingsResultsScreen");
             }}
             validationSchema={validationSchema}
           >
@@ -121,7 +136,7 @@ const UserListingUpdateDescScreen = () => {
 
             <View style={{ flex: 1 }}></View>
 
-            <FormSubmitButton title="Next 4/5" />
+            <FormSubmitButton title="Update" />
           </AppForm>
         </View>
       </ScrollView>
@@ -132,6 +147,11 @@ const UserListingUpdateDescScreen = () => {
 export default UserListingUpdateDescScreen;
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   appFormContainer: {
     padding: 15,
     flex: 1,

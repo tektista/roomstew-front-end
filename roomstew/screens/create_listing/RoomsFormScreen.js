@@ -7,7 +7,9 @@ import {
   FlatList,
   Modal,
   Alert,
+  ActivityIndicator,
 } from "react-native";
+import colors from "../../config/colors";
 import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import axios from "axios";
@@ -30,12 +32,16 @@ import RoomCardPreviewListFormField from "../../components/forms/RoomCardPreview
 
 const RoomsFormScreen = ({ navigation, route }) => {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const postListing = async (listingDbObj) => {
     try {
+      setIsLoading(true);
       const response = await listingsService.createAListing(listingDbObj);
     } catch (err) {
-      throw err;
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,6 +64,14 @@ const RoomsFormScreen = ({ navigation, route }) => {
       ]);
     }
   }, [isSuccess]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -84,7 +98,7 @@ const RoomsFormScreen = ({ navigation, route }) => {
             console.log("convertedListingDbObj: ");
             console.log(listingDbObj);
             postListing(listingDbObj);
-            // setIsSuccess(true);
+            setIsSuccess(true);
 
             //TO DO: Add a success message
           }}
@@ -127,6 +141,11 @@ style={{
 export default RoomsFormScreen;
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   appFormContainer: {
     padding: 15,
     flex: 1,
