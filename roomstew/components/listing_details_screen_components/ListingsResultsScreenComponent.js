@@ -48,19 +48,17 @@ const ListingsResultsScreenComponent = ({
     maxRent = parseInt(route.params.values.maxRent);
   }
 
-  const [offset, setOffset] = useState(0);
-  const [isScreenLoading, setIsScreenLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [fetchMore, setFetchMore] = useState(false);
   const [listings, setListings] = useState([]);
 
   const handleEndReached = () => {
+    setFetchMore(true);
     console.log("end reached");
-    getListings();
   };
 
   const getListings = async () => {
-    if (isLoading) return;
-    setIsLoading(true);
     try {
       let response;
 
@@ -106,12 +104,13 @@ const ListingsResultsScreenComponent = ({
 
         return convertedListing;
       });
-      setListings([...listings, ...convertedListings]);
-      setIsScreenLoading(false);
+      const newUniqueListings = convertedListings.filter(
+        (newListing) =>
+          !listings.some((oldListing) => oldListing.id === newListing.id)
+      );
+      setListings([...listings, ...newUniqueListings]);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -127,19 +126,28 @@ const ListingsResultsScreenComponent = ({
         {
           text: "OK",
           onPress: async () => {
+            setIsLoading(true);
             try {
               const response = await listingsService.deleteAListingById(
                 listingId
               );
-              console.log(response);
 
               if (response.status === 200) {
+                setIsLoading(false);
+
+                const updatedListings = listings.filter(
+                  (listing) => listing.id !== listingId
+                );
+                setListings(updatedListings);
+
                 Alert.alert("Success", "Listing deleted successfully", [
-                  { text: "OK", onPress: () => getListings() },
+                  { text: "OK" },
                 ]);
               }
             } catch (err) {
               console.log(err);
+            } finally {
+              setIsLoading(false);
             }
           },
         },
@@ -147,24 +155,28 @@ const ListingsResultsScreenComponent = ({
     );
   };
 
+  //Mount
   useEffect(() => {
     getListings();
-  }, [listings]);
-
-  useEffect(() => {
-    setOffset(listings.length);
-  }, [listings]);
-
-  useEffect(() => {
-    getListings();
-    setOffset(listings.length);
   }, []);
+
+  //Everytime fetchMore changes, check if its true, if it is fetch more
+  useEffect(() => {
+    if (fetchMore) {
+      getListings();
+      setFetchMore(false);
+    }
+  }, [fetchMore]);
+
+  useEffect(() => {
+    setOffset(listings.length);
+  }, [listings]);
 
   useEffect(() => {
     console.log(offset);
   }, [offset]);
 
-  if (isScreenLoading) {
+  if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
@@ -177,6 +189,7 @@ const ListingsResultsScreenComponent = ({
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
+        extraData={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => {
           console.log(item);
