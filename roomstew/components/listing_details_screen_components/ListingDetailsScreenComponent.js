@@ -83,10 +83,10 @@ export default function ListingDetailsScreenComponent({
       setListingRoomCardDetailsListFromDB(
         convertRoomObjListForCards(response.data.listingRoomCardDetailsList)
       );
-
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -116,7 +116,6 @@ export default function ListingDetailsScreenComponent({
           listingFromDB.listing_id
         );
       }
-
       setListingIsSaved(!listingIsSaved);
     } catch (err) {
       console.error("Error saving/un-saving listing:", err);

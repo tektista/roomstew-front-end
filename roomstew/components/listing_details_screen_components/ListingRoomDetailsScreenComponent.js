@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
@@ -32,6 +33,8 @@ export default function ListingRoomDetailsScreenComponent() {
   const navigation = useNavigation();
   const route = useRoute();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const roomId = route.params.roomId;
 
   const [roomFromDB, setRoomFromDB] = useState({});
@@ -41,6 +44,7 @@ export default function ListingRoomDetailsScreenComponent() {
 
   const getRoomDetails = async () => {
     try {
+      setIsLoading(true);
       const response = await roomsService.getARoomsDetailsById(roomId);
 
       const convertedRoomObjList = convertRoomObjListForFrontEnd(
@@ -56,6 +60,8 @@ export default function ListingRoomDetailsScreenComponent() {
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -72,6 +78,14 @@ export default function ListingRoomDetailsScreenComponent() {
     console.log("roomPhotosFromDB");
     console.log(roomPhotosFromDB);
   }, [roomPhotosFromDB]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <ScrollView>
@@ -114,6 +128,12 @@ export default function ListingRoomDetailsScreenComponent() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   image: {
     width: "100%",
     height: 300,
