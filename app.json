@@ -8,8 +8,8 @@
         }
       ]
     ],
-    "name": "front-end",
-    "slug": "front-end",
+    "name": "RoomStew",
+    "slug": "roomstew",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": ".app/assets/icon.png",

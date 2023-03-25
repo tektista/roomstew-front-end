@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import React from "react";
-import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
+import ExpoVectorIcon from "./ExpoVectorIcon";
 import colors from "../config/colors";
 
 const SaveButton = ({ onPress, isSaved }) => {

@@ -11,7 +11,7 @@ import AppText from "./AppText";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
+import ExpoVectorIcon from "./ExpoVectorIcon";
 
 export default function Card({
   image,

@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
-import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
+import ExpoVectorIcon from "./ExpoVectorIcon";
 
 const LocationButton = ({ onPress, children }) => {
   return (

@@ -3,7 +3,7 @@ import React from "react";
 import AppText from "./AppText";
 import colors from "../config/colors";
 
-import ExpoVectorIcon from "../../app/components/ExpoVectorIcon";
+import ExpoVectorIcon from "./ExpoVectorIcon";
 
 const CardRoom = ({
   isUserListing,
