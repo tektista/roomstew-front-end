@@ -15,29 +15,34 @@ const CardRoom = ({
 }) => {
   return (
     <View style={styles.roomCardContainer}>
-      <TouchableOpacity onPress={onPress} style={{ flex: 9, padding: 10 }}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <View>
-            <AppText>Room {roomNumber + 1}</AppText>
-            <AppText>{roomObj.room_size}</AppText>
-          </View>
+      <TouchableOpacity onPress={onPress} style={{ flex: 5 }}>
+        <View style={{ flex: 1.5 }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              backgroundColor: colors.primary,
+              padding: 10,
+            }}
+          >
+            <View>
+              <AppText style={styles.headerText}>Room {roomNumber + 1}</AppText>
+              <AppText>{roomObj.room_size}</AppText>
+            </View>
 
-          <View>
-            <AppText>Available:</AppText>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-              }}
-            >
-              <AppText>{roomObj.start_date}</AppText>
+            <View>
+              <AppText style={styles.headerText}>Available</AppText>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <AppText>{roomObj.start_date}</AppText>
+              </View>
             </View>
           </View>
         </View>
@@ -49,6 +54,8 @@ const CardRoom = ({
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            padding: 10,
+            backgroundColor: colors.white,
           }}
         >
           <View>
@@ -67,15 +74,17 @@ const CardRoom = ({
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "flex-end",
+            padding: 10,
+            backgroundColor: colors.white,
           }}
         >
           <View>
-            <AppText>Rent:</AppText>
+            <AppText style={styles.headerText}>Rent</AppText>
             <AppText>£{roomObj.rent} /month</AppText>
           </View>
 
           <View>
-            <AppText>Deposit:</AppText>
+            <AppText style={styles.headerText}>Deposit</AppText>
 
             <View
               style={{
@@ -93,9 +102,10 @@ const CardRoom = ({
       {isUserListing && (
         <View
           style={{
-            flex: 3,
+            flex: 1,
             borderTopWidth: 1,
             flexDirection: "row",
+            backgroundColor: colors.white,
           }}
         >
           <TouchableOpacity style={{ flex: 1 }} onPress={onPressEdit}>
@@ -132,10 +142,26 @@ export default CardRoom;
 
 const styles = StyleSheet.create({
   roomCardContainer: {
+    flex: 1,
     width: 310,
     marginRight: 15,
     marginBottom: 10,
-    borderWidth: 1,
     borderColor: colors.black,
+    borderRadius: 15,
+
+    overflow: "hidden",
+  },
+  shadowStyles: {
+    flex: 1,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+  },
+
+  headerText: {
+    fontWeight: "bold",
   },
 });

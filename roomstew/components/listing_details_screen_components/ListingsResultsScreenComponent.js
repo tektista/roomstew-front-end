@@ -148,7 +148,7 @@ const ListingsResultsScreenComponent = ({
         renderItem={({ item }) => {
           console.log(item);
           return (
-            <View style={styles.cardView}>
+            <View style={styles.cardContainer}>
               <Card
                 title={item.title}
                 image={item.image}
@@ -192,13 +192,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
   },
 
-  cardView: {
+  cardContainer: {
     padding: 15,
     shadowOffset: {
       width: 2,
-      height: 2, // Add this line
+      height: 2,
     },
-    shadowOpacity: 0.3, // Add this line
-    shadowRadius: 5, // Add this line
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
   },
 });

@@ -45,8 +45,14 @@ const PhotoScrollView = ({ photoObjListWIthDataUrl }) => {
               backgroundColor: colors.white,
               alignSelf: "flex-start",
               padding: 5,
-              borderRadius: 50,
-              borderWidth: 1,
+              borderRadius: "50%",
+
+              shadowOffset: {
+                width: 2,
+                height: 2, // Add this line
+              },
+              shadowOpacity: 0.3, // Add this line
+              shadowRadius: 5, // Add this line
             }}
           >
             <AppText style={{ color: colors.black }}>

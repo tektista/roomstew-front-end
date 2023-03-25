@@ -7,6 +7,7 @@ import ListItem from "../../components/ListItem";
 import ListItemList from "../../components/ListItemList";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import AppText from "../AppText";
 
 const ListingShowMoreDetailsScreenComponent = () => {
   const route = useRoute();
@@ -16,12 +17,18 @@ const ListingShowMoreDetailsScreenComponent = () => {
 
   return (
     <ScrollView>
+      <AppText style={{ fontSize: 20, fontWeight: "bold", padding: 10 }}>
+        Property Details
+      </AppText>
+
       <View style={styles.detailsContainer}>
         <ListItemList
           objFromDB={listingFromDB}
           s
           localObj={listing}
           items={ListingDetailsScreenItems}
+          sliceAtIndex={0}
+          sliceToIndex={9}
         />
 
         <View style={styles.showMoreContainer}></View>
