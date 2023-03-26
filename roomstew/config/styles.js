@@ -16,4 +16,9 @@ export default {
     justifyContent: "center",
     alignItems: "center",
   },
+
+  titleSize: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
 };

@@ -7,7 +7,7 @@ import FormSubmitButton from "../../components/forms/FormSubmitButton";
 import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 import CheckboxFormField from "../../components/forms/CheckboxFormField";
 
-import AppText from "../../components/AppText";
+import Screen from "../../components/Screen";
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 
@@ -25,6 +25,7 @@ const populatePickerItems = (minAge, maxAge) => {
 };
 
 import { useNavigation, useRoute } from "@react-navigation/native";
+import ListItemSeparator from "../../components/ListItemSeparator";
 const UserListingUpdateDescScreen = ({}) => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -39,9 +40,6 @@ const UserListingUpdateDescScreen = ({}) => {
   const getListingDetails = async () => {
     try {
       const response = await listingsService.getAListingById(listingId);
-
-      console.log("response.data: ");
-      console.log(response);
 
       const {
         min_age,
@@ -135,123 +133,127 @@ const UserListingUpdateDescScreen = ({}) => {
 
   return (
     isLoading === false && (
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View>
-          <AppText style={styles.title}> Roommate Preferences </AppText>
-        </View>
-
-        <View style={styles.appFormContainer}>
-          <AppForm
-            initialValues={{
-              min_age: listingPrefs.min_age,
-              max_age: listingPrefs.max_age,
-              gender_preference: listingPrefs.gender_preference,
-              couples_allowed: Boolean(listingPrefs.couples_allowed),
-              pets_allowed: Boolean(listingPrefs.pets_allowed),
-              smokers_allowed: Boolean(listingPrefs.smokers_allowed),
-            }}
-            onSubmit={(values) => {
-              console.log("BYE", values);
-
-              navigation.navigate("UserListingUpdateDescScreen", {
-                listingId: listingId,
-                title: titleAndDesc.title,
-                description: titleAndDesc.description,
-                listingPrefs: {
-                  min_age: values.min_age,
-                  max_age: values.max_age,
-                  gender_preference: values.gender_preference,
-                  couples_allowed: values.couples_allowed,
-                  pets_allowed: values.pets_allowed,
-                  smokers_allowed: values.smokers_allowed,
-                },
-                base64DataList: base64DataList,
-              });
-            }}
-          >
-            <ListItemPickerFormField
-              name="min_age"
-              title="Minimum Age"
-              IconComponent={
-                <Icon
-                  name="format-list-numbered"
-                  backgroundColor={colors.primary}
-                />
-              }
-              items={minAgePickerItems}
-              onSelectItem={(item) => {
-                if (item > maxAge) {
-                  setMaxAge(item);
-                  setMaxAgePickerItems(populatePickerItems(item, 99));
-                }
-
-                setMinAge(item);
-                setMinAgePickerItems(populatePickerItems(17, maxAge));
+      <Screen style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.appFormContainer}>
+            <AppForm
+              initialValues={{
+                min_age: listingPrefs.min_age,
+                max_age: listingPrefs.max_age,
+                gender_preference: listingPrefs.gender_preference,
+                couples_allowed: Boolean(listingPrefs.couples_allowed),
+                pets_allowed: Boolean(listingPrefs.pets_allowed),
+                smokers_allowed: Boolean(listingPrefs.smokers_allowed),
               }}
-            />
+              onSubmit={(values) => {
+                console.log("BYE", values);
 
-            <ListItemPickerFormField
-              name="max_age"
-              title="Max Age"
-              IconComponent={
-                <Icon
-                  name="format-list-numbered"
-                  backgroundColor={colors.primary}
-                />
-              }
-              items={maxAgePickerItems}
-              onSelectItem={(item) => {
-                if (item < minAge) {
+                navigation.navigate("UserListingUpdateDescScreen", {
+                  listingId: listingId,
+                  title: titleAndDesc.title,
+                  description: titleAndDesc.description,
+                  listingPrefs: {
+                    min_age: values.min_age,
+                    max_age: values.max_age,
+                    gender_preference: values.gender_preference,
+                    couples_allowed: values.couples_allowed,
+                    pets_allowed: values.pets_allowed,
+                    smokers_allowed: values.smokers_allowed,
+                  },
+                  base64DataList: base64DataList,
+                });
+              }}
+            >
+              <ListItemSeparator />
+              <ListItemPickerFormField
+                name="min_age"
+                title="Minimum Age"
+                IconComponent={
+                  <Icon
+                    name="format-list-numbered"
+                    backgroundColor={colors.primary}
+                  />
+                }
+                items={minAgePickerItems}
+                onSelectItem={(item) => {
+                  if (item > maxAge) {
+                    setMaxAge(item);
+                    setMaxAgePickerItems(populatePickerItems(item, 99));
+                  }
+
                   setMinAge(item);
-                  setMinAgePickerItems(populatePickerItems(17, item));
+                  setMinAgePickerItems(populatePickerItems(17, maxAge));
+                }}
+              />
+              <ListItemSeparator />
+              <ListItemPickerFormField
+                name="max_age"
+                title="Max Age"
+                IconComponent={
+                  <Icon
+                    name="format-list-numbered"
+                    backgroundColor={colors.primary}
+                  />
                 }
+                items={maxAgePickerItems}
+                onSelectItem={(item) => {
+                  if (item < minAge) {
+                    setMinAge(item);
+                    setMinAgePickerItems(populatePickerItems(17, item));
+                  }
 
-                setMaxAge(item);
-                setMaxAgePickerItems(populatePickerItems(minAge, 99));
-              }}
-            />
+                  setMaxAge(item);
+                  setMaxAgePickerItems(populatePickerItems(minAge, 99));
+                }}
+              />
+              <ListItemSeparator />
 
-            <ListItemPickerFormField
-              name="gender_preference"
-              title=" Gender"
-              IconComponent={
-                <Icon
-                  name="gender-male-female"
-                  backgroundColor={colors.primary}
-                />
-              }
-              items={genderPreferencePickerItems}
-            />
+              <ListItemPickerFormField
+                name="gender_preference"
+                title=" Gender"
+                IconComponent={
+                  <Icon
+                    name="gender-male-female"
+                    backgroundColor={colors.primary}
+                  />
+                }
+                items={genderPreferencePickerItems}
+              />
+              <ListItemSeparator />
 
-            <CheckboxFormField
-              name="couples_allowed"
-              title={"Couples"}
-              IconComponent={
-                <Icon name="account-heart" backgroundColor={colors.primary} />
-              }
-            />
+              <CheckboxFormField
+                name="couples_allowed"
+                title={"Couples"}
+                IconComponent={
+                  <Icon name="account-heart" backgroundColor={colors.primary} />
+                }
+              />
+              <ListItemSeparator />
 
-            <CheckboxFormField
-              name="smokers_allowed"
-              title={"Smokers"}
-              IconComponent={
-                <Icon name="cigar" backgroundColor={colors.primary} />
-              }
-            />
+              <CheckboxFormField
+                name="smokers_allowed"
+                title={"Smokers"}
+                IconComponent={
+                  <Icon name="cigar" backgroundColor={colors.primary} />
+                }
+              />
+              <ListItemSeparator />
 
-            <CheckboxFormField
-              name="pets_allowed"
-              title={"Pets"}
-              IconComponent={
-                <Icon name="dog-side" backgroundColor={colors.primary} />
-              }
-            />
-            <View style={{ flex: 1 }}></View>
+              <CheckboxFormField
+                name="pets_allowed"
+                title={"Pets"}
+                IconComponent={
+                  <Icon name="dog-side" backgroundColor={colors.primary} />
+                }
+              />
+              <ListItemSeparator />
+              <View style={{ flex: 1 }}></View>
 
-            <FormSubmitButton title="Next 1/2" />
-          </AppForm>
-        </View>
-      </ScrollView>
+              <FormSubmitButton title="Next 1/2" />
+            </AppForm>
+          </View>
+        </ScrollView>
+      </Screen>
     )
   );
 };

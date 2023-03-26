@@ -15,14 +15,9 @@ const AppNavigator = () => (
     screenOptions={{
       headerShown: false,
     }}
-    tabBarOptions={{
-      labelStyle: {
-        display: "none",
-      },
-    }}
   >
     <Tab.Screen
-      name="Listings"
+      name="Search"
       component={ListingsNavigator}
       options={{
         tabBarIcon: ({ size, color }) => (
@@ -35,7 +30,7 @@ const AppNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="CreateListing"
+      name="Create a Listing"
       component={CreateListingFormNavigator}
       options={{
         tabBarIcon: ({ size, color }) => (
@@ -48,7 +43,7 @@ const AppNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="AccountNavigator"
+      name="My Account"
       component={AccountNavigator}
       options={{
         tabBarIcon: ({ size, color }) => (

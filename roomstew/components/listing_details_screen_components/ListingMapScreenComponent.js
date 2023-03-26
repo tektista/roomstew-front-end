@@ -4,6 +4,7 @@ import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import axios from "axios";
 import { GOOGLE_MAPS_API_KEY } from "@env";
+import colors from "../../config/colors";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -22,8 +23,8 @@ const ListingMapScreenComponent = () => {
   const [listingLocation, setListingLocation] = useState(null);
 
   const getLatitudeAndLongitude = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${listingAddress.street_address},+${listingAddress.city},+${listingAddress.postcode}&key=${GOOGLE_MAPS_API_KEY}`
       );

@@ -23,55 +23,44 @@ const ListingsNavigator = () => (
     <Stack.Screen
       name="ListingsSearchScreen"
       component={ListingsSearchScreen}
+      options={{ title: "RoomStew" }}
     />
 
     <Stack.Screen
       name="ListingsResultsScreen"
       component={ListingsResultsScreen}
+      options={{ title: "Results" }}
     />
 
     <Stack.Screen
       name="ListingDetailsScreen"
       component={ListingDetailsScreen}
+      options={{ title: "Listing Details" }}
     />
 
-    <Stack.Screen name="ListingMapScreen" component={ListingMapScreen} />
+    <Stack.Screen
+      name="ListingMapScreen"
+      component={ListingMapScreen}
+      options={{ title: "Location" }}
+    />
 
     <Stack.Screen
       name="ListingRoomDetailsScreen"
       component={ListingRoomDetailsScreen}
+      options={{ title: "Room Details" }}
     />
 
     <Stack.Screen
       name="ListingShowMoreDescriptionScreen"
       component={ListingShowMoreDescriptionScreen}
+      options={{ title: "Description" }}
     />
 
     <Stack.Screen
       name="ListingShowMoreDetailsScreen"
       component={ListingShowMoreDetailsScreen}
+      options={{ title: "Details" }}
     />
-    {/* <Stack.Screen name="Listings" component={ListingsScreen} /> */}
-    {/* 
-    <Stack.Screen name="ListingDetails" component={ListingDetailsScreen} /> */}
-
-    {/*     
-    <Stack.Screen
-      name="ListingDetailsShowMoreDetailsScreen"
-      component={ListingDetailsShowMoreDetailsScreen}
-    />
-    <Stack.Screen
-      name="ListingDetailsShowMoreDescScreen"
-      component={ListingDetailsShowMoreDescScreen}
-    />
-    <Stack.Screen
-      name="ListingDetailsRoomDetailsScreen"
-      component={ListingDetailsRoomDetailsScreen}
-    />
-    <Stack.Screen
-      name="ListingDetailsMapScreen"
-      component={ListingDetailsMapScreen}
-    /> */}
   </Stack.Navigator>
 );
 

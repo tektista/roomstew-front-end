@@ -66,10 +66,6 @@ const PreferencesFormScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View>
-        <AppText style={styles.title}> Roommate Preferences </AppText>
-      </View>
-
       <View style={styles.appFormContainer}>
         <AppForm
           initialValues={{

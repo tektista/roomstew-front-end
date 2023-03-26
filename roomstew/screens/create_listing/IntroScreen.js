@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import Screen from "../../components/Screen";
 import AppText from "../../components/AppText";
 import colors from "../../config/colors";
 
@@ -7,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const IntroScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <View style={styles.postContainer}>
         <View style={{ flex: 1, padding: 20 }}>
           <TouchableOpacity
@@ -27,7 +28,7 @@ const IntroScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Screen>
   );
 };
 

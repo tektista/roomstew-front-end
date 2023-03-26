@@ -40,54 +40,67 @@ const AccountNavigator = () => {
   return (
     <Stack.Navigator>
       {/* MY ACCOUNT PAGE */}
-      <Stack.Screen name="AccountScreen" component={AccountScreen} />
+      <Stack.Screen
+        name="AccountScreen"
+        component={AccountScreen}
+        options={{ title: "My Account" }}
+      />
 
       {/* USER LISTINGS*/}
       <Stack.Screen
         name="UserListingsResultsScreen"
         component={UserListingsResultsScreen}
+        options={{ title: "My Listings" }}
       />
 
       {/* EDIT LISTING SCREENS */}
       <Stack.Screen
         name="UserListingUpdatePrefsScreen"
         component={UserListingUpdatePrefsScreen}
+        options={{ title: "Roommate Preferences" }}
       />
 
       <Stack.Screen
         name="UserListingUpdateDescScreen"
         component={UserListingUpdateDescScreen}
+        options={{ title: "Description & Shared Area Photos" }}
       />
       {/* EDIT LISTING SCREENS */}
 
       <Stack.Screen
         name="UserListingDetailsScreen"
         component={UserListingDetailsScreen}
+        options={{ title: "Listing Details" }}
       />
 
       <Stack.Screen
         name="UserListingMapScreen"
         component={UserListingMapScreen}
+        options={{ title: "Location" }}
       />
 
       <Stack.Screen
         name="UserListingRoomDetailsScreen"
         component={UserListingRoomDetailsScreen}
+        options={{ title: "Room Details" }}
       />
 
       <Stack.Screen
         name="UserListingShowMoreDescriptionScreen"
         component={UserListingShowMoreDescriptionScreen}
+        options={{ title: "Description" }}
       />
 
       <Stack.Screen
         name="UserListingShowMoreDetailsScreen"
         component={UserListingShowMoreDetailsScreen}
+        options={{ title: "Details" }}
       />
       {/* EDIT A ROOM SCREEN */}
       <Stack.Screen
         name="UserListingUpdateRoomScreen"
         component={UserListingUpdateRoomScreen}
+        options={{ title: "Edit Room" }}
       />
       {/* EDIT A ROOM SCREEN */}
 
@@ -95,32 +108,38 @@ const AccountNavigator = () => {
       <Stack.Screen
         name="SavedListingsResultsScreen"
         component={SavedListingsResultsScreen}
+        options={{ title: "Saved Listings" }}
       />
 
       <Stack.Screen
         name="SavedListingDetailsScreen"
         component={SavedListingDetailsScreen}
+        options={{ title: "Listing Details" }}
       />
 
       <Stack.Screen
         name="SavedListingMapScreen"
         component={SavedListingMapScreen}
+        options={{ title: "Location" }}
       />
 
       <Stack.Screen
         name="SavedListingShowMoreDescriptionScreen"
         component={SavedListingShowMoreDescriptionScreen}
+        options={{ title: "Description" }}
       />
 
       <Stack.Screen
         name="SavedListingShowMoreDetailsScreen"
         component={SavedListingShowMoreDetailsScreen}
+        options={{ title: "Details" }}
       />
 
       {/* ROOM SCREEN */}
       <Stack.Screen
         name="SavedListingRoomDetailsScreen"
         component={SavedListingRoomDetailsScreen}
+        options={{ title: "Room Details" }}
       />
     </Stack.Navigator>
   );

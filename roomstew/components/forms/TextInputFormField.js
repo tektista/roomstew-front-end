@@ -20,7 +20,7 @@ const TextInputFormField = ({
     <>
       <View style={{ width: width }}>
         <View>
-          <AppText> {title} </AppText>
+          <AppText style={styles.title}> {title} </AppText>
         </View>
 
         {dataFromDB ? (
@@ -46,6 +46,12 @@ const TextInputFormField = ({
 };
 
 export default TextInputFormField;
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+  },
+});
 
 /* This form is so we don't need to set onBlur, onChangeText and a corresponding
  error message for every AppTextInput

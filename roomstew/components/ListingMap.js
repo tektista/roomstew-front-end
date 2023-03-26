@@ -4,6 +4,7 @@ import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import axios from "axios";
 import { GOOGLE_MAPS_API_KEY } from "@env";
+import colors from "../config/colors";
 
 const ListingMap = ({ listingAddress }) => {
   const [listingLocation, setListingLocation] = useState(null);

@@ -12,6 +12,8 @@ import ListItemSeparator from "../../components/ListItemSeparator";
 import colors from "../../config/colors";
 import Screen from "../../components/Screen";
 
+import defaultStyles from "../../config/styles";
+
 const DetailsFormScreen = ({ route, navigation }) => {
   const previousValues = route.params.locationValues;
 
@@ -67,133 +69,132 @@ const DetailsFormScreen = ({ route, navigation }) => {
   });
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View>
-        <AppText style={styles.title}> Property Details</AppText>
-      </View>
+    <Screen style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.appFormContainer}>
+          <AppForm
+            initialValues={{
+              building_type: -1,
+              bills_included: false,
+              internet_included: false,
+              is_furnished: false,
+              has_living_room: false,
+              bathroom_count: -1,
+              has_garden: false,
+              has_parking: false,
+              has_hmo: false,
+            }}
+            onSubmit={(values) => {
+              const mergedValues = Object.assign({}, values, previousValues);
+              navigation.navigate("PreferencesFormScreen", { mergedValues });
+            }}
+            validationSchema={validationSchema}
+          >
+            <ListItemSeparator />
+            <ListItemPickerFormField
+              name="building_type"
+              title="Building Type"
+              IconComponent={
+                <Icon name="office-building" backgroundColor={colors.primary} />
+              }
+              items={buildingTypeListItems}
+            />
+            <ListItemSeparator />
+            <CheckboxFormField
+              name="bills_included"
+              title={"Bills included"}
+              IconComponent={
+                <Icon
+                  name="home-lightning-bolt"
+                  backgroundColor={colors.primary}
+                />
+              }
+            />
 
-      <View style={styles.appFormContainer}>
-        <AppForm
-          initialValues={{
-            building_type: -1,
-            bills_included: false,
-            internet_included: false,
-            is_furnished: false,
-            has_living_room: false,
-            bathroom_count: -1,
-            has_garden: false,
-            has_parking: false,
-            has_hmo: false,
-          }}
-          onSubmit={(values) => {
-            const mergedValues = Object.assign({}, values, previousValues);
-            navigation.navigate("PreferencesFormScreen", { mergedValues });
-          }}
-          validationSchema={validationSchema}
-        >
-          <ListItemPickerFormField
-            name="building_type"
-            title="Building Type"
-            IconComponent={
-              <Icon name="office-building" backgroundColor={colors.primary} />
-            }
-            items={buildingTypeListItems}
-          />
-          <ListItemSeparator />
-          <CheckboxFormField
-            name="bills_included"
-            title={"Bills included"}
-            IconComponent={
-              <Icon
-                name="home-lightning-bolt"
-                backgroundColor={colors.primary}
-              />
-            }
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <CheckboxFormField
+              name="internet_included"
+              title={"Internet included"}
+              IconComponent={
+                <Icon name="wifi" backgroundColor={colors.primary} />
+              }
+            />
 
-          <CheckboxFormField
-            name="internet_included"
-            title={"Internet included"}
-            IconComponent={
-              <Icon name="wifi" backgroundColor={colors.primary} />
-            }
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <CheckboxFormField
+              name="is_furnished"
+              title={"Furnished"}
+              IconComponent={
+                <Icon name="table-chair" backgroundColor={colors.primary} />
+              }
+            />
 
-          <CheckboxFormField
-            name="is_furnished"
-            title={"Furnished"}
-            IconComponent={
-              <Icon name="table-chair" backgroundColor={colors.primary} />
-            }
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <CheckboxFormField
+              name="has_living_room"
+              title={"Living room"}
+              IconComponent={
+                <Icon
+                  name="home-lightning-bolt"
+                  backgroundColor={colors.primary}
+                />
+              }
+            />
 
-          <CheckboxFormField
-            name="has_living_room"
-            title={"Living room"}
-            IconComponent={
-              <Icon
-                name="home-lightning-bolt"
-                backgroundColor={colors.primary}
-              />
-            }
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <ListItemPickerFormField
+              name="bathroom_count"
+              title="Bathrooms"
+              IconComponent={
+                <Icon name="toilet" backgroundColor={colors.primary} />
+              }
+              items={bathroomListItems}
+            />
 
-          <ListItemPickerFormField
-            name="bathroom_count"
-            title="Bathrooms"
-            IconComponent={
-              <Icon name="toilet" backgroundColor={colors.primary} />
-            }
-            items={bathroomListItems}
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <CheckboxFormField
+              name="has_hmo"
+              title={"HMO License"}
+              IconComponent={
+                <Icon
+                  name="account-multiple-check"
+                  backgroundColor={colors.primary}
+                />
+              }
+            />
 
-          <CheckboxFormField
-            name="has_hmo"
-            title={"HMO License"}
-            IconComponent={
-              <Icon
-                name="account-multiple-check"
-                backgroundColor={colors.primary}
-              />
-            }
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <CheckboxFormField
+              name="has_garden"
+              title={"Garden"}
+              IconComponent={
+                <Icon name="grass" backgroundColor={colors.primary} />
+              }
+            />
 
-          <CheckboxFormField
-            name="has_garden"
-            title={"Garden"}
-            IconComponent={
-              <Icon name="grass" backgroundColor={colors.primary} />
-            }
-          />
+            <ListItemSeparator />
 
-          <ListItemSeparator />
+            <CheckboxFormField
+              name="has_parking"
+              title={"Parking"}
+              IconComponent={
+                <Icon name="parking" backgroundColor={colors.primary} />
+              }
+            />
 
-          <CheckboxFormField
-            name="has_parking"
-            title={"Parking"}
-            IconComponent={
-              <Icon name="parking" backgroundColor={colors.primary} />
-            }
-          />
+            <View style={{ flex: 1 }}></View>
 
-          <View style={{ flex: 1 }}></View>
-
-          <FormSubmitButton title="Next 2/5" />
-        </AppForm>
-      </View>
-    </ScrollView>
+            <FormSubmitButton title="Next 2/5" />
+          </AppForm>
+        </View>
+      </ScrollView>
+    </Screen>
   );
 };
 
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   appFormContainer: {
-    padding: 15,
     flex: 1,
+    paddingHorizontal: 15,
   },
 });

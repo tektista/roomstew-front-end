@@ -11,8 +11,6 @@ const AddressPickerFormField = ({
   IconComponent,
   onSelectItem,
   itemListName,
-
-  //pass as string
   streetAddressVarName,
   cityVarName,
   postcodeVarName,
@@ -45,9 +43,7 @@ const AddressPickerFormField = ({
           items={items}
           onSelectItemSetFieldValue={(value) => {
             setFieldValue(name, value);
-
             const { streetAddress, city, postcode } = separateAddress(value);
-
             setFieldValue(streetAddressVarName, streetAddress);
             setFieldValue(cityVarName, city);
             setFieldValue(postcodeVarName, postcode);

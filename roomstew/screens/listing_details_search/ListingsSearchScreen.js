@@ -1,17 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import React from "react";
 import * as Yup from "yup";
-import { Button, ScrollView } from "react-native";
-import Screen from "../../components/Screen";
 
 import AppForm from "../../components/forms/AppForm";
 import ListItemPickerFormField from "../../components/forms/ListItemPickerFormField";
 import TextInputFormField from "../../components/forms/TextInputFormField";
+import FormSubmitButton from "../../components/forms/FormSubmitButton";
+
 import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 import AppText from "../../components/AppText";
 import ListItemSeparator from "../../components/ListItemSeparator";
-import FormSubmitButton from "../../components/forms/FormSubmitButton";
 
 const items = [{ label: "Any", value: "", subTitle: "Any" }];
 
