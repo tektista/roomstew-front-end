@@ -15,6 +15,7 @@ import Card from "../Card";
 import colors from "../../config/colors";
 const moment = require("moment");
 
+import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 /*
@@ -59,6 +60,7 @@ const ListingsResultsScreenComponent = ({
   };
 
   const getListings = async () => {
+    console.log("here");
     try {
       let response;
 
@@ -71,10 +73,12 @@ const ListingsResultsScreenComponent = ({
           minRent,
           maxRent
         );
+        //always just load from beginning
       } else if (searchOrSavedOrUser === "user") {
-        response = await listingsService.getAllListingsByUserId(offset);
+        response = await listingsService.getAllListingsByUserId(0);
       } else if (searchOrSavedOrUser === "saved") {
-        response = await listingsService.getAllListingsByListingIds(offset);
+        //always just load from beginning
+        response = await listingsService.getAllListingsByListingIds(0);
       }
 
       const convertedListings = response.data.map((item) => {
@@ -104,11 +108,16 @@ const ListingsResultsScreenComponent = ({
 
         return convertedListing;
       });
-      const newUniqueListings = convertedListings.filter(
-        (newListing) =>
-          !listings.some((oldListing) => oldListing.id === newListing.id)
-      );
-      setListings([...listings, ...newUniqueListings]);
+
+      if (searchOrSavedOrUser === "saved" || searchOrSavedOrUser === "user") {
+        setListings(convertedListings);
+      } else {
+        const newUniqueListings = convertedListings.filter(
+          (newListing) =>
+            !listings.some((oldListing) => oldListing.id === newListing.id)
+        );
+        setListings([...listings, ...newUniqueListings]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -135,13 +144,14 @@ const ListingsResultsScreenComponent = ({
               if (response.status === 200) {
                 setIsLoading(false);
 
+                //Do this locally
                 const updatedListings = listings.filter(
                   (listing) => listing.id !== listingId
                 );
                 setListings(updatedListings);
 
                 Alert.alert("Success", "Listing deleted successfully", [
-                  { text: "OK" },
+                  { text: "OK", onPress: () => console.log("OK Pressed") },
                 ]);
               }
             } catch (err) {
@@ -156,9 +166,16 @@ const ListingsResultsScreenComponent = ({
   };
 
   //Mount
-  useEffect(() => {
-    getListings();
-  }, []);
+  // useEffect(() => {
+  //   getListings();
+  // }, []);
+
+  //TO DO: only fetch if prop "update" has been passed
+  useFocusEffect(
+    React.useCallback(() => {
+      getListings();
+    }, [])
+  );
 
   //Everytime fetchMore changes, check if its true, if it is fetch more
   useEffect(() => {
@@ -226,6 +243,7 @@ const ListingsResultsScreenComponent = ({
         }}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.9}
+        contentContainerStyle={{ flexGrow: 1 }}
       ></FlatList>
     </Screen>
   );
@@ -241,6 +259,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     backgroundColor: colors.light,
+    flex: 1,
   },
 
   cardContainer: {

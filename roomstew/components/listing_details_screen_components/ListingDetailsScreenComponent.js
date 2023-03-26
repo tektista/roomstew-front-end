@@ -49,6 +49,8 @@ import RoomAddFormField from "../forms/RoomAddFormField";
 const { width } = Dimensions.get("window");
 const height = (width / 100) * 60;
 
+import { useFocusEffect } from "@react-navigation/native";
+
 export default function ListingDetailsScreenComponent({
   navigateToMapScreenName,
   navigateToRoomDetailsScreenName,
@@ -58,8 +60,10 @@ export default function ListingDetailsScreenComponent({
 }) {
   const navigation = useNavigation();
   const route = useRoute();
-
   const listing = route.params.item;
+
+  console.log("HERE");
+  console.log(route.params);
 
   const [isLoading, setIsLoading] = useState(true);
   const [listingFromDB, setListingFromDB] = useState({});
@@ -69,10 +73,16 @@ export default function ListingDetailsScreenComponent({
   const [listingIsSaved, setListingIsSaved] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  //TO DO: only fetch if prop "update" has been passed
+  useFocusEffect(
+    React.useCallback(() => {
+      getListingDetails();
+    }, [])
+  );
   const getListingDetails = async () => {
+    setIsLoading(true);
     try {
       const response = await listingsService.getAListingById(listing.id);
-      console.log(response.data);
       setListingFromDB(convertListingForFrontEnd(response.data.listingObj[0]));
       setListingPhotosFromDB(
         convertPhotoListForFrontEnd(
@@ -233,13 +243,13 @@ export default function ListingDetailsScreenComponent({
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <LocationButton
             color={colors.black}
-            onPress={() =>
+            onPress={() => {
               navigation.navigate(navigateToMapScreenName, {
                 street_address: listingFromDB.street_address,
                 city: listingFromDB.city,
                 postcode: listingFromDB.postcode,
-              })
-            }
+              });
+            }}
           >
             <View>
               <AppText style={{ textDecorationLine: "underline" }}>
@@ -303,9 +313,13 @@ export default function ListingDetailsScreenComponent({
           onPress={(roomObj) =>
             navigation.navigate(navigateToRoomDetailsScreenName, roomObj)
           }
-          onPressEdit={(roomObj) =>
-            navigation.navigate("UserListingUpdateRoomScreen", { roomObj })
-          }
+          onPressEdit={(roomObj) => {
+            console.log("ListingId in navigate:", listing);
+            navigation.navigate("UserListingUpdateRoomScreen", {
+              listing: listing,
+              roomObj: roomObj,
+            });
+          }}
           onPressDelete={(roomObj) => handleRoomDelete(roomObj)}
         />
       </View>
