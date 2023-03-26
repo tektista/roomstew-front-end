@@ -11,6 +11,7 @@ import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import * as ImagePicker from "expo-image-picker";
+import ExpoVectorIcon from "./ExpoVectorIcon";
 
 const ImageInput = ({ imageBase64Data, onChangeImage }) => {
   useEffect(() => {
@@ -52,8 +53,9 @@ const ImageInput = ({ imageBase64Data, onChangeImage }) => {
       {/* IF no image URI display the placeholder camera icon */}
       <View style={styles.container}>
         {!imageBase64Data && (
-          <MaterialCommunityIcons
-            name="camera"
+          <ExpoVectorIcon
+            family="mi"
+            name="add-a-photo"
             size={40}
             color={colors.medium}
           />
