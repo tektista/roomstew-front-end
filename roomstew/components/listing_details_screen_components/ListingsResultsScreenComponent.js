@@ -1,11 +1,10 @@
 import {
   FlatList,
   StyleSheet,
-  Text,
   View,
-  Dimensions,
   Alert,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import listingsService from "../../services/listingsService";
@@ -13,6 +12,7 @@ import convertPhotoListForFrontEnd from "../../helpers/convertPhotoListForFrontE
 import Screen from "../Screen";
 import Card from "../Card";
 import colors from "../../config/colors";
+import AppText from "../AppText";
 const moment = require("moment");
 
 import { useFocusEffect } from "@react-navigation/native";
@@ -44,15 +44,24 @@ const ListingsResultsScreenComponent = ({
 
   if (searchOrSavedOrUser === "search") {
     cityToSearch = route.params.values.cityToSearch;
+
+    // minRoomsAvailable = parseInt(route.params.values.minRoomsAvailable);
+    // minRent = parseInt(route.params.values.minRent);
+    // maxRent = parseInt(route.params.values.maxRent);
+
     minRoomsAvailable = route.params.values.minRoomsAvailable;
-    minRent = parseInt(route.params.values.minRent);
-    maxRent = parseInt(route.params.values.maxRent);
+    minRent = route.params.values.minRent;
+    maxRent = route.params.values.maxRent;
   }
 
   const [isLoading, setIsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [fetchMore, setFetchMore] = useState(false);
   const [listings, setListings] = useState([]);
+
+  const handleFilterPress = () => {
+    navigation.goBack();
+  };
 
   const handleEndReached = () => {
     setFetchMore(true);
@@ -203,6 +212,49 @@ const ListingsResultsScreenComponent = ({
 
   return (
     <Screen style={styles.screen}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 5,
+          width: "100%",
+        }}
+      >
+        {searchOrSavedOrUser === "search" && (
+          <>
+            {cityToSearch || minRoomsAvailable || minRent || maxRent ? (
+              <TouchableOpacity onPress={() => handleFilterPress()}>
+                <AppText
+                  style={{
+                    textDecorationLine: "underline",
+                    color: colors.primary,
+                  }}
+                >
+                  Filters:
+                  {cityToSearch && ` ${cityToSearch}`}
+                  {minRoomsAvailable > 0 &&
+                    `, ${minRoomsAvailable} available rooms`}
+                  {minRent > 0 && `, £${minRent} min`}
+                  {maxRent > 0 && `, £${maxRent} max`}
+                </AppText>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => handleFilterPress()}>
+                <AppText
+                  style={{
+                    textDecorationLine: "underline",
+                    color: colors.primary,
+                  }}
+                >
+                  No filters
+                </AppText>
+              </TouchableOpacity>
+            )}
+          </>
+        )}
+      </View>
+
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
@@ -257,6 +309,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   screen: {
     backgroundColor: colors.light,
     flex: 1,
