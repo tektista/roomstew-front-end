@@ -65,16 +65,13 @@ const ListingsResultsScreenComponent = ({
 
   const handleEndReached = () => {
     setFetchMore(true);
-    console.log("end reached");
   };
 
   const getListings = async () => {
-    console.log("here");
     try {
       let response;
 
       if (searchOrSavedOrUser === "search") {
-        console.log("cityToSearch", cityToSearch);
         response = await listingsService.getAllListings(
           offset,
           cityToSearch,
@@ -160,7 +157,7 @@ const ListingsResultsScreenComponent = ({
                 setListings(updatedListings);
 
                 Alert.alert("Success", "Listing deleted successfully", [
-                  { text: "OK", onPress: () => console.log("OK Pressed") },
+                  { text: "OK" },
                 ]);
               }
             } catch (err) {
@@ -198,9 +195,7 @@ const ListingsResultsScreenComponent = ({
     setOffset(listings.length);
   }, [listings]);
 
-  useEffect(() => {
-    console.log(offset);
-  }, [offset]);
+  useEffect(() => {}, [offset]);
 
   if (isLoading) {
     return (
@@ -261,7 +256,6 @@ const ListingsResultsScreenComponent = ({
         extraData={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => {
-          console.log(item);
           return (
             <View style={styles.cardContainer}>
               <Card

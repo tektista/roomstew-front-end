@@ -35,7 +35,6 @@ const PostcodeInputFormField = ({
       const response = await axios.get(
         `https://ws.postcoder.com/pcw/${API_KEY}/address/${"uk"}/${postcodeWithPercent20}`
       );
-      console.log(response);
 
       //unconverted response list
       const addressList = response.data;

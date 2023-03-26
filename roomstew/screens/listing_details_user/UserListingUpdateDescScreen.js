@@ -29,7 +29,7 @@ const UserListingUpdateDescScreen = () => {
   const description = route.params.description;
 
   const listingPrefs = route.params.listingPrefs;
-  console.log("GELLO");
+
   console.log(listingPrefs);
   const base64DataList = route.params.base64DataList;
 
@@ -104,7 +104,6 @@ const UserListingUpdateDescScreen = () => {
                 listingPhotoObjList: listingPhotoObjectList,
               };
 
-              console.log("updateObj: ", updateObj);
               updateListing(listingId, updateObj);
             }}
             validationSchema={validationSchema}

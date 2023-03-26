@@ -13,7 +13,6 @@ const UserListingsScreen = ({ navigation }) => {
   const [listings, setListings] = useState([]);
 
   const handleEndReached = () => {
-    console.log("end reached");
     getListings();
   };
 
@@ -56,9 +55,7 @@ const UserListingsScreen = ({ navigation }) => {
     setOffset(listings.length);
   }, [listings]);
 
-  useEffect(() => {
-    console.log(offset);
-  }, [offset]);
+  useEffect(() => {}, [offset]);
 
   return (
     <Screen style={styles.screen}>

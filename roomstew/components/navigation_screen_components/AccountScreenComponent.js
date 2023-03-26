@@ -49,7 +49,7 @@ function AccountScreenComponent({
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => console.log("hello")}>
+        <TouchableOpacity>
           <ListItem
             title="John Bautista"
             subTitle="john.bautista@email.com"

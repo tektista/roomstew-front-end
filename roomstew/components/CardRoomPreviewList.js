@@ -15,7 +15,6 @@ const CardRoomPreviewList = ({ roomList = [], handleDelete }) => {
   return (
     <View>
       {roomList.map((room, index) => {
-        console.log(room);
         return (
           <View
             key={index}

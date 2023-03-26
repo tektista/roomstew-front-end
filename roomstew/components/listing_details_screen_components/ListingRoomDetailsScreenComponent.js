@@ -69,16 +69,6 @@ export default function ListingRoomDetailsScreenComponent() {
     getRoomDetails();
   }, []);
 
-  useEffect(() => {
-    console.log("roomFromDB");
-    console.log(roomFromDB);
-  }, [roomFromDB]);
-
-  useEffect(() => {
-    console.log("roomPhotosFromDB");
-    console.log(roomPhotosFromDB);
-  }, [roomPhotosFromDB]);
-
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>

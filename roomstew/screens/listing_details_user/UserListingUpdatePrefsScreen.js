@@ -116,14 +116,6 @@ const UserListingUpdateDescScreen = ({}) => {
   }, []);
 
   useEffect(() => {
-    console.log("listingPrefs", listingPrefs);
-  }, [listingPrefs]);
-
-  useEffect(() => {
-    console.log("base64datalist", base64DataList);
-  }, [listingPrefs]);
-
-  useEffect(() => {
     setMinAgePickerItems(populatePickerItems(17, maxAge));
   }, [minAge, maxAge]);
 

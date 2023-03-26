@@ -35,7 +35,6 @@ const UserListingUpdateRoomScreen = () => {
 
   const listing = route.params.listing;
 
-  console.log("listing in update screen:", listing);
   const roomId = route.params.roomObj;
 
   const [startDate, setStartDate] = useState(new Date());
@@ -176,7 +175,6 @@ const UserListingUpdateRoomScreen = () => {
                 roomImageList: roomPhotosFromDB,
               }}
               onSubmit={(values) => {
-                console.log(values);
                 const { roomImageList, ...roomObj } = values;
 
                 // Create a new list of objects with room_photo and room_photo_order properties

@@ -3,8 +3,6 @@ const { Buffer } = require("buffer");
 
 const convertPhotoListForFrontEnd = (photoObjList, photoType) => {
   // determine the image type and send this back to the front end
-  console.log("here");
-  console.log(photoObjList);
 
   function getImageType(base64String) {
     const buffer = Buffer.from(base64String, "base64");

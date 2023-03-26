@@ -62,9 +62,6 @@ export default function ListingDetailsScreenComponent({
   const route = useRoute();
   const listing = route.params.item;
 
-  console.log("HERE");
-  console.log(route.params);
-
   const [isLoading, setIsLoading] = useState(true);
   const [listingFromDB, setListingFromDB] = useState({});
   const [listingPhotosFromDB, setListingPhotosFromDB] = useState([]);
@@ -145,7 +142,6 @@ export default function ListingDetailsScreenComponent({
           text: "OK",
           onPress: async () => {
             const response = await roomsService.deleteARoomById(roomId);
-            console.log(response);
 
             if (response.status === 200) {
               Alert.alert("Success", "Room deleted successfully", [
@@ -314,7 +310,6 @@ export default function ListingDetailsScreenComponent({
             navigation.navigate(navigateToRoomDetailsScreenName, roomObj)
           }
           onPressEdit={(roomObj) => {
-            console.log("ListingId in navigate:", listing);
             navigation.navigate("UserListingUpdateRoomScreen", {
               listing: listing,
               roomObj: roomObj,

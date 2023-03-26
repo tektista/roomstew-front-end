@@ -58,8 +58,6 @@ const ListingsSearchScreen = ({ navigation }) => {
             maxRent: 0,
           }}
           onSubmit={(values) => {
-            console.log("values", values);
-
             navigation.navigate("ListingsResultsScreen", { values });
           }}
           validationSchema={validationSchema}
