@@ -5,6 +5,7 @@ import {
   ScrollView,
   Button,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { getFormatedDate } from "react-native-modern-datepicker";
@@ -23,6 +24,7 @@ import Icon from "../../components/Icon";
 import colors from "../../config/colors";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
+import useFocusEffect from "@react-navigation/native";
 import roomsService from "../../services/roomsService";
 
 const moment = require("moment");
@@ -30,6 +32,10 @@ const moment = require("moment");
 const UserListingUpdateRoomScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const listing = route.params.listing;
+
+  console.log("listing in update screen:", listing);
   const roomId = route.params.roomObj;
 
   const [startDate, setStartDate] = useState(new Date());
@@ -92,13 +98,13 @@ const UserListingUpdateRoomScreen = () => {
   const [roomPhotosFromDB, setRoomPhotosFromDB] = useState([]);
 
   const getRoomDetails = async () => {
+    setIsLoading(true);
     try {
       const response = await roomsService.getARoomsDetailsById(roomId);
       setRoomFromDB(response.data.roomObj[0]);
       setRoomPhotosFromDB(
         response.data.roomPhotoObjList.map((obj) => obj.room_photo)
       );
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     } finally {
@@ -107,30 +113,36 @@ const UserListingUpdateRoomScreen = () => {
   };
 
   const updateRoomWithPhotos = async (id, roomObjWithPhotos) => {
+    setIsLoading(true);
     try {
       const response = await roomsService.updateARoomById(
         id,
         roomObjWithPhotos
       );
-      console.log(response);
+      setIsLoading(false);
+
+      if (response.status === 200) {
+        Alert.alert("Updated", "Room succesfully updated", [
+          {
+            text: "OK",
+            onPress: () =>
+              navigation.navigate("UserListingDetailsScreen", {
+                item: listing,
+                update: true,
+              }),
+          },
+        ]);
+      }
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getRoomDetails();
   }, []);
-
-  useEffect(() => {
-    console.log("Room from DB");
-    console.log(roomFromDB);
-  }, [roomFromDB]);
-
-  useEffect(() => {
-    console.log("Room Photos from DB");
-    console.log(roomPhotosFromDB);
-  }, [roomPhotosFromDB]);
 
   if (isLoading) {
     return (
@@ -182,8 +194,6 @@ const UserListingUpdateRoomScreen = () => {
                 };
 
                 updateRoomWithPhotos(roomId, roomObjWithImageList);
-
-                navigation.goBack();
               }}
               validationSchema={validationSchema}
             >

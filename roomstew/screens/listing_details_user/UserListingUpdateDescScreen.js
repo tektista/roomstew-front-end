@@ -4,8 +4,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   ActivityIndicator,
+  Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import listingsService from "../../services/listingsService";
 import colors from "../../config/colors";
@@ -14,7 +15,6 @@ import AppForm from "../../components/forms/AppForm";
 import TextInputFormField from "../../components/forms/TextInputFormField";
 import FormSubmitButton from "../../components/forms/FormSubmitButton";
 import ImagePickerFormField from "../../components/forms/ImagePickerFormField";
-import AppText from "../../components/AppText";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -48,7 +48,15 @@ const UserListingUpdateDescScreen = () => {
         listingId,
         updateObj
       );
-      console.log(response);
+
+      if (response.status === 200) {
+        Alert.alert("Updated", "Listing succesfully updated", [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("UserListingsResultsScreen"),
+          },
+        ]);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -67,12 +75,6 @@ const UserListingUpdateDescScreen = () => {
   return (
     <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View>
-          <AppText style={styles.formTitle}>
-            Property Description & Photos
-          </AppText>
-        </View>
-
         <View style={styles.appFormContainer}>
           <AppForm
             initialValues={{
@@ -104,7 +106,6 @@ const UserListingUpdateDescScreen = () => {
 
               console.log("updateObj: ", updateObj);
               updateListing(listingId, updateObj);
-              navigation.navigate("UserListingsResultsScreen");
             }}
             validationSchema={validationSchema}
           >

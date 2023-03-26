@@ -35,8 +35,8 @@ const RoomsFormScreen = ({ navigation, route }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const postListing = async (listingDbObj) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const response = await listingsService.createAListing(listingDbObj);
     } catch (err) {
       console.log(err);
@@ -75,9 +75,6 @@ const RoomsFormScreen = ({ navigation, route }) => {
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View>
-        <AppText style={styles.formTitle}> Rooms </AppText>
-      </View>
       <View style={styles.appFormContainer}>
         <AppButton title="Add a room" onPress={() => setModalVisible(true)} />
         <AppForm
