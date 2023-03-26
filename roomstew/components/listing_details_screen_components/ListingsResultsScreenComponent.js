@@ -250,6 +250,12 @@ const ListingsResultsScreenComponent = ({
         )}
       </View>
 
+      {listings.length === 0 && (
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <AppText> No listings found :( </AppText>
+        </View>
+      )}
+
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
