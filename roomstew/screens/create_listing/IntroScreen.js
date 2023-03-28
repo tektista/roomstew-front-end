@@ -23,7 +23,7 @@ const IntroScreen = ({ navigation }) => {
               />
             </View>
             <View style={styles.titleContainer}>
-              <AppText style={styles.title}>create a listing</AppText>
+              <AppText style={styles.title}>Create a Listing</AppText>
             </View>
           </TouchableOpacity>
         </View>
