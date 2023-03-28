@@ -41,17 +41,40 @@ const ListingsResultsScreenComponent = ({
   let minRoomsAvailable;
   let minRent;
   let maxRent;
+  let postCodeToSearch;
+  let dateAvailableBy;
+  let maxDeposit;
+  let isRoomFurnished;
+  let isRoomEnsuite;
+  let isFurnished;
+  let hasLivingRoom;
+  let bathroomCount;
+  let hasHmo;
+  let billsIncluded;
+  let internetIncluded;
+  let buildingType;
+  let hasGarden;
+  let hasParking;
 
   if (searchOrSavedOrUser === "search") {
     cityToSearch = route.params.values.cityToSearch;
-
-    // minRoomsAvailable = parseInt(route.params.values.minRoomsAvailable);
-    // minRent = parseInt(route.params.values.minRent);
-    // maxRent = parseInt(route.params.values.maxRent);
-
     minRoomsAvailable = route.params.values.minRoomsAvailable;
     minRent = route.params.values.minRent;
     maxRent = route.params.values.maxRent;
+    postCodeToSearch = route.params.values.postCodeToSearch;
+    dateAvailableBy = route.params.values.dateAvailableBy;
+    maxDeposit = route.params.values.maxDeposit;
+    isRoomFurnished = route.params.values.isRoomFurnished;
+    isRoomEnsuite = route.params.values.isRoomEnsuite;
+    isFurnished = route.params.values.isFurnished;
+    hasLivingRoom = route.params.values.hasLivingRoom;
+    bathroomCount = route.params.values.bathroomCount;
+    hasHmo = route.params.values.hasHmo;
+    billsIncluded = route.params.values.billsIncluded;
+    internetIncluded = route.params.values.internetIncluded;
+    buildingType = route.params.values.buildingType;
+    hasGarden = route.params.values.hasGarden;
+    hasParking = route.params.values.hasParking;
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -65,9 +88,11 @@ const ListingsResultsScreenComponent = ({
 
   const handleEndReached = () => {
     setFetchMore(true);
+    if (listings.length === 1) setFetchMore(false);
   };
 
   const getListings = async () => {
+    setIsLoading(true);
     try {
       let response;
 
@@ -77,7 +102,21 @@ const ListingsResultsScreenComponent = ({
           cityToSearch,
           minRoomsAvailable,
           minRent,
-          maxRent
+          maxRent,
+          postCodeToSearch,
+          dateAvailableBy,
+          maxDeposit,
+          isRoomFurnished,
+          isRoomEnsuite,
+          isFurnished,
+          hasLivingRoom,
+          bathroomCount,
+          hasHmo,
+          billsIncluded,
+          internetIncluded,
+          buildingType,
+          hasGarden,
+          hasParking
         );
         //always just load from beginning
       } else if (searchOrSavedOrUser === "user") {
@@ -126,6 +165,9 @@ const ListingsResultsScreenComponent = ({
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      console.log(isLoading);
     }
   };
 
@@ -163,7 +205,7 @@ const ListingsResultsScreenComponent = ({
             } catch (err) {
               console.log(err);
             } finally {
-              setIsLoading(false);
+              // setIsLoading(false);
             }
           },
         },
@@ -180,7 +222,7 @@ const ListingsResultsScreenComponent = ({
   useFocusEffect(
     React.useCallback(() => {
       getListings();
-    }, [])
+    }, [offset])
   );
 
   //Everytime fetchMore changes, check if its true, if it is fetch more
@@ -197,7 +239,7 @@ const ListingsResultsScreenComponent = ({
 
   useEffect(() => {}, [offset]);
 
-  if (isLoading) {
+  if (isLoading && searchOrSavedOrUser !== "search") {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
@@ -297,6 +339,23 @@ const ListingsResultsScreenComponent = ({
         onEndReachedThreshold={0.9}
         contentContainerStyle={{ flexGrow: 1 }}
       ></FlatList>
+
+      {isLoading && searchOrSavedOrUser === "search" && (
+        <View
+          style={{
+            height: 50,
+            padding: 5,
+            justifyContent: "flex-end",
+            backgroundColor: "transparent",
+          }}
+        >
+          <ActivityIndicator
+            size="large"
+            color={colors.primary}
+            style={{ backgroundColor: "transparent" }}
+          />
+        </View>
+      )}
     </Screen>
   );
 };
