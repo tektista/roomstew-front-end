@@ -81,13 +81,10 @@ const ListingsSearchScreen = ({ navigation }) => {
           initialValues={{
             cityToSearch: "",
             postcodeToSearch: "",
-            //added
             dateAvailableBy: new Date(),
-
             minRoomsAvailable: "",
             minRent: "",
             maxRent: "",
-            //added
             maxDeposit: "",
             isRoomFurnished: "",
             isRoomEnsuite: "",
@@ -129,7 +126,7 @@ const ListingsSearchScreen = ({ navigation }) => {
               autocorrect={false}
               keyboardType="default"
               title="Postcode"
-              name="postCodeToSearch"
+              name="postodeToSearch"
               placeholder="e.g. SW1 2AA (optional)"
             />
 
