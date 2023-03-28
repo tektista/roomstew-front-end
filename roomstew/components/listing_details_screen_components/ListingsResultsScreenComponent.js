@@ -260,25 +260,26 @@ const ListingsResultsScreenComponent = ({
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.9}
         contentContainerStyle={{ flexGrow: 1 }}
+        ListFooterComponent={renderFooter(isLoading, searchOrSavedOrUser)}
       ></FlatList>
-
-      {isLoading && searchOrSavedOrUser === "search" && (
-        <View
-          style={{
-            height: 50,
-            padding: 5,
-            justifyContent: "flex-end",
-            backgroundColor: "transparent",
-          }}
-        >
-          <ActivityIndicator
-            size="large"
-            color={colors.primary}
-            style={{ backgroundColor: "transparent" }}
-          />
-        </View>
-      )}
     </Screen>
+  );
+};
+
+const renderFooter = (isLoading, searchOrSavedOrUser) => {
+  if (!isLoading || searchOrSavedOrUser !== "search") return null;
+
+  return (
+    <ActivityIndicator
+      size="large"
+      color={colors.primary}
+      style={{
+        height: 50,
+        padding: 5,
+        justifyContent: "flex-end",
+        backgroundColor: "rgba(255, 255, 255, 0)",
+      }}
+    />
   );
 };
 
