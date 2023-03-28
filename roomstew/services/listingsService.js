@@ -4,87 +4,70 @@ import moment from "moment";
 const baseURL = "http://localhost:3002/api/listings";
 // const baseURL = `https://nodejs-cleardb-project.herokuapp.com/api/listings`;
 
-const getAllListings = (
-  offset,
-  cityToSearch,
-  minRoomsAvailable,
-  minRent,
-  maxRent,
-  postCodeToSearch,
-  dateAvailableBy,
-  maxDeposit,
-  isRoomFurnished,
-  isRoomEnsuite,
-  isFurnished,
-  hasLivingRoom,
-  bathroomCount,
-  hasHmo,
-  billsIncluded,
-  internetIncluded,
-  buildingType,
-  hasGarden,
-  hasParking
-) => {
+const getAllListings = (offset, filtersObj) => {
+  console.log("filtersObjIn listings service", filtersObj);
   let url = `${baseURL}/?offset=${offset}`;
 
-  if (cityToSearch) {
-    url += `&city=${cityToSearch}`;
+  if (filtersObj.cityToSearch) {
+    url += `&city=${filtersObj.cityToSearch}`;
   }
-  if (postCodeToSearch) {
-    url += `&postcode=${postCodeToSearch}`;
+  if (filtersObj.postcodeToSearch) {
+    url += `&postcode=${filtersObj.postcodeToSearch}`;
   }
-
-  if (minRent) {
-    url += `&minRent=${minRent}`;
+  if (filtersObj.minRent) {
+    url += `&minRent=${filtersObj.minRent}`;
   }
-  if (maxRent) {
-    url += `&maxRent=${maxRent}`;
+  if (filtersObj.maxRent) {
+    url += `&maxRent=${filtersObj.maxRent}`;
   }
-  if (maxDeposit) {
-    url += `&maxDeposit=${maxDeposit}`;
+  if (filtersObj.maxDeposit) {
+    url += `&maxDeposit=${filtersObj.maxDeposit}`;
   }
-  if (dateAvailableBy) {
-    url += `&dateAvailable=${dateAvailableBy.toISOString()}`;
+  if (
+    moment(filtersObj.dateAvailableBy).format("YYYY-MM-DD") !==
+    moment(new Date()).format("YYYY-MM-DD")
+  ) {
+    url += `&dateAvailable=${filtersObj.dateAvailableBy.toISOString()}`;
   }
-  if (minRoomsAvailable) {
-    url += `&minRooms=${minRoomsAvailable}`;
+  if (filtersObj.minRoomsAvailable) {
+    url += `&minRooms=${filtersObj.minRoomsAvailable}`;
   }
-  if (isRoomFurnished !== "") {
-    url += `&isRoomFurnished=${Boolean(isRoomFurnished)}`;
+  //HANDLE boolean/0,1 values differently
+  if (filtersObj.isRoomFurnished > -1) {
+    url += `&isRoomFurnished=${filtersObj.isRoomFurnished}`;
   }
-  if (isRoomEnsuite !== "") {
-    console.log("isRoomEnsuite", isRoomEnsuite);
-    url += `&isRoomEnsuite=${isRoomEnsuite}`;
+  if (filtersObj.isRoomEnsuite > -1) {
+    url += `&isRoomEnsuite=${filtersObj.isRoomEnsuite}`;
   }
-  if (isFurnished !== "") {
-    url += `&isFurnished=${Boolean(isFurnished)}`;
+  if (filtersObj.isFurnished > -1) {
+    url += `&isFurnished=${filtersObj.isFurnished}`;
   }
-  if (hasLivingRoom !== "") {
-    url += `&hasLivingRoom=${Boolean(hasLivingRoom)}`;
+  if (filtersObj.hasLivingRoom > -1) {
+    url += `&hasLivingRoom=${filtersObj.hasLivingRoom}`;
   }
-  if (bathroomCount) {
-    url += `&bathroomCount=${bathroomCount}`;
+  if (filtersObj.bathroomCount > -1) {
+    url += `&bathroomCount=${filtersObj.bathroomCount}`;
   }
-  if (hasHmo !== "") {
-    url += `&hasHmo=${hasHmo}`;
+  if (filtersObj.hasHmo > -1) {
+    url += `&hasHmo=${filtersObj.hasHmo}`;
   }
-  if (billsIncluded !== "") {
-    url += `&billsIncluded=${Boolean(billsIncluded)}`;
+  if (filtersObj.billsIncluded > -1) {
+    url += `&billsIncluded=${filtersObj.billsIncluded}`;
   }
-  if (internetIncluded !== "") {
-    url += `&internetIncluded=${Boolean(internetIncluded)}`;
-  }
-
-  if (buildingType !== "") {
-    url += `&buildingType=${buildingType}`;
-  }
-  if (hasGarden !== "") {
-    url += `&hasGarden=${Boolean(hasGarden)}`;
-  }
-  if (hasParking !== "") {
-    url += `&hasParking=${Boolean(hasParking)}`;
+  if (filtersObj.internetIncluded > -1) {
+    url += `&internetIncluded=${filtersObj.internetIncluded}`;
   }
 
+  if (filtersObj.buildingType > -1) {
+    url += `&buildingType=${filtersObj.buildingType}`;
+  }
+  if (filtersObj.hasGarden > -1) {
+    url += `&hasGarden=${filtersObj.hasGarden}`;
+  }
+  if (filtersObj.hasParking > -1) {
+    url += `&hasParking=${filtersObj.hasParking}`;
+  }
+  console.log("url", url);
   return axios.get(url);
 };
 

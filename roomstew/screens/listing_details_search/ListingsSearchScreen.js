@@ -24,7 +24,7 @@ for (let i = 1; i <= 12; i++) {
   minRoomPickerItems.push({ label, value, subTitle });
 }
 
-const bathroomPickerItems = [{ label: "Any", value: "", subTitle: "Any" }];
+const bathroomPickerItems = [{ label: "Any", value: -1, subTitle: "Any" }];
 for (let i = 1; i <= 12; i++) {
   const label = `${i} Bathroom${i > 1 ? "s" : ""}`;
   const value = i;
@@ -33,13 +33,13 @@ for (let i = 1; i <= 12; i++) {
 }
 
 const trueOrFalsePickerItems = [
-  { label: "Any", value: "", subTitle: "Any" },
+  { label: "Any", value: -1, subTitle: "Any" },
   { label: "Yes", value: 1, subTitle: "Yes" },
   { label: "No", value: 0, subTitle: "No" },
 ];
 
 const buildingTypePickerItems = [
-  { label: "Any", value: "", subTitle: "Any" },
+  { label: "Any", value: -1, subTitle: "Any" },
   { label: "Flat", value: 0, subTitle: "Flat" },
   { label: "House", value: 1, subTitle: "House" },
   { label: "Other", value: 2, subTitle: "Other" },
@@ -86,17 +86,17 @@ const ListingsSearchScreen = ({ navigation }) => {
             minRent: "",
             maxRent: "",
             maxDeposit: "",
-            isRoomFurnished: "",
-            isRoomEnsuite: "",
-            isFurnished: "",
-            hasLivingRoom: "",
-            bathroomCount: "",
-            hasHmo: "",
-            billsIncluded: "",
-            internetIncluded: "",
-            buildingType: "",
-            hasGarden: "",
-            hasParking: "",
+            isRoomFurnished: -1,
+            isRoomEnsuite: -1,
+            isFurnished: -1,
+            hasLivingRoom: -1,
+            bathroomCount: -1,
+            hasHmo: -1,
+            billsIncluded: -1,
+            internetIncluded: -1,
+            buildingType: -1,
+            hasGarden: -1,
+            hasParking: -1,
           }}
           onSubmit={(values) => {
             //TO DO: fix serializable log error
@@ -104,7 +104,7 @@ const ListingsSearchScreen = ({ navigation }) => {
             //   "YYYY/MM/DD"
             // );
             navigation.navigate("ListingsResultsScreen", { values });
-            console.log(values);
+            console.log("Values on button press in search screen", values);
           }}
           validationSchema={validationSchema}
         >

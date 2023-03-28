@@ -37,46 +37,6 @@ const ListingsResultsScreenComponent = ({
   const navigation = useNavigation();
   const route = useRoute();
 
-  let cityToSearch;
-  let minRoomsAvailable;
-  let minRent;
-  let maxRent;
-  let postcodeToSearch;
-  let dateAvailableBy;
-  let maxDeposit;
-  let isRoomFurnished;
-  let isRoomEnsuite;
-  let isFurnished;
-  let hasLivingRoom;
-  let bathroomCount;
-  let hasHmo;
-  let billsIncluded;
-  let internetIncluded;
-  let buildingType;
-  let hasGarden;
-  let hasParking;
-
-  if (searchOrSavedOrUser === "search") {
-    cityToSearch = route.params.values.cityToSearch;
-    minRoomsAvailable = route.params.values.minRoomsAvailable;
-    minRent = route.params.values.minRent;
-    maxRent = route.params.values.maxRent;
-    postcodeToSearch = route.params.values.postcodeToSearch;
-    dateAvailableBy = route.params.values.dateAvailableBy;
-    maxDeposit = route.params.values.maxDeposit;
-    isRoomFurnished = route.params.values.isRoomFurnished;
-    isRoomEnsuite = route.params.values.isRoomEnsuite;
-    isFurnished = route.params.values.isFurnished;
-    hasLivingRoom = route.params.values.hasLivingRoom;
-    bathroomCount = route.params.values.bathroomCount;
-    hasHmo = route.params.values.hasHmo;
-    billsIncluded = route.params.values.billsIncluded;
-    internetIncluded = route.params.values.internetIncluded;
-    buildingType = route.params.values.buildingType;
-    hasGarden = route.params.values.hasGarden;
-    hasParking = route.params.values.hasParking;
-  }
-
   const [isLoading, setIsLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [fetchMore, setFetchMore] = useState(false);
@@ -97,26 +57,10 @@ const ListingsResultsScreenComponent = ({
       let response;
 
       if (searchOrSavedOrUser === "search") {
+        console.log("values object in results screen", route.params);
         response = await listingsService.getAllListings(
           offset,
-          cityToSearch,
-          minRoomsAvailable,
-          minRent,
-          maxRent,
-          postcodeToSearch,
-          dateAvailableBy,
-          maxDeposit,
-          isRoomFurnished,
-          isRoomEnsuite,
-          isFurnished,
-          hasLivingRoom,
-          bathroomCount,
-          hasHmo,
-          billsIncluded,
-          internetIncluded,
-          buildingType,
-          hasGarden,
-          hasParking
+          route.params.values
         );
         //always just load from beginning
       } else if (searchOrSavedOrUser === "user") {
@@ -190,9 +134,7 @@ const ListingsResultsScreenComponent = ({
               );
 
               if (response.status === 200) {
-                setIsLoading(false);
-
-                //Do this locally
+                //Locally, delete the listing from the listings array
                 const updatedListings = listings.filter(
                   (listing) => listing.id !== listingId
                 );
@@ -205,7 +147,7 @@ const ListingsResultsScreenComponent = ({
             } catch (err) {
               console.log(err);
             } finally {
-              // setIsLoading(false);
+              setIsLoading(false);
             }
           },
         },
@@ -213,7 +155,7 @@ const ListingsResultsScreenComponent = ({
     );
   };
 
-  //Mount
+  // // Mount;
   // useEffect(() => {
   //   getListings();
   // }, []);
