@@ -30,7 +30,11 @@ const DescriptionFormScreen = ({ route, navigation }) => {
   });
 
   return (
-    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
+    <KeyboardAvoidingView
+      behavior="position"
+      keyboardVerticalOffset={100}
+      style={{ flex: 1 }}
+    >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.appFormContainer}>
           <AppForm
@@ -58,7 +62,7 @@ const DescriptionFormScreen = ({ route, navigation }) => {
               keyboardType="default"
               name="title"
               title="Title"
-              placeholder="e.g. 2 bed flat in London Available From..."
+              placeholder="e.g. 1 Bedroom Available in a 3 Bed Flat in City Centre Glasgow..."
             />
 
             <TextInputFormField
@@ -68,7 +72,7 @@ const DescriptionFormScreen = ({ route, navigation }) => {
               keyboardType="default"
               name="description"
               title="Description"
-              placeholder="e.g. Looking for a flatmate to share my 2 bed flat in London... Looking for someone who is... You can contact me at..."
+              placeholder="e.g. Include your contact details, extra details about the property and the rooms available. If you are a current tenant, include what institution you attend, a bit about yourself/current roommates and what you look for in a roommate"
               multiline={true}
               numberOfLines={3}
             />

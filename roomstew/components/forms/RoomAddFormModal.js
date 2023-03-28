@@ -129,9 +129,8 @@ const RoomAddFormModal = ({
                 autoCorrect={false}
                 keyboardType="default"
                 name="room_description"
-                title="Room Description"
-                placeholder="e.g. Double room with en-suite bathroom..."
-                multiline={true}
+                title="Room description"
+                placeholder="e.g. A short description about the bedroom and any other details you would like to add."
               />
 
               <TextInputFormField
