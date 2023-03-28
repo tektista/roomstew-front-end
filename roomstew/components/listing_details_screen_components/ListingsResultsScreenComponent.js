@@ -41,7 +41,7 @@ const ListingsResultsScreenComponent = ({
   let minRoomsAvailable;
   let minRent;
   let maxRent;
-  let postCodeToSearch;
+  let postcodeToSearch;
   let dateAvailableBy;
   let maxDeposit;
   let isRoomFurnished;
@@ -61,7 +61,7 @@ const ListingsResultsScreenComponent = ({
     minRoomsAvailable = route.params.values.minRoomsAvailable;
     minRent = route.params.values.minRent;
     maxRent = route.params.values.maxRent;
-    postCodeToSearch = route.params.values.postCodeToSearch;
+    postcodeToSearch = route.params.values.postcodeToSearch;
     dateAvailableBy = route.params.values.dateAvailableBy;
     maxDeposit = route.params.values.maxDeposit;
     isRoomFurnished = route.params.values.isRoomFurnished;
@@ -103,7 +103,7 @@ const ListingsResultsScreenComponent = ({
           minRoomsAvailable,
           minRent,
           maxRent,
-          postCodeToSearch,
+          postcodeToSearch,
           dateAvailableBy,
           maxDeposit,
           isRoomFurnished,
@@ -259,36 +259,16 @@ const ListingsResultsScreenComponent = ({
         }}
       >
         {searchOrSavedOrUser === "search" && (
-          <>
-            {cityToSearch || minRoomsAvailable || minRent || maxRent ? (
-              <TouchableOpacity onPress={() => handleFilterPress()}>
-                <AppText
-                  style={{
-                    textDecorationLine: "underline",
-                    color: colors.primary,
-                  }}
-                >
-                  Filters:
-                  {cityToSearch && ` ${cityToSearch}`}
-                  {minRoomsAvailable > 0 &&
-                    `, ${minRoomsAvailable} available rooms`}
-                  {minRent > 0 && `, £${minRent} min`}
-                  {maxRent > 0 && `, £${maxRent} max`}
-                </AppText>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity onPress={() => handleFilterPress()}>
-                <AppText
-                  style={{
-                    textDecorationLine: "underline",
-                    color: colors.primary,
-                  }}
-                >
-                  No filters
-                </AppText>
-              </TouchableOpacity>
-            )}
-          </>
+          <TouchableOpacity onPress={() => handleFilterPress()}>
+            <AppText
+              style={{
+                textDecorationLine: "underline",
+                color: colors.primary,
+              }}
+            >
+              Filters
+            </AppText>
+          </TouchableOpacity>
         )}
       </View>
 

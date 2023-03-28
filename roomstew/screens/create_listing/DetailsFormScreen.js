@@ -137,10 +137,7 @@ const DetailsFormScreen = ({ route, navigation }) => {
               name="has_living_room"
               title={"Living room"}
               IconComponent={
-                <Icon
-                  name="home-lightning-bolt"
-                  backgroundColor={colors.primary}
-                />
+                <Icon name="sofa" backgroundColor={colors.primary} />
               }
             />
 
