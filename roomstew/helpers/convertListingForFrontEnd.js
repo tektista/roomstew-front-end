@@ -7,6 +7,7 @@ const convertListingForFrontEnd = (listingObj, savedQueryRows) => {
     internet_included:
       listingObj.internet_included === 1 ? "Included" : "Not included",
     has_living_room: listingObj.has_living_room === 1 ? "Yes" : "No",
+    has_hmo: listingObj.has_hmo === 1 ? "Yes" : "No",
     has_garden: listingObj.has_garden === 1 ? "Yes" : "No",
     has_parking: listingObj.has_parking === 1 ? "Yes" : "No",
     couples_allowed:
