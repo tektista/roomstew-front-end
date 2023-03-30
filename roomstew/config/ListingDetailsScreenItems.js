@@ -41,6 +41,15 @@ const ListingDetailsScreenItems = [
       backgroundColor: colors.primary,
     },
   },
+
+  {
+    title: "HMO",
+    DBFieldName: "has_hmo",
+    icon: {
+      name: "account-multiple-check",
+      backgroundColor: colors.primary,
+    }
+  },
   {
     title: "Bathrooms",
     DBFieldName: "bathroom_count",
