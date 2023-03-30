@@ -92,11 +92,13 @@ const ListingsResultsScreenComponent = ({
                   "MMMM D"
                 ),
           hasLivingRoom: item.hasLivingRoom,
+          hasHMO: item.hasHMO,
           bathroomCount: item.bathroomCount,
         };
 
         return convertedListing;
       });
+      console.log(convertedListings);
 
       if (searchOrSavedOrUser === "saved" || searchOrSavedOrUser === "user") {
         setListings(convertedListings);
@@ -244,6 +246,7 @@ const ListingsResultsScreenComponent = ({
                     : ""
                 }
                 hasLivingRoom={item.hasLivingRoom}
+                hasHMO={item.hasHMO}
                 bathroomCount={item.bathroomCount}
                 isUserListing={isUserListing}
                 onPress={() => {

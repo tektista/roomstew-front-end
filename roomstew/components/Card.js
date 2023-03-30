@@ -29,6 +29,7 @@ export default function Card({
   onPressDelete,
   isUserListing,
   hasLivingRoom,
+  hasHMO,
   bathroomCount,
 }) {
   return (
@@ -77,7 +78,7 @@ export default function Card({
                 flexDirection: "row",
                 width: "80%",
                 paddingHorizontal: 7,
-                paddingTop: 5,
+                paddingTop: 10,
               }}
             >
               <ExpoVectorIcon family="i" name="location-outline" />
@@ -91,7 +92,7 @@ export default function Card({
               style={{
                 flexDirection: "row",
                 paddingHorizontal: 10,
-                paddingTop: 5,
+                paddingTop: 10,
               }}
             >
               <ExpoVectorIcon family="mci" name="bed" />
@@ -99,6 +100,14 @@ export default function Card({
               <AppText style={styles.roomsAvailableText}>
                 {numRoomsAvailable} rooms available
               </AppText>
+            </View>
+
+            <View style={{flexDirection: "row", paddingHorizontal: 10, paddingTop: 10}}>
+           
+            {hasHMO ? 
+            (<ExpoVectorIcon family="mi" name="check-circle" />) :
+            (<ExpoVectorIcon family="mci" name="close-circle" />)}
+            <AppText>  HMO</AppText>
             </View>
 
             <View style={styles.datesContainer}>
@@ -160,7 +169,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderColor: colors.black,
 
-    height: 500 + 20,
+    height: 550,
   },
 
   image: {

@@ -343,7 +343,7 @@ export default function ListingDetailsScreenComponent({
           localObj={listing}
           items={ListingDetailsScreenItems}
           sliceAtIndex={0}
-          sliceToIndex={5}
+          sliceToIndex={6}
         />
 
         <ListItemSeparator />
@@ -354,10 +354,12 @@ export default function ListingDetailsScreenComponent({
           </AppText>
         </View>
 
+        {console.log(listingFromDB)}
+
         <ListItemList
           objFromDB={listingFromDB}
           items={ListingDetailsScreenItems}
-          sliceAtIndex={8}
+          sliceAtIndex={7}
           sliceToIndex={14}
         />
       </View>
