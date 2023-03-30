@@ -1,8 +1,8 @@
 import axios from "axios";
 import moment from "moment";
 
-const baseURL = "http://localhost:3002/api/listings";
-// const baseURL = `https://nodejs-cleardb-project.herokuapp.com/api/listings`;
+// const baseURL = "http://localhost:3002/api/listings";
+const baseURL = `https://nodejs-cleardb-project.herokuapp.com/api/listings`;
 
 const getAllListings = (offset, filtersObj) => {
   console.log("filtersObjIn listings service", filtersObj);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3002/api/save";
-// const baseURL = `https://nodejs-cleardb-project.herokuapp.com/api/save`;
+// const baseURL = "http://localhost:3002/api/save";
+const baseURL = `https://nodejs-cleardb-project.herokuapp.com/api/save`;
 
 const getSavedListingIdsByUserId = () => {
   return axios.get(`${baseURL}`);
