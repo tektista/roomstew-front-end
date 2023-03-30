@@ -28,7 +28,7 @@ const ListingShowMoreDetailsScreenComponent = () => {
           localObj={listing}
           items={ListingDetailsScreenItems}
           sliceAtIndex={0}
-          sliceToIndex={9}
+          sliceToIndex={10}
         />
 
         <View style={styles.showMoreContainer}></View>
