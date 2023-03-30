@@ -359,7 +359,7 @@ export default function ListingDetailsScreenComponent({
         <ListItemList
           objFromDB={listingFromDB}
           items={ListingDetailsScreenItems}
-          sliceAtIndex={7}
+          sliceAtIndex={10}
           sliceToIndex={14}
         />
       </View>
