@@ -102,12 +102,19 @@ export default function Card({
               </AppText>
             </View>
 
-            <View style={{flexDirection: "row", paddingHorizontal: 10, paddingTop: 10}}>
-           
-            {hasHMO ? 
-            (<ExpoVectorIcon family="mi" name="check-circle" />) :
-            (<ExpoVectorIcon family="mci" name="close-circle" />)}
-            <AppText>  HMO</AppText>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingHorizontal: 10,
+                paddingTop: 10,
+              }}
+            >
+              {hasHMO ? (
+                <ExpoVectorIcon family="mi" name="check-circle" />
+              ) : (
+                <ExpoVectorIcon family="mci" name="close-circle" />
+              )}
+              <AppText> HMO</AppText>
             </View>
 
             <View style={styles.datesContainer}>
@@ -168,8 +175,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     overflow: "hidden",
     borderColor: colors.black,
-
-    height: 550,
+    height: 600,
   },
 
   image: {
