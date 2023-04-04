@@ -131,6 +131,7 @@ const RoomAddFormModal = ({
                 name="room_description"
                 title="Room description"
                 placeholder="e.g. A short description about the bedroom and any other details you would like to add."
+                width="100%"
               />
 
               <TextInputFormField
@@ -139,7 +140,8 @@ const RoomAddFormModal = ({
                 keyboardType="numeric"
                 name="rent"
                 title="Rent /month in £"
-                placeholder="650"
+                placeholder="e.g. 650"
+                width="35%"
               />
 
               <TextInputFormField
@@ -148,7 +150,8 @@ const RoomAddFormModal = ({
                 keyboardType="numeric"
                 name="deposit"
                 title="Deposit in £"
-                placeholder="650"
+                placeholder="e.g. 400"
+                width="35%"
               />
 
               <ListItemSeparator />
