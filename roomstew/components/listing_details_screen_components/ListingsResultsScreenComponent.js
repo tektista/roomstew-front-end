@@ -68,6 +68,7 @@ const ListingsResultsScreenComponent = ({
       } else if (searchOrSavedOrUser === "saved") {
         //always just load from beginning
         response = await listingsService.getAllListingsByListingIds(0);
+        console.log("response from db for saved listings asdf:", response.data);
       }
 
       const convertedListings = response.data.map((item) => {
@@ -98,7 +99,6 @@ const ListingsResultsScreenComponent = ({
 
         return convertedListing;
       });
-      console.log(convertedListings);
 
       if (searchOrSavedOrUser === "saved" || searchOrSavedOrUser === "user") {
         setListings(convertedListings);
@@ -183,13 +183,13 @@ const ListingsResultsScreenComponent = ({
 
   useEffect(() => {}, [offset]);
 
-  if (isLoading && searchOrSavedOrUser !== "search") {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={colors.primary} />
-      </View>
-    );
-  }
+  // if (isLoading && searchOrSavedOrUser !== "search") {
+  //   return (
+  //     <View style={styles.loadingContainer}>
+  //       <ActivityIndicator size="large" color={colors.primary} />
+  //     </View>
+  //   );
+  // }
 
   return (
     <Screen style={styles.screen}>
@@ -261,7 +261,7 @@ const ListingsResultsScreenComponent = ({
           );
         }}
         onEndReached={handleEndReached}
-        onEndReachedThreshold={0.9}
+        onEndReachedThreshold={0.99}
         contentContainerStyle={{ flexGrow: 1 }}
         ListFooterComponent={renderFooter(isLoading, searchOrSavedOrUser)}
       ></FlatList>
