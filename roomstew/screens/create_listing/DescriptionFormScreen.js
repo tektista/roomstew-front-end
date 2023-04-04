@@ -32,7 +32,7 @@ const DescriptionFormScreen = ({ route, navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior="position"
-      keyboardVerticalOffset={100}
+      keyboardVerticalOffset={25}
       style={{ flex: 1 }}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
