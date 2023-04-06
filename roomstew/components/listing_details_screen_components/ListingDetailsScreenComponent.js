@@ -259,9 +259,7 @@ export default function ListingDetailsScreenComponent({
 
       {/* MAIN DETAILS CONTAINER */}
       <View style={styles.descriptionContainer}>
-        <AppText style={styles.title}>
-          {listingFromDB.title} {listingFromDB.listing_id}
-        </AppText>
+        <AppText style={styles.title}>{listingFromDB.title}</AppText>
 
         <Description description={listingFromDB.description} />
 
