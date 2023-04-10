@@ -48,6 +48,7 @@ const ListingsResultsScreenComponent = ({
 
   const handleEndReached = () => {
     setFetchMore(true);
+    //To prevent repeated calls to the api
     if (listings.length === 1) setFetchMore(false);
   };
 
@@ -55,9 +56,7 @@ const ListingsResultsScreenComponent = ({
     setIsLoading(true);
     try {
       let response;
-
       if (searchOrSavedOrUser === "search") {
-        console.log("values object in results screen", route.params);
         response = await listingsService.getAllListings(
           offset,
           route.params.values
@@ -68,7 +67,6 @@ const ListingsResultsScreenComponent = ({
       } else if (searchOrSavedOrUser === "saved") {
         //always just load from beginning
         response = await listingsService.getAllListingsByListingIds(0);
-        console.log("response from db for saved listings asdf:", response.data);
       }
 
       const convertedListings = response.data.map((item) => {
@@ -113,7 +111,6 @@ const ListingsResultsScreenComponent = ({
       console.log(error);
     } finally {
       setIsLoading(false);
-      console.log(isLoading);
     }
   };
 
@@ -156,11 +153,6 @@ const ListingsResultsScreenComponent = ({
       ]
     );
   };
-
-  // // Mount;
-  // useEffect(() => {
-  //   getListings();
-  // }, []);
 
   //TO DO: only fetch if prop "update" has been passed
   useFocusEffect(

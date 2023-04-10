@@ -100,9 +100,6 @@ const ListingsSearchScreen = ({ navigation }) => {
           }}
           onSubmit={(values) => {
             //TO DO: fix serializable log error
-            // values.dateAvailableBy = moment(values.dateAvailableBy).format(
-            //   "YYYY/MM/DD"
-            // );
             navigation.navigate("ListingsResultsScreen", { values });
             console.log("Values on button press in search screen", values);
           }}

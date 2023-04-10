@@ -1,11 +1,8 @@
 import React from "react";
-
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 import ListingsNavigator from "./ListingsNavigator";
 import CreateListingFormNavigator from "./CreateListingFormNavigator";
-
 import AccountNavigator from "./AccountNavigator";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
